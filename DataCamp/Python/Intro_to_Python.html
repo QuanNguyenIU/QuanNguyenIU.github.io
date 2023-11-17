@@ -1686,9 +1686,9 @@ Python?</h2>
 <p>Python is a pretty versatile language. You can use it for any purpose
 that you may imagine:</p>
 <ul>
-<li>You want to do some quick calculations.</li>
+<li>You want to do some quick calculations;</li>
 <li>For your new business, you want to develop a database-driven
-website.</li>
+website;</li>
 <li>Your boss asks you to clean and analyze the results of the latest
 satisfaction survey.</li>
 </ul>
@@ -1711,7 +1711,7 @@ completely ignored during execution.</p>
 Calculator</h2>
 <p>Python is perfectly suited to do basic calculations. Apart from
 addition, subtraction, multiplication and division, there is also
-support for more advanced operations such as exponentiation <span class="math inline">\(**\)</span> and modulo <span class="math inline">\(\%\)</span>. The code below gives some
+support for more advanced operations such as exponentiation (<span class="math inline">\(**\)</span>) and modulo (<span class="math inline">\(\%\)</span>). The code below gives some
 examples.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Addition - Subtraction</span></span>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;5 + 5 =&#39;</span>, <span class="dv">5</span> <span class="op">+</span> <span class="dv">5</span>, <span class="st">&#39; ||  5 - 5 =&#39;</span>, <span class="dv">5</span> <span class="op">-</span> <span class="dv">5</span>)</span></code></pre></div>
@@ -1722,9 +1722,9 @@ examples.</p>
 <pre><code>## 3 * 5 = 15  ||  10 / 2 = 5.0  ||  18 % 7 = 4  ||  4 ** 2 = 16</code></pre>
 <p>Suppose you have <span class="math inline">\(\$100\)</span>, which
 you can invest with a <span class="math inline">\(10\%\)</span> return
-each year. After one year, it’s <span class="math inline">\(100*1.1=110\)</span> dollars, and after two years
-it’s <span class="math inline">\(100*1.1*1.1=121\)</span>. The code
-below calculates how much money you end up with after <span class="math inline">\(7\)</span> years, and prints the result.</p>
+each year. After one year, it’s <span class="math inline">\(\$100*1.1=\$110\)</span>, and after two years it’s
+<span class="math inline">\(\$100*1.1*1.1=\$121\)</span>. The code below
+calculates how much money you end up with after <span class="math inline">\(7\)</span> years, and prints the result.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># How much is your $100 worth after 7 years?</span></span>
 <span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">100</span> <span class="op">*</span> (<span class="fl">1.1</span> <span class="op">**</span> <span class="dv">7</span>))</span></code></pre></div>
 <pre><code>## 194.87171000000012</code></pre>
@@ -1852,7 +1852,7 @@ Lists</h2>
 </div>
 <div id="create-a-list" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Create a List</h2>
-<p>As opposed to <strong>int</strong>, <strong>bool</strong> etc., a
+<p>As opposed to <strong>int</strong> or <strong>bool</strong>, a
 <strong>list</strong> is a compound data type; you can group values
 together:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>a <span class="op">=</span> <span class="st">&#39;is&#39;</span></span>
@@ -2333,9 +2333,9 @@ were called on. Indeed, most list methods will change the list they’re
 called on. Examples are:</p>
 <ul>
 <li><strong>append()</strong>, that adds an element to the list it is
-called on,</li>
+called on;</li>
 <li><strong>remove()</strong>, that removes the first element of a list
-that matches the input,</li>
+that matches the input;</li>
 <li><strong>reverse()</strong>, that reverses the order of the elements
 in the list it is called on.</li>
 </ul>
@@ -2477,8 +2477,9 @@ meters!</p>
 <span id="cb104-4"><a href="#cb104-4" tabindex="-1"></a><span class="co"># Print np_height_m</span></span>
 <span id="cb104-5"><a href="#cb104-5" tabindex="-1"></a><span class="bu">print</span>(np_height_m)</span></code></pre></div>
 <pre><code>## [1.8796 1.8796 1.8288 ... 1.905  1.905  1.8542]</code></pre>
-<p>Nice! In the blink of an eye, numpy performs multiplications on more
-than <span class="math inline">\(1000\)</span> height measurements!</p>
+<p>Nice! In the blink of an eye, <strong>numpy</strong> performs
+multiplications on more than <span class="math inline">\(1000\)</span>
+height measurements!</p>
 </div>
 <div id="baseball-players-bmi" class="section level2" number="5.4">
 <h2><span class="header-section-number">5.4</span> Baseball player’s
@@ -2495,7 +2496,7 @@ are available as regular Python lists: <strong>height_in</strong> and
 <p><strong>height_in</strong> is in inches and
 <strong>weight_lb</strong> is in pounds.</p>
 <p>It’s now possible to calculate the BMI of each baseball player, with
-the formula: <span class="math display">\[\textrm{BMI}=\frac{\textrm{weight(kg)}}{\textrm{height(m)}^2}\]</span></p>
+the formula: <span class="math display">\[\textrm{BMI}=\frac{\textrm{weight(kg)}}{\textrm{height(m)}^2}.\]</span></p>
 <div class="sourceCode" id="cb108"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb108-1"><a href="#cb108-1" tabindex="-1"></a><span class="co"># Import numpy</span></span>
 <span id="cb108-2"><a href="#cb108-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb108-3"><a href="#cb108-3" tabindex="-1"></a></span>
@@ -2516,8 +2517,8 @@ the formula: <span class="math display">\[\textrm{BMI}=\frac{\textrm{weight(kg)}
 <div id="subsetting-numpy-arrays" class="section level2" number="5.5">
 <h2><span class="header-section-number">5.5</span> Subsetting NumPy
 Arrays</h2>
-<p>To subset both regular Python lists and numpy arrays, you can use
-square brackets:</p>
+<p>To subset both regular Python lists and <strong>numpy</strong>
+arrays, you can use square brackets:</p>
 <div class="sourceCode" id="cb110"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb110-1"><a href="#cb110-1" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">4</span> , <span class="dv">9</span> , <span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">1</span>]</span>
 <span id="cb110-2"><a href="#cb110-2" tabindex="-1"></a>x[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## 9</code></pre>
@@ -2525,7 +2526,8 @@ square brackets:</p>
 <span id="cb112-2"><a href="#cb112-2" tabindex="-1"></a>y <span class="op">=</span> np.array(x)</span>
 <span id="cb112-3"><a href="#cb112-3" tabindex="-1"></a>y[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## 9</code></pre>
-<p>For numpy specifically, you can also use boolean numpy arrays:</p>
+<p>For <strong>numpy</strong> specifically, you can also use boolean
+<strong>numpy</strong> arrays:</p>
 <div class="sourceCode" id="cb114"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb114-1"><a href="#cb114-1" tabindex="-1"></a>high <span class="op">=</span> y <span class="op">&gt;</span> <span class="dv">5</span></span>
 <span id="cb114-2"><a href="#cb114-2" tabindex="-1"></a>y[high]</span></code></pre></div>
 <pre><code>## array([9, 6])</code></pre>
