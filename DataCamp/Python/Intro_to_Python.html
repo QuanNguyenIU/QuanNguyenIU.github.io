@@ -2201,7 +2201,7 @@ variable, <strong>result</strong>, you can use the following:</p>
 <pre><code>## &lt;class &#39;float&#39;&gt;</code></pre>
 <p>The general recipe for calling functions and saving the result to a
 variable is thus:</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" tabindex="-1"></a><span class="co"># output = function_name(input)</span></span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" tabindex="-1"></a>output <span class="op">=</span> function_name(<span class="bu">input</span>)</span></code></pre></div>
 <p>Examples are provided below.</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" tabindex="-1"></a>var1 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
 <span id="cb74-2"><a href="#cb74-2" tabindex="-1"></a>var2 <span class="op">=</span> <span class="va">True</span></span>
@@ -2456,8 +2456,15 @@ main players. They pass along data on more than a thousand players,
 which is stored in a regular Python list <strong>height_in</strong>. The
 data can be found
 <a href="https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Intro.%20to%20Python/baseball.csv"><strong>here</strong><a></a>.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1" tabindex="-1"></a><span class="co"># height_in is available as a regular list</span></span>
-<span id="cb100-2"><a href="#cb100-2" tabindex="-1"></a>height_in[:<span class="dv">6</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1" tabindex="-1"></a><span class="co"># create height_in and weight_lb</span></span>
+<span id="cb100-2"><a href="#cb100-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb100-3"><a href="#cb100-3" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Intro.%20to%20Python/baseball.csv&#39;</span></span>
+<span id="cb100-4"><a href="#cb100-4" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb100-5"><a href="#cb100-5" tabindex="-1"></a>height_in <span class="op">=</span> <span class="bu">list</span>(df.Height)</span>
+<span id="cb100-6"><a href="#cb100-6" tabindex="-1"></a>weight_lb <span class="op">=</span> <span class="bu">list</span>(df.Weight)</span>
+<span id="cb100-7"><a href="#cb100-7" tabindex="-1"></a></span>
+<span id="cb100-8"><a href="#cb100-8" tabindex="-1"></a><span class="co"># height_in is available as a regular list</span></span>
+<span id="cb100-9"><a href="#cb100-9" tabindex="-1"></a>height_in[:<span class="dv">6</span>]</span></code></pre></div>
 <pre><code>## [74, 74, 72, 72, 73, 69]</code></pre>
 <p>The height is expressed in inches. Let’s make a
 <strong>numpy</strong> array out of it and convert the units to
@@ -2632,8 +2639,11 @@ sublist represents the height and weight of a single baseball player.
 The name of this embedded list is <strong>baseball</strong>. The data
 can be found
 <a href="https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Intro.%20to%20Python/baseball.csv"><strong>here</strong><a></a>.</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb128-1"><a href="#cb128-1" tabindex="-1"></a><span class="co"># baseball is available as a regular list of lists</span></span>
-<span id="cb128-2"><a href="#cb128-2" tabindex="-1"></a>baseball[:<span class="dv">6</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb128-1"><a href="#cb128-1" tabindex="-1"></a><span class="co"># create baseball</span></span>
+<span id="cb128-2"><a href="#cb128-2" tabindex="-1"></a>baseball <span class="op">=</span> [<span class="bu">list</span>(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">list</span>(<span class="bu">zip</span>(height_in, weight_lb))]</span>
+<span id="cb128-3"><a href="#cb128-3" tabindex="-1"></a></span>
+<span id="cb128-4"><a href="#cb128-4" tabindex="-1"></a><span class="co"># baseball is available as a regular list of lists</span></span>
+<span id="cb128-5"><a href="#cb128-5" tabindex="-1"></a>baseball[:<span class="dv">6</span>]</span></code></pre></div>
 <pre><code>## [[74, 180], [74, 215], [72, 210], [72, 210], [73, 188], [69, 176]]</code></pre>
 <p>Let’s store the data as a <span class="math inline">\(2\textrm{D}\)</span> array to unlock
 <strong>numpy</strong>’s extra functionality!</p>
@@ -2718,8 +2728,11 @@ with vectors, and with other matrices.</p>
 available for us; it’s now a <span class="math inline">\(2\textrm{D}\)</span> list of lists with 3 columns
 representing height (in inches), weight (in pounds) and age (in
 years).</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb146-1"><a href="#cb146-1" tabindex="-1"></a><span class="co"># baseball is available as a regular list of lists</span></span>
-<span id="cb146-2"><a href="#cb146-2" tabindex="-1"></a>baseball[:<span class="dv">6</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb146-1"><a href="#cb146-1" tabindex="-1"></a><span class="co"># create baseball</span></span>
+<span id="cb146-2"><a href="#cb146-2" tabindex="-1"></a>baseball <span class="op">=</span> [<span class="bu">list</span>(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">list</span>(<span class="bu">zip</span>(height_in, weight_lb, <span class="bu">list</span>(df.Age)))]</span>
+<span id="cb146-3"><a href="#cb146-3" tabindex="-1"></a></span>
+<span id="cb146-4"><a href="#cb146-4" tabindex="-1"></a><span class="co"># baseball is available as a regular list of lists</span></span>
+<span id="cb146-5"><a href="#cb146-5" tabindex="-1"></a>baseball[:<span class="dv">6</span>]</span></code></pre></div>
 <pre><code>## [[74, 180, 22.99], [74, 215, 34.69], [72, 210, 30.78], [72, 210, 35.43], [73, 188, 35.71], [69, 176, 29.39]]</code></pre>
 <p>You want to convert the units of height and weight to metric (meters
 and kilograms, respectively).</p>
@@ -2803,12 +2816,19 @@ together</h2>
 <p>In the last few exercises you’ve learned everything there is to know
 about heights and weights of baseball players. Now it’s time to dive
 into another sport: soccer.</p>
-<p>You’ve contacted FIFA for some data and they handed you two lists.
-The lists are the following:</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb162-1"><a href="#cb162-1" tabindex="-1"></a>positions[:<span class="dv">6</span>]</span></code></pre></div>
-<pre><code>## [&#39;GK&#39;, &#39;M&#39;, &#39;A&#39;, &#39;D&#39;, &#39;M&#39;, &#39;D&#39;]</code></pre>
-<div class="sourceCode" id="cb164"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb164-1"><a href="#cb164-1" tabindex="-1"></a>heights[:<span class="dv">6</span>]</span></code></pre></div>
-<pre><code>## [191, 184, 185, 180, 181, 187]</code></pre>
+<p>You’ve contacted FIFA for some data and they handed you two lists, as
+follows:</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb162-1"><a href="#cb162-1" tabindex="-1"></a><span class="co"># create positions and heights</span></span>
+<span id="cb162-2"><a href="#cb162-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb162-3"><a href="#cb162-3" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Intro.%20to%20Python/fifa.csv&#39;</span></span>
+<span id="cb162-4"><a href="#cb162-4" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb162-5"><a href="#cb162-5" tabindex="-1"></a>positions <span class="op">=</span> [i.replace(<span class="st">&#39; &#39;</span>, <span class="st">&#39;&#39;</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">list</span>(df[<span class="st">&#39; position&#39;</span>])]</span>
+<span id="cb162-6"><a href="#cb162-6" tabindex="-1"></a>heights <span class="op">=</span> <span class="bu">list</span>(df[<span class="st">&#39; height&#39;</span>])</span>
+<span id="cb162-7"><a href="#cb162-7" tabindex="-1"></a></span>
+<span id="cb162-8"><a href="#cb162-8" tabindex="-1"></a><span class="co"># Examine positions and heights</span></span>
+<span id="cb162-9"><a href="#cb162-9" tabindex="-1"></a><span class="bu">print</span>(positions[:<span class="dv">6</span>], <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>, heights[:<span class="dv">6</span>])</span></code></pre></div>
+<pre><code>## [&#39;GK&#39;, &#39;M&#39;, &#39;A&#39;, &#39;D&#39;, &#39;M&#39;, &#39;D&#39;] 
+##  [191, 184, 185, 180, 181, 187]</code></pre>
 <p>Each element in the lists corresponds to a player. The first list,
 <strong>positions</strong>, contains strings representing each player’s
 position. The possible positions are: <strong>‘GK’</strong>
@@ -2823,24 +2843,24 @@ be found
 higher than that of other players on the soccer field. Some of your
 friends don’t believe you, so you are determined to show them using the
 data you received from FIFA and your newly acquired Python skills.</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb166-1"><a href="#cb166-1" tabindex="-1"></a><span class="co"># Import numpy</span></span>
-<span id="cb166-2"><a href="#cb166-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb166-3"><a href="#cb166-3" tabindex="-1"></a></span>
-<span id="cb166-4"><a href="#cb166-4" tabindex="-1"></a><span class="co"># Convert positions and heights to numpy arrays: np_positions, np_heights</span></span>
-<span id="cb166-5"><a href="#cb166-5" tabindex="-1"></a>np_positions <span class="op">=</span> np.array(positions)</span>
-<span id="cb166-6"><a href="#cb166-6" tabindex="-1"></a>np_heights <span class="op">=</span> np.array(heights)</span>
-<span id="cb166-7"><a href="#cb166-7" tabindex="-1"></a></span>
-<span id="cb166-8"><a href="#cb166-8" tabindex="-1"></a><span class="co"># Heights of the goalkeepers: gk_heights</span></span>
-<span id="cb166-9"><a href="#cb166-9" tabindex="-1"></a>gk_heights <span class="op">=</span> np_heights[np_positions <span class="op">==</span> <span class="st">&#39;GK&#39;</span>]</span>
-<span id="cb166-10"><a href="#cb166-10" tabindex="-1"></a></span>
-<span id="cb166-11"><a href="#cb166-11" tabindex="-1"></a><span class="co"># Heights of the other players: other_heights</span></span>
-<span id="cb166-12"><a href="#cb166-12" tabindex="-1"></a>other_heights <span class="op">=</span> np_heights[np_positions <span class="op">!=</span> <span class="st">&#39;GK&#39;</span>]</span>
-<span id="cb166-13"><a href="#cb166-13" tabindex="-1"></a></span>
-<span id="cb166-14"><a href="#cb166-14" tabindex="-1"></a><span class="co"># Print out the median height of goalkeepers</span></span>
-<span id="cb166-15"><a href="#cb166-15" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Median height of goalkeepers: &quot;</span> <span class="op">+</span> <span class="bu">str</span>(np.median(gk_heights)))</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb164-1"><a href="#cb164-1" tabindex="-1"></a><span class="co"># Import numpy</span></span>
+<span id="cb164-2"><a href="#cb164-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb164-3"><a href="#cb164-3" tabindex="-1"></a></span>
+<span id="cb164-4"><a href="#cb164-4" tabindex="-1"></a><span class="co"># Convert positions and heights to numpy arrays: np_positions, np_heights</span></span>
+<span id="cb164-5"><a href="#cb164-5" tabindex="-1"></a>np_positions <span class="op">=</span> np.array(positions)</span>
+<span id="cb164-6"><a href="#cb164-6" tabindex="-1"></a>np_heights <span class="op">=</span> np.array(heights)</span>
+<span id="cb164-7"><a href="#cb164-7" tabindex="-1"></a></span>
+<span id="cb164-8"><a href="#cb164-8" tabindex="-1"></a><span class="co"># Heights of the goalkeepers: gk_heights</span></span>
+<span id="cb164-9"><a href="#cb164-9" tabindex="-1"></a>gk_heights <span class="op">=</span> np_heights[np_positions <span class="op">==</span> <span class="st">&#39;GK&#39;</span>]</span>
+<span id="cb164-10"><a href="#cb164-10" tabindex="-1"></a></span>
+<span id="cb164-11"><a href="#cb164-11" tabindex="-1"></a><span class="co"># Heights of the other players: other_heights</span></span>
+<span id="cb164-12"><a href="#cb164-12" tabindex="-1"></a>other_heights <span class="op">=</span> np_heights[np_positions <span class="op">!=</span> <span class="st">&#39;GK&#39;</span>]</span>
+<span id="cb164-13"><a href="#cb164-13" tabindex="-1"></a></span>
+<span id="cb164-14"><a href="#cb164-14" tabindex="-1"></a><span class="co"># Print out the median height of goalkeepers</span></span>
+<span id="cb164-15"><a href="#cb164-15" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Median height of goalkeepers: &quot;</span> <span class="op">+</span> <span class="bu">str</span>(np.median(gk_heights)))</span></code></pre></div>
 <pre><code>## Median height of goalkeepers: 188.0</code></pre>
-<div class="sourceCode" id="cb168"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb168-1"><a href="#cb168-1" tabindex="-1"></a><span class="co"># Print out the median height of other players</span></span>
-<span id="cb168-2"><a href="#cb168-2" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Median height of other players: &quot;</span> <span class="op">+</span> <span class="bu">str</span>(np.median(other_heights)))</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb166-1"><a href="#cb166-1" tabindex="-1"></a><span class="co"># Print out the median height of other players</span></span>
+<span id="cb166-2"><a href="#cb166-2" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Median height of other players: &quot;</span> <span class="op">+</span> <span class="bu">str</span>(np.median(other_heights)))</span></code></pre></div>
 <pre><code>## Median height of other players: 181.0</code></pre>
 <p>Wonderful! You were right and the disbelievers were wrong!</p>
 </div>
