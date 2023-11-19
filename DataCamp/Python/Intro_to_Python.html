@@ -1605,7 +1605,7 @@ margin-left: 0 !important;
           <li><a href="#subsetting-2d-numpy-arrays" id="toc-subsetting-2d-numpy-arrays"><span class="toc-section-number">5.10</span> Subsetting 2D NumPy
           Arrays</a></li>
           <li><a href="#d-arithmetic" id="toc-d-arithmetic"><span class="toc-section-number">5.11</span> 2D Arithmetic</a></li>
-          <li><a href="#lecture-numpy-basic-statistics" id="toc-lecture-numpy-basic-statistics"><span class="toc-section-number">5.12</span> Lecture: NumPy: Basic
+          <li><a href="#lecture-numpy---basic-statistics" id="toc-lecture-numpy---basic-statistics"><span class="toc-section-number">5.12</span> Lecture: NumPy - Basic
           Statistics</a></li>
           <li><a href="#explore-the-baseball-data" id="toc-explore-the-baseball-data"><span class="toc-section-number">5.13</span> Explore the baseball
           data</a></li>
@@ -1666,8 +1666,9 @@ tools to begin conducting your own analyses.</p>
 <div id="python-basics" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Python Basics</h1>
 <p>An introduction to the basic concepts of Python. Learn how to use
-Python interactively and by using a script. Create your first variables
-and acquaint yourself with Python’s basic data types.</p>
+Python interactively and by using a script. Create your first
+<strong>variables</strong> and acquaint yourself with Python’s basic
+data types.</p>
 <div id="lecture-hello-python" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Lecture: Hello
 Python!</h2>
@@ -1696,8 +1697,9 @@ satisfaction survey.</li>
 <div id="any-comments" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Any Comments?</h2>
 <p>Something that Hugo didn’t mention in his videos is that you can add
-comments to your Python scripts. Comments are important to make sure
-that you and others can understand what your code is about.</p>
+<strong>comments</strong> to your Python scripts. Comments are important
+to make sure that you and others can understand what your code is
+about.</p>
 <p>To add comments to your Python script, you can use the
 <strong>#</strong> tag. These comments are not run as Python code, so
 they will not influence your result. As an example, the comment below is
@@ -1738,9 +1740,8 @@ and Types</h2>
 <div id="variable-assignment" class="section level2" number="2.6">
 <h2><span class="header-section-number">2.6</span> Variable
 Assignment</h2>
-<p>In Python, a variable allows you to refer to a value with a name. To
-create a variable, use <span class="math inline">\(=\)</span> like the
-example below.</p>
+<p>In Python, a <strong>variable</strong> allows you to refer to a value
+with a name. To create a variable, use <span class="math inline">\(=\)</span> like the example below.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="bu">print</span>(x)</span></code></pre></div>
 <pre><code>## 5</code></pre>
@@ -1907,7 +1908,7 @@ strings and floats, but that’s not a problem for Python!</p>
 it will make sense to group some of this data.</p>
 <p>Instead of creating a flat list containing strings and floats,
 representing the names and areas of the rooms in your house, you can
-create a list of lists. Don’t get confused here:
+create a <strong>list of lists</strong>. Don’t get confused here:
 <strong>“hallway”</strong> is a string, while <strong>hall</strong> is a
 variable that represents the float <span class="math inline">\(11.25\)</span> you specified earlier.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="co"># area variables (in square meters)</span></span>
@@ -1938,11 +1939,11 @@ Lists</h2>
 <div id="subset-and-conquer" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Subset and
 conquer</h2>
-<p>Subsetting Python lists is a piece of cake. Take the code sample
-below, which creates a list <strong>x</strong> and then selects
-<strong>“b”</strong> from it. Remember that this is the second element,
-so it has index <span class="math inline">\(1\)</span>. You can also use
-negative indexing.</p>
+<p><strong>Subsetting</strong> Python lists is a piece of cake. Take the
+code sample below, which creates a list <strong>x</strong> and then
+selects <strong>“b”</strong> from it. Remember that this is the second
+element, so it has index <span class="math inline">\(1\)</span>. You can
+also use negative indexing.</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>x <span class="op">=</span> [<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>]</span>
 <span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a><span class="bu">print</span>(x[<span class="dv">1</span>], <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
 <span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a>      x[<span class="op">-</span><span class="dv">3</span>]) <span class="co"># same result!</span></span></code></pre></div>
@@ -1990,8 +1991,9 @@ that result are pasted together using the <span class="math inline">\(+\)</span>
 <h2><span class="header-section-number">3.8</span> Slicing and
 dicing</h2>
 <p>Selecting single values from a list is just one part of the story.
-It’s also possible to slice your list, which means selecting multiple
-elements from your list. Use the following syntax:</p>
+It’s also possible to <strong>slice</strong> your list, which means
+selecting multiple elements from your list. Use the following
+syntax:</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a>my_list[start:end]</span></code></pre></div>
 <p>The <strong>start</strong> index will be included, while the
 <strong>end</strong> index is not.</p>
@@ -2758,8 +2760,8 @@ and kilograms, respectively).</p>
 <strong>numpy</strong> data structure in a very specific way. This will
 be very useful in your future as a data scientist!</p>
 </div>
-<div id="lecture-numpy-basic-statistics" class="section level2" number="5.12">
-<h2><span class="header-section-number">5.12</span> Lecture: NumPy:
+<div id="lecture-numpy---basic-statistics" class="section level2" number="5.12">
+<h2><span class="header-section-number">5.12</span> Lecture: NumPy -
 Basic Statistics</h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/37EJ5jNMNgk" data-external="1">
 </iframe>
