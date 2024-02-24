@@ -2056,14 +2056,64 @@ Dictionaries, Part 1</h2>
 <div id="motivation-for-dictionaries" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Motivation for
 Dictionaries</h2>
+<p>To see why dictionaries are useful, have a look at the two lists
+defined below. countries contains the names of some European countries.
+capitals lists the corresponding names of their capital.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># Definition of countries and capital</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>countries <span class="op">=</span> [<span class="st">&#39;spain&#39;</span>, <span class="st">&#39;france&#39;</span>, <span class="st">&#39;germany&#39;</span>, <span class="st">&#39;norway&#39;</span>]</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>capitals <span class="op">=</span> [<span class="st">&#39;madrid&#39;</span>, <span class="st">&#39;paris&#39;</span>, <span class="st">&#39;berlin&#39;</span>, <span class="st">&#39;oslo&#39;</span>]</span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a><span class="co"># Get index of &#39;germany&#39;: ind_ger</span></span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a>ind_ger <span class="op">=</span> countries.index(<span class="st">&#39;germany&#39;</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a><span class="co"># Use ind_ger to print out capital of Germany</span></span>
+<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a><span class="bu">print</span>(capitals[ind_ger])</span></code></pre></div>
+<pre><code>## berlin</code></pre>
+<p>As Hugo already told you: this works, but it’s not very
+convenient.</p>
 </div>
 <div id="create-dictionaries" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Create
 Dictionaries</h2>
+<p>The countries and capitals lists are again available below. Let’s
+convert this data to a dictionary where the country names are the keys
+and the capitals are the corresponding values. As a refresher, here is a
+recipe for creating a dictionary:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>my_dict <span class="op">=</span> {</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>   <span class="st">&quot;key1&quot;</span>:<span class="st">&quot;value1&quot;</span>,</span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>   <span class="st">&quot;key2&quot;</span>:<span class="st">&quot;value2&quot;</span>,</span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># Definition of countries and capital</span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>countries <span class="op">=</span> [<span class="st">&#39;spain&#39;</span>, <span class="st">&#39;france&#39;</span>, <span class="st">&#39;germany&#39;</span>, <span class="st">&#39;norway&#39;</span>]</span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>capitals <span class="op">=</span> [<span class="st">&#39;madrid&#39;</span>, <span class="st">&#39;paris&#39;</span>, <span class="st">&#39;berlin&#39;</span>, <span class="st">&#39;oslo&#39;</span>]</span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a><span class="co"># From string in countries and capitals, create dictionary europe</span></span>
+<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a>europe <span class="op">=</span> { <span class="st">&#39;spain&#39;</span>:<span class="st">&#39;madrid&#39;</span>, <span class="st">&#39;france&#39;</span>:<span class="st">&#39;paris&#39;</span>, <span class="st">&#39;germany&#39;</span>:<span class="st">&#39;berlin&#39;</span>, <span class="st">&#39;norway&#39;</span>:<span class="st">&#39;oslo&#39;</span> }</span>
+<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a><span class="co"># Print europe</span></span>
+<span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a><span class="bu">print</span>(europe)</span></code></pre></div>
+<pre><code>## {&#39;spain&#39;: &#39;madrid&#39;, &#39;france&#39;: &#39;paris&#39;, &#39;germany&#39;: &#39;berlin&#39;, &#39;norway&#39;: &#39;oslo&#39;}</code></pre>
+<p>Great! Now that you’ve built your first dictionaries, let’s get
+serious!</p>
 </div>
 <div id="access-dictionaries" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Access
 Dictionaries</h2>
+<p>If the keys of a dictionary are chosen wisely, accessing the values
+in a dictionary is easy and intuitive. For example, to get the capital
+for France from europe you can use:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>europe[<span class="st">&#39;france&#39;</span>]</span></code></pre></div>
+<p>Here, ‘france’ is the key and ‘paris’ the value is returned.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="co"># Definition of dictionary</span></span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>europe <span class="op">=</span> {<span class="st">&#39;spain&#39;</span>:<span class="st">&#39;madrid&#39;</span>, <span class="st">&#39;france&#39;</span>:<span class="st">&#39;paris&#39;</span>, <span class="st">&#39;germany&#39;</span>:<span class="st">&#39;berlin&#39;</span>, <span class="st">&#39;norway&#39;</span>:<span class="st">&#39;oslo&#39;</span> }</span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a><span class="co"># Print out the keys in europe</span></span>
+<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a><span class="bu">print</span>(europe.keys())</span></code></pre></div>
+<pre><code>## dict_keys([&#39;spain&#39;, &#39;france&#39;, &#39;germany&#39;, &#39;norway&#39;])</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="co"># Print out value that belongs to key &#39;norway&#39;</span></span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a><span class="bu">print</span>(europe[<span class="st">&#39;norway&#39;</span>])</span></code></pre></div>
+<pre><code>## oslo</code></pre>
+<p>Good job, now you’re warmed up for some more.</p>
 </div>
 <div id="lecture-dictionaries-part-2" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Lecture:
