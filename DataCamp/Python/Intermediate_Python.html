@@ -1654,7 +1654,7 @@ margin-left: 0 !important;
           <li class="divider"></li>
                                 <li><span><i class="glyphicon glyphicon-user"></i> Quan
 Nguyen</span></li>
-                                         <li><span><i class="glyphicon glyphicon-calendar"></i> February
+                                         <li><span><i class="glyphicon glyphicon-calendar"></i> March
 2024</span></li>
                   </ul>     
       </div>
@@ -2502,13 +2502,76 @@ Operators</h2>
 </div>
 <div id="equality" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Equality</h2>
+<p>To check if two Python values, or variables, are equal you can use
+==. To check for inequality, you need !=. As a refresher, have a look at
+the following examples that all result in True.</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" tabindex="-1"></a><span class="dv">2</span> <span class="op">==</span> (<span class="dv">1</span> <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb81-2"><a href="#cb81-2" tabindex="-1"></a><span class="co">&quot;intermediate&quot;</span> <span class="op">!=</span> <span class="st">&quot;python&quot;</span></span>
+<span id="cb81-3"><a href="#cb81-3" tabindex="-1"></a><span class="va">True</span> <span class="op">!=</span> <span class="va">False</span></span>
+<span id="cb81-4"><a href="#cb81-4" tabindex="-1"></a><span class="co">&quot;Python&quot;</span> <span class="op">!=</span> <span class="st">&quot;python&quot;</span></span></code></pre></div>
+<p>When you write these comparisons in a script, you will need to wrap a
+print() function around them to see the output.</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" tabindex="-1"></a><span class="co"># Comparison of booleans</span></span>
+<span id="cb82-2"><a href="#cb82-2" tabindex="-1"></a><span class="bu">print</span>(<span class="va">True</span> <span class="op">==</span> <span class="va">False</span>)</span></code></pre></div>
+<pre><code>## False</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" tabindex="-1"></a><span class="co"># Comparison of integers</span></span>
+<span id="cb84-2"><a href="#cb84-2" tabindex="-1"></a><span class="bu">print</span>(<span class="op">-</span><span class="dv">5</span> <span class="op">*</span> <span class="dv">15</span> <span class="op">!=</span> <span class="dv">75</span>)</span></code></pre></div>
+<pre><code>## True</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1" tabindex="-1"></a><span class="co"># Comparison of strings</span></span>
+<span id="cb86-2"><a href="#cb86-2" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;pyscript&#39;</span> <span class="op">==</span> <span class="st">&#39;PyScript&#39;</span>)</span></code></pre></div>
+<pre><code>## False</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1" tabindex="-1"></a><span class="co"># Compare a boolean with an integer</span></span>
+<span id="cb88-2"><a href="#cb88-2" tabindex="-1"></a><span class="bu">print</span>(<span class="va">True</span> <span class="op">==</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## True</code></pre>
+<p>The last comparison worked fine because actually, a boolean is a
+special kind of integer: True corresponds to 1, False corresponds to
+0.</p>
 </div>
 <div id="greater-and-less-than" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Greater and Less
 than</h2>
+<p>In the video, Hugo also talked about the less than and greater than
+signs, &lt; and &gt; in Python. You can combine them with an equals
+sign: &lt;= and &gt;=. Pay attention: &lt;= is valid syntax, but =&lt;
+is not.</p>
+<p>All Python expressions in the following code chunk evaluate to
+True:</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb90-1"><a href="#cb90-1" tabindex="-1"></a><span class="dv">3</span> <span class="op">&lt;</span> <span class="dv">4</span></span>
+<span id="cb90-2"><a href="#cb90-2" tabindex="-1"></a><span class="dv">3</span> <span class="op">&lt;=</span> <span class="dv">4</span></span>
+<span id="cb90-3"><a href="#cb90-3" tabindex="-1"></a><span class="co">&quot;alpha&quot;</span> <span class="op">&lt;=</span> <span class="st">&quot;beta&quot;</span></span></code></pre></div>
+<p>Remember that for string comparison, Python determines the
+relationship based on alphabetical order.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" tabindex="-1"></a><span class="co"># Comparison of integers</span></span>
+<span id="cb91-2"><a href="#cb91-2" tabindex="-1"></a>x <span class="op">=</span> <span class="op">-</span><span class="dv">3</span> <span class="op">*</span> <span class="dv">6</span></span>
+<span id="cb91-3"><a href="#cb91-3" tabindex="-1"></a><span class="bu">print</span>( x <span class="op">&gt;=</span> <span class="op">-</span><span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## False</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" tabindex="-1"></a><span class="co"># Comparison of strings</span></span>
+<span id="cb93-2"><a href="#cb93-2" tabindex="-1"></a>y <span class="op">=</span> <span class="st">&quot;test&quot;</span></span>
+<span id="cb93-3"><a href="#cb93-3" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;test&#39;</span> <span class="op">&lt;=</span> y)</span></code></pre></div>
+<pre><code>## True</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" tabindex="-1"></a><span class="co"># Comparison of booleans</span></span>
+<span id="cb95-2"><a href="#cb95-2" tabindex="-1"></a><span class="bu">print</span>(<span class="va">True</span> <span class="op">&gt;</span> <span class="va">False</span>)</span></code></pre></div>
+<pre><code>## True</code></pre>
 </div>
 <div id="compare-arrays" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Compare Arrays</h2>
+<p>Out of the box, you can also use comparison operators with NumPy
+arrays.</p>
+<p>Remember areas, the list of area measurements for different rooms in
+your house from Introduction to Python? This time there’s two NumPy
+arrays: my_house and your_house. They both contain the areas for the
+kitchen, living room, bedroom and bathroom in the same order, so you can
+compare them.</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1" tabindex="-1"></a><span class="co"># Create arrays</span></span>
+<span id="cb97-2"><a href="#cb97-2" tabindex="-1"></a>my_house <span class="op">=</span> np.array([<span class="fl">18.0</span>, <span class="fl">20.0</span>, <span class="fl">10.75</span>, <span class="fl">9.50</span>])</span>
+<span id="cb97-3"><a href="#cb97-3" tabindex="-1"></a>your_house <span class="op">=</span> np.array([<span class="fl">14.0</span>, <span class="fl">24.0</span>, <span class="fl">14.25</span>, <span class="fl">9.0</span>])</span>
+<span id="cb97-4"><a href="#cb97-4" tabindex="-1"></a></span>
+<span id="cb97-5"><a href="#cb97-5" tabindex="-1"></a><span class="co"># my_house greater than or equal to 18</span></span>
+<span id="cb97-6"><a href="#cb97-6" tabindex="-1"></a><span class="bu">print</span>(my_house <span class="op">&gt;=</span> <span class="dv">18</span>)</span></code></pre></div>
+<pre><code>## [ True  True False False]</code></pre>
+<div class="sourceCode" id="cb99"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb99-1"><a href="#cb99-1" tabindex="-1"></a><span class="co"># my_house less than your_house</span></span>
+<span id="cb99-2"><a href="#cb99-2" tabindex="-1"></a><span class="bu">print</span>(my_house <span class="op">&lt;</span> your_house)</span></code></pre></div>
+<pre><code>## [False  True  True False]</code></pre>
 </div>
 <div id="lecture-booleans-operators" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> Lecture: Booleans
@@ -2518,10 +2581,39 @@ Operators</h2>
 </div>
 <div id="and-or-not" class="section level2" number="4.6">
 <h2><span class="header-section-number">4.6</span> and, or, not</h2>
+<p>A boolean is either 1 or 0, True or False. With boolean operators
+such as and, or and not, you can combine these booleans to perform more
+advanced queries on your data.</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb101-1"><a href="#cb101-1" tabindex="-1"></a><span class="co"># Define variables</span></span>
+<span id="cb101-2"><a href="#cb101-2" tabindex="-1"></a>my_kitchen <span class="op">=</span> <span class="fl">18.0</span></span>
+<span id="cb101-3"><a href="#cb101-3" tabindex="-1"></a>your_kitchen <span class="op">=</span> <span class="fl">14.0</span></span>
+<span id="cb101-4"><a href="#cb101-4" tabindex="-1"></a></span>
+<span id="cb101-5"><a href="#cb101-5" tabindex="-1"></a><span class="co"># my_kitchen bigger than 10 and smaller than 18?</span></span>
+<span id="cb101-6"><a href="#cb101-6" tabindex="-1"></a><span class="bu">print</span>(my_kitchen <span class="op">&gt;</span> <span class="dv">10</span> <span class="kw">and</span> my_kitchen <span class="op">&lt;</span> <span class="dv">18</span>)</span></code></pre></div>
+<pre><code>## False</code></pre>
+<div class="sourceCode" id="cb103"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb103-1"><a href="#cb103-1" tabindex="-1"></a><span class="co"># my_kitchen smaller than 14 or bigger than 17?</span></span>
+<span id="cb103-2"><a href="#cb103-2" tabindex="-1"></a><span class="bu">print</span>(my_kitchen <span class="op">&lt;</span> <span class="dv">14</span> <span class="kw">or</span> my_kitchen <span class="op">&gt;</span> <span class="dv">17</span>)</span></code></pre></div>
+<pre><code>## True</code></pre>
+<div class="sourceCode" id="cb105"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb105-1"><a href="#cb105-1" tabindex="-1"></a><span class="co"># Double my_kitchen smaller than triple your_kitchen?</span></span>
+<span id="cb105-2"><a href="#cb105-2" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">2</span> <span class="op">*</span> my_kitchen <span class="op">&lt;</span> <span class="dv">3</span> <span class="op">*</span> your_kitchen)</span></code></pre></div>
+<pre><code>## True</code></pre>
 </div>
 <div id="boolean-operators-with-numpy" class="section level2" number="4.7">
 <h2><span class="header-section-number">4.7</span> Boolean Operators
 with NumPy</h2>
+<p>Before, the operational operators like &lt; and &gt;= worked with
+NumPy arrays out of the box. Unfortunately, this is not true for the
+boolean operators and, or, and not.</p>
+<p>To use these operators with NumPy, you will need np.logical_and(),
+np.logical_or() and np.logical_not(). Here’s an example on the my_house
+and your_house arrays from before to give you an idea:</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb107-1"><a href="#cb107-1" tabindex="-1"></a>np.logical_and(my_house <span class="op">&gt;</span> <span class="dv">13</span>, your_house <span class="op">&lt;</span> <span class="dv">15</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb108-1"><a href="#cb108-1" tabindex="-1"></a><span class="co"># my_house greater than 18.5 or smaller than 10</span></span>
+<span id="cb108-2"><a href="#cb108-2" tabindex="-1"></a><span class="bu">print</span>(np.logical_or(my_house <span class="op">&gt;</span> <span class="fl">18.5</span>, my_house <span class="op">&lt;</span> <span class="dv">10</span>))</span></code></pre></div>
+<pre><code>## [False  True False  True]</code></pre>
+<div class="sourceCode" id="cb110"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb110-1"><a href="#cb110-1" tabindex="-1"></a><span class="co"># Both my_house and your_house smaller than 11</span></span>
+<span id="cb110-2"><a href="#cb110-2" tabindex="-1"></a><span class="bu">print</span>(np.logical_and(my_house <span class="op">&lt;</span> <span class="dv">11</span>, your_house <span class="op">&lt;</span> <span class="dv">11</span>))</span></code></pre></div>
+<pre><code>## [False False False  True]</code></pre>
 </div>
 <div id="lecture-if-elif-else" class="section level2" number="4.8">
 <h2><span class="header-section-number">4.8</span> Lecture: if, elif,
@@ -2531,13 +2623,62 @@ else</h2>
 </div>
 <div id="if" class="section level2" number="4.9">
 <h2><span class="header-section-number">4.9</span> if</h2>
+<p>It’s time to take a closer look around in your house.</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb112-1"><a href="#cb112-1" tabindex="-1"></a><span class="co"># Define variables</span></span>
+<span id="cb112-2"><a href="#cb112-2" tabindex="-1"></a>room <span class="op">=</span> <span class="st">&quot;kit&quot;</span></span>
+<span id="cb112-3"><a href="#cb112-3" tabindex="-1"></a>area <span class="op">=</span> <span class="fl">14.0</span></span>
+<span id="cb112-4"><a href="#cb112-4" tabindex="-1"></a></span>
+<span id="cb112-5"><a href="#cb112-5" tabindex="-1"></a><span class="co"># if statement for room</span></span>
+<span id="cb112-6"><a href="#cb112-6" tabindex="-1"></a><span class="cf">if</span> room <span class="op">==</span> <span class="st">&quot;kit&quot;</span> :</span>
+<span id="cb112-7"><a href="#cb112-7" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;looking around in the kitchen.&quot;</span>)</span></code></pre></div>
+<pre><code>## looking around in the kitchen.</code></pre>
+<div class="sourceCode" id="cb114"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb114-1"><a href="#cb114-1" tabindex="-1"></a></span>
+<span id="cb114-2"><a href="#cb114-2" tabindex="-1"></a><span class="co"># if statement for area</span></span>
+<span id="cb114-3"><a href="#cb114-3" tabindex="-1"></a><span class="cf">if</span> area <span class="op">&gt;</span> <span class="dv">15</span>:</span>
+<span id="cb114-4"><a href="#cb114-4" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">&#39;big place!&#39;</span>)</span></code></pre></div>
+<p>Great! big place! wasn’t printed, because area &gt; 15 is not True.
+Experiment with other values of room and area to see how the printouts
+change.</p>
 </div>
 <div id="add-else" class="section level2" number="4.10">
 <h2><span class="header-section-number">4.10</span> Add else</h2>
+<div class="sourceCode" id="cb115"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb115-1"><a href="#cb115-1" tabindex="-1"></a><span class="co"># if-else construct for room</span></span>
+<span id="cb115-2"><a href="#cb115-2" tabindex="-1"></a><span class="cf">if</span> room <span class="op">==</span> <span class="st">&quot;kit&quot;</span> :</span>
+<span id="cb115-3"><a href="#cb115-3" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;looking around in the kitchen.&quot;</span>)</span>
+<span id="cb115-4"><a href="#cb115-4" tabindex="-1"></a><span class="cf">else</span> :</span>
+<span id="cb115-5"><a href="#cb115-5" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;looking around elsewhere.&quot;</span>)</span></code></pre></div>
+<pre><code>## looking around in the kitchen.</code></pre>
+<div class="sourceCode" id="cb117"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb117-1"><a href="#cb117-1" tabindex="-1"></a><span class="co"># if-else construct for area</span></span>
+<span id="cb117-2"><a href="#cb117-2" tabindex="-1"></a><span class="cf">if</span> area <span class="op">&gt;</span> <span class="dv">15</span> :</span>
+<span id="cb117-3"><a href="#cb117-3" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;big place!&quot;</span>)</span>
+<span id="cb117-4"><a href="#cb117-4" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb117-5"><a href="#cb117-5" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">&#39;pretty small.&#39;</span>)</span></code></pre></div>
+<pre><code>## pretty small.</code></pre>
 </div>
 <div id="customizing-further-elif" class="section level2" number="4.11">
 <h2><span class="header-section-number">4.11</span> Customizing Further:
 elif</h2>
+<p>It’s also possible to have a look around in the bedroom.</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb119-1"><a href="#cb119-1" tabindex="-1"></a><span class="co"># Define variables</span></span>
+<span id="cb119-2"><a href="#cb119-2" tabindex="-1"></a>room <span class="op">=</span> <span class="st">&quot;bed&quot;</span></span>
+<span id="cb119-3"><a href="#cb119-3" tabindex="-1"></a>area <span class="op">=</span> <span class="fl">14.0</span></span>
+<span id="cb119-4"><a href="#cb119-4" tabindex="-1"></a></span>
+<span id="cb119-5"><a href="#cb119-5" tabindex="-1"></a><span class="co"># if-elif-else construct for room</span></span>
+<span id="cb119-6"><a href="#cb119-6" tabindex="-1"></a><span class="cf">if</span> room <span class="op">==</span> <span class="st">&quot;kit&quot;</span> :</span>
+<span id="cb119-7"><a href="#cb119-7" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;looking around in the kitchen.&quot;</span>)</span>
+<span id="cb119-8"><a href="#cb119-8" tabindex="-1"></a><span class="cf">elif</span> room <span class="op">==</span> <span class="st">&quot;bed&quot;</span>:</span>
+<span id="cb119-9"><a href="#cb119-9" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;looking around in the bedroom.&quot;</span>)</span>
+<span id="cb119-10"><a href="#cb119-10" tabindex="-1"></a><span class="cf">else</span> :</span>
+<span id="cb119-11"><a href="#cb119-11" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;looking around elsewhere.&quot;</span>)</span></code></pre></div>
+<pre><code>## looking around in the bedroom.</code></pre>
+<div class="sourceCode" id="cb121"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb121-1"><a href="#cb121-1" tabindex="-1"></a><span class="co"># if-elif-else construct for area</span></span>
+<span id="cb121-2"><a href="#cb121-2" tabindex="-1"></a><span class="cf">if</span> area <span class="op">&gt;</span> <span class="dv">15</span> :</span>
+<span id="cb121-3"><a href="#cb121-3" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;big place!&quot;</span>)</span>
+<span id="cb121-4"><a href="#cb121-4" tabindex="-1"></a><span class="cf">elif</span> area <span class="op">&gt;</span> <span class="dv">10</span>:</span>
+<span id="cb121-5"><a href="#cb121-5" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">&#39;medium size, nice!&#39;</span>)</span>
+<span id="cb121-6"><a href="#cb121-6" tabindex="-1"></a><span class="cf">else</span> :</span>
+<span id="cb121-7"><a href="#cb121-7" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;pretty small.&quot;</span>)</span></code></pre></div>
+<pre><code>## medium size, nice!</code></pre>
 </div>
 <div id="lecture-filtering-pandas-dataframe" class="section level2" number="4.12">
 <h2><span class="header-section-number">4.12</span> Lecture: Filtering
@@ -2547,9 +2688,83 @@ Pandas DataFrame</h2>
 </div>
 <div id="driving-right" class="section level2" number="4.13">
 <h2><span class="header-section-number">4.13</span> Driving Right</h2>
+<p>Remember that cars dataset, containing the cars per 1000 people
+(cars_per_cap) and whether people drive right (drives_right) for
+different countries (country)?</p>
+<p>In the video, you saw a step-by-step approach to filter observations
+from a DataFrame based on boolean arrays. Let’s start simple and try to
+find all observations in cars where drives_right is True.</p>
+<p>drives_right is a boolean column, so you’ll have to extract it as a
+Series and then use this boolean Series to select observations from
+cars.</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb123-1"><a href="#cb123-1" tabindex="-1"></a><span class="co"># Extract drives_right column as Series: dr</span></span>
+<span id="cb123-2"><a href="#cb123-2" tabindex="-1"></a>dr <span class="op">=</span> cars.loc[:, <span class="st">&#39;drives_right&#39;</span>]</span>
+<span id="cb123-3"><a href="#cb123-3" tabindex="-1"></a></span>
+<span id="cb123-4"><a href="#cb123-4" tabindex="-1"></a><span class="co"># Use dr to subset cars: sel</span></span>
+<span id="cb123-5"><a href="#cb123-5" tabindex="-1"></a>sel <span class="op">=</span> cars[dr]</span>
+<span id="cb123-6"><a href="#cb123-6" tabindex="-1"></a></span>
+<span id="cb123-7"><a href="#cb123-7" tabindex="-1"></a><span class="co"># Print sel</span></span>
+<span id="cb123-8"><a href="#cb123-8" tabindex="-1"></a><span class="bu">print</span>(sel)</span></code></pre></div>
+<pre><code>##      cars_per_cap        country  drives_right
+## US            809  United States          True
+## RU            200         Russia          True
+## MOR            70        Morocco          True
+## EG             45          Egypt          True</code></pre>
+<p>The code above worked fine, but you actually unnecessarily created a
+new variable dr. You can achieve the same result without this
+intermediate variable.</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb125-1"><a href="#cb125-1" tabindex="-1"></a><span class="co"># Convert code to a one-liner</span></span>
+<span id="cb125-2"><a href="#cb125-2" tabindex="-1"></a>sel <span class="op">=</span> cars[cars[<span class="st">&#39;drives_right&#39;</span>]]</span>
+<span id="cb125-3"><a href="#cb125-3" tabindex="-1"></a></span>
+<span id="cb125-4"><a href="#cb125-4" tabindex="-1"></a><span class="co"># Print sel</span></span>
+<span id="cb125-5"><a href="#cb125-5" tabindex="-1"></a><span class="bu">print</span>(sel)</span></code></pre></div>
+<pre><code>##      cars_per_cap        country  drives_right
+## US            809  United States          True
+## RU            200         Russia          True
+## MOR            70        Morocco          True
+## EG             45          Egypt          True</code></pre>
+<p>Nice one! cars contains 7 rows or observations, sel contains 4; so in
+the majority of the countries in your dataset, people drive on the right
+side of the road.</p>
 </div>
 <div id="cars-per-capita" class="section level2" number="4.14">
 <h2><span class="header-section-number">4.14</span> Cars per Capita</h2>
+<p>Let’s stick to the cars data some more. This time you want to find
+out which countries have a high cars per capita figure. In other words,
+in which countries do many people have a car, or maybe multiple
+cars.</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb127-1"><a href="#cb127-1" tabindex="-1"></a><span class="co"># Create car_maniac: observations that have a cars_per_cap over 500</span></span>
+<span id="cb127-2"><a href="#cb127-2" tabindex="-1"></a>cpc <span class="op">=</span> cars.loc[:, <span class="st">&#39;cars_per_cap&#39;</span>]</span>
+<span id="cb127-3"><a href="#cb127-3" tabindex="-1"></a>many_cars <span class="op">=</span> cpc <span class="op">&gt;</span> <span class="dv">500</span></span>
+<span id="cb127-4"><a href="#cb127-4" tabindex="-1"></a>car_maniac <span class="op">=</span> cars[many_cars]</span>
+<span id="cb127-5"><a href="#cb127-5" tabindex="-1"></a></span>
+<span id="cb127-6"><a href="#cb127-6" tabindex="-1"></a><span class="co"># Print car_maniac</span></span>
+<span id="cb127-7"><a href="#cb127-7" tabindex="-1"></a><span class="bu">print</span>(car_maniac)</span></code></pre></div>
+<pre><code>##      cars_per_cap        country  drives_right
+## US            809  United States          True
+## AUS           731      Australia         False
+## JPN           588          Japan         False</code></pre>
+<p>Good job! The output shows that the US, Australia and Japan have a
+cars_per_cap of over 500.</p>
+<p>Remember about np.logical_and(), np.logical_or() and
+np.logical_not(), the NumPy variants of the and, or and not operators?
+You can also use them on Pandas Series to do more advanced filtering
+operations.</p>
+<p>Take this example that selects the observations that have a
+cars_per_cap between 10 and 80. Try out these lines of code step by step
+to see what’s happening.</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb129-1"><a href="#cb129-1" tabindex="-1"></a>cpc <span class="op">=</span> cars[<span class="st">&#39;cars_per_cap&#39;</span>]</span>
+<span id="cb129-2"><a href="#cb129-2" tabindex="-1"></a>between <span class="op">=</span> np.logical_and(cpc <span class="op">&gt;</span> <span class="dv">10</span>, cpc <span class="op">&lt;</span> <span class="dv">80</span>)</span>
+<span id="cb129-3"><a href="#cb129-3" tabindex="-1"></a>medium <span class="op">=</span> cars[between]</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb130-1"><a href="#cb130-1" tabindex="-1"></a><span class="co"># Create medium: observations with cars_per_cap between 100 and 500</span></span>
+<span id="cb130-2"><a href="#cb130-2" tabindex="-1"></a>cpc <span class="op">=</span> cars[<span class="st">&#39;cars_per_cap&#39;</span>]</span>
+<span id="cb130-3"><a href="#cb130-3" tabindex="-1"></a>between <span class="op">=</span> np.logical_and(cpc <span class="op">&gt;=</span> <span class="dv">100</span>, cpc <span class="op">&lt;=</span> <span class="dv">500</span>)</span>
+<span id="cb130-4"><a href="#cb130-4" tabindex="-1"></a>medium <span class="op">=</span> cars[between]</span>
+<span id="cb130-5"><a href="#cb130-5" tabindex="-1"></a></span>
+<span id="cb130-6"><a href="#cb130-6" tabindex="-1"></a><span class="co"># Print medium</span></span>
+<span id="cb130-7"><a href="#cb130-7" tabindex="-1"></a><span class="bu">print</span>(medium)</span></code></pre></div>
+<pre><code>##     cars_per_cap country  drives_right
+## RU           200  Russia          True</code></pre>
 </div>
 </div>
 <div id="loops" class="section level1" number="5">
