@@ -2781,9 +2781,80 @@ loop</h2>
 </div>
 <div id="basic-while-loop" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> Basic while loop</h2>
+<p>Below you can find the example from the video where the error
+variable, initially equal to 50.0, is divided by 4 and printed out on
+every run:</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb132-1"><a href="#cb132-1" tabindex="-1"></a>error <span class="op">=</span> <span class="fl">50.0</span></span>
+<span id="cb132-2"><a href="#cb132-2" tabindex="-1"></a><span class="cf">while</span> error <span class="op">&gt;</span> <span class="dv">1</span> :</span>
+<span id="cb132-3"><a href="#cb132-3" tabindex="-1"></a>    error <span class="op">=</span> error <span class="op">/</span> <span class="dv">4</span></span>
+<span id="cb132-4"><a href="#cb132-4" tabindex="-1"></a>    <span class="bu">print</span>(error)</span></code></pre></div>
+<p>This example will come in handy, because it’s time to build a while
+loop yourself! We’re going to code a while loop that implements a very
+basic control system for an inverted pendulum. If there’s an offset from
+standing perfectly straight, the while loop will incrementally fix this
+offset.</p>
+<p>Note that if your while loop takes too long to run, you might have
+made a mistake. In particular, remember to indent the contents of the
+loop using four spaces or auto-indentation!</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb133-1"><a href="#cb133-1" tabindex="-1"></a>offset <span class="op">=</span> <span class="dv">8</span></span>
+<span id="cb133-2"><a href="#cb133-2" tabindex="-1"></a><span class="cf">while</span> offset <span class="op">!=</span> <span class="dv">0</span>:</span>
+<span id="cb133-3"><a href="#cb133-3" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">&#39;correcting...&#39;</span>)</span>
+<span id="cb133-4"><a href="#cb133-4" tabindex="-1"></a>  offset <span class="op">=</span> offset <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb133-5"><a href="#cb133-5" tabindex="-1"></a>  <span class="bu">print</span>(offset)</span></code></pre></div>
+<pre><code>## correcting...
+## 7
+## correcting...
+## 6
+## correcting...
+## 5
+## correcting...
+## 4
+## correcting...
+## 3
+## correcting...
+## 2
+## correcting...
+## 1
+## correcting...
+## 0</code></pre>
 </div>
 <div id="add-conditionals" class="section level2" number="5.3">
 <h2><span class="header-section-number">5.3</span> Add conditionals</h2>
+<p>The while loop that corrects the offset is a good start, but what if
+offset is negative? You can try to run the following code where offset
+is initialized to -6:</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb135-1"><a href="#cb135-1" tabindex="-1"></a>offset <span class="op">=</span> <span class="op">-</span><span class="dv">6</span></span>
+<span id="cb135-2"><a href="#cb135-2" tabindex="-1"></a><span class="cf">while</span> offset <span class="op">!=</span> <span class="dv">0</span> :</span>
+<span id="cb135-3"><a href="#cb135-3" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;correcting...&quot;</span>)</span>
+<span id="cb135-4"><a href="#cb135-4" tabindex="-1"></a>    offset <span class="op">=</span> offset <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb135-5"><a href="#cb135-5" tabindex="-1"></a>    <span class="bu">print</span>(offset)</span></code></pre></div>
+<p>The while loop will never stop running, because offset will be
+further decreased on every run. offset != 0 will never become False and
+the while loop continues forever. Fix things by putting an if-else
+statement inside the while loop. If your code is still taking too long
+to run, you probably made a mistake!</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb136-1"><a href="#cb136-1" tabindex="-1"></a>offset <span class="op">=</span> <span class="op">-</span><span class="dv">6</span></span>
+<span id="cb136-2"><a href="#cb136-2" tabindex="-1"></a><span class="cf">while</span> offset <span class="op">!=</span> <span class="dv">0</span> :</span>
+<span id="cb136-3"><a href="#cb136-3" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;correcting...&quot;</span>)</span>
+<span id="cb136-4"><a href="#cb136-4" tabindex="-1"></a>    <span class="cf">if</span> offset <span class="op">&gt;</span> <span class="dv">0</span> :</span>
+<span id="cb136-5"><a href="#cb136-5" tabindex="-1"></a>      offset <span class="op">=</span> offset <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb136-6"><a href="#cb136-6" tabindex="-1"></a>    <span class="cf">else</span> : </span>
+<span id="cb136-7"><a href="#cb136-7" tabindex="-1"></a>      offset <span class="op">=</span> offset <span class="op">+</span> <span class="dv">1</span>  </span>
+<span id="cb136-8"><a href="#cb136-8" tabindex="-1"></a>    <span class="bu">print</span>(offset)</span></code></pre></div>
+<pre><code>## correcting...
+## -5
+## correcting...
+## -4
+## correcting...
+## -3
+## correcting...
+## -2
+## correcting...
+## -1
+## correcting...
+## 0</code></pre>
+<p>The while loop is not that often used in Data Science, so let’s head
+over to the for loop.</p>
 </div>
 <div id="lecture-for-loop" class="section level2" number="5.4">
 <h2><span class="header-section-number">5.4</span> Lecture: for
@@ -2793,14 +2864,69 @@ loop</h2>
 </div>
 <div id="loop-over-a-list" class="section level2" number="5.5">
 <h2><span class="header-section-number">5.5</span> Loop over a list</h2>
+<p>Have another look at the for loop that Hugo showed in the video:</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb138-1"><a href="#cb138-1" tabindex="-1"></a>fam <span class="op">=</span> [<span class="fl">1.73</span>, <span class="fl">1.68</span>, <span class="fl">1.71</span>, <span class="fl">1.89</span>]</span>
+<span id="cb138-2"><a href="#cb138-2" tabindex="-1"></a><span class="cf">for</span> height <span class="kw">in</span> fam : </span>
+<span id="cb138-3"><a href="#cb138-3" tabindex="-1"></a>    <span class="bu">print</span>(height)</span></code></pre></div>
+<p>As usual, you simply have to indent the code with 4 spaces to tell
+Python which code should be executed in the for loop.</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb139-1"><a href="#cb139-1" tabindex="-1"></a>areas <span class="op">=</span> [<span class="fl">11.25</span>, <span class="fl">18.0</span>, <span class="fl">20.0</span>, <span class="fl">10.75</span>, <span class="fl">9.50</span>]</span>
+<span id="cb139-2"><a href="#cb139-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> areas:</span>
+<span id="cb139-3"><a href="#cb139-3" tabindex="-1"></a>  <span class="bu">print</span>(i)</span></code></pre></div>
+<pre><code>## 11.25
+## 18.0
+## 20.0
+## 10.75
+## 9.5</code></pre>
 </div>
 <div id="indexes-and-values" class="section level2" number="5.6">
 <h2><span class="header-section-number">5.6</span> Indexes and
 values</h2>
+<p>Using a for loop to iterate over a list only gives you access to
+every list element in each run, one after the other. If you also want to
+access the index information, so where the list element you’re iterating
+over is located, you can use enumerate().</p>
+<p>As an example, have a look at how the for loop from the video was
+converted:</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb141-1"><a href="#cb141-1" tabindex="-1"></a>fam <span class="op">=</span> [<span class="fl">1.73</span>, <span class="fl">1.68</span>, <span class="fl">1.71</span>, <span class="fl">1.89</span>]</span>
+<span id="cb141-2"><a href="#cb141-2" tabindex="-1"></a><span class="cf">for</span> index, height <span class="kw">in</span> <span class="bu">enumerate</span>(fam) :</span>
+<span id="cb141-3"><a href="#cb141-3" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;person &quot;</span> <span class="op">+</span> <span class="bu">str</span>(index) <span class="op">+</span> <span class="st">&quot;: &quot;</span> <span class="op">+</span> <span class="bu">str</span>(height))</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb142-1"><a href="#cb142-1" tabindex="-1"></a><span class="co"># Change for loop to use enumerate() and update print()</span></span>
+<span id="cb142-2"><a href="#cb142-2" tabindex="-1"></a><span class="cf">for</span> i, a <span class="kw">in</span> <span class="bu">enumerate</span>(areas):</span>
+<span id="cb142-3"><a href="#cb142-3" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&#39;room &#39;</span> <span class="op">+</span> <span class="bu">str</span>(i) <span class="op">+</span> <span class="st">&#39;: &#39;</span> <span class="op">+</span> <span class="bu">str</span>(a))</span></code></pre></div>
+<pre><code>## room 0: 11.25
+## room 1: 18.0
+## room 2: 20.0
+## room 3: 10.75
+## room 4: 9.5</code></pre>
+<p>For non-programmer folks, room 0: 11.25 is strange. Wouldn’t it be
+better if the count started at 1?</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb144-1"><a href="#cb144-1" tabindex="-1"></a><span class="cf">for</span> index, area <span class="kw">in</span> <span class="bu">enumerate</span>(areas) :</span>
+<span id="cb144-2"><a href="#cb144-2" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;room &quot;</span> <span class="op">+</span> <span class="bu">str</span>(index <span class="op">+</span> <span class="dv">1</span>) <span class="op">+</span> <span class="st">&quot;: &quot;</span> <span class="op">+</span> <span class="bu">str</span>(area))</span></code></pre></div>
+<pre><code>## room 1: 11.25
+## room 2: 18.0
+## room 3: 20.0
+## room 4: 10.75
+## room 5: 9.5</code></pre>
 </div>
 <div id="loop-over-list-of-lists" class="section level2" number="5.7">
 <h2><span class="header-section-number">5.7</span> Loop over list of
 lists</h2>
+<p>Remember the house variable from the Intro to Python course? Have a
+look at its definition below. It’s basically a list of lists, where each
+sublist contains the name and area of a room in your house.</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb146-1"><a href="#cb146-1" tabindex="-1"></a>house <span class="op">=</span> [[<span class="st">&quot;hallway&quot;</span>, <span class="fl">11.25</span>], </span>
+<span id="cb146-2"><a href="#cb146-2" tabindex="-1"></a>         [<span class="st">&quot;kitchen&quot;</span>, <span class="fl">18.0</span>], </span>
+<span id="cb146-3"><a href="#cb146-3" tabindex="-1"></a>         [<span class="st">&quot;living room&quot;</span>, <span class="fl">20.0</span>], </span>
+<span id="cb146-4"><a href="#cb146-4" tabindex="-1"></a>         [<span class="st">&quot;bedroom&quot;</span>, <span class="fl">10.75</span>], </span>
+<span id="cb146-5"><a href="#cb146-5" tabindex="-1"></a>         [<span class="st">&quot;bathroom&quot;</span>, <span class="fl">9.50</span>]]</span>
+<span id="cb146-6"><a href="#cb146-6" tabindex="-1"></a><span class="cf">for</span> a <span class="kw">in</span> house:</span>
+<span id="cb146-7"><a href="#cb146-7" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">&#39;the &#39;</span> <span class="op">+</span> <span class="bu">str</span>(a[<span class="dv">0</span>]) <span class="op">+</span> <span class="st">&#39; is &#39;</span> <span class="op">+</span> <span class="bu">str</span>(a[<span class="dv">1</span>]) <span class="op">+</span> <span class="st">&#39; sqm&#39;</span>)</span></code></pre></div>
+<pre><code>## the hallway is 11.25 sqm
+## the kitchen is 18.0 sqm
+## the living room is 20.0 sqm
+## the bedroom is 10.75 sqm
+## the bathroom is 9.5 sqm</code></pre>
 </div>
 <div id="lecture-loop-data-structures-part-1" class="section level2" number="5.8">
 <h2><span class="header-section-number">5.8</span> Lecture: Loop Data
@@ -2811,10 +2937,67 @@ Structures, Part 1</h2>
 <div id="loop-over-dictionary" class="section level2" number="5.9">
 <h2><span class="header-section-number">5.9</span> Loop over
 dictionary</h2>
+<p>In Python 3, you need the items() method to loop over a
+dictionary:</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb148-1"><a href="#cb148-1" tabindex="-1"></a>world <span class="op">=</span> { <span class="st">&quot;afghanistan&quot;</span>:<span class="fl">30.55</span>, </span>
+<span id="cb148-2"><a href="#cb148-2" tabindex="-1"></a>          <span class="st">&quot;albania&quot;</span>:<span class="fl">2.77</span>,</span>
+<span id="cb148-3"><a href="#cb148-3" tabindex="-1"></a>          <span class="st">&quot;algeria&quot;</span>:<span class="fl">39.21</span> }</span>
+<span id="cb148-4"><a href="#cb148-4" tabindex="-1"></a></span>
+<span id="cb148-5"><a href="#cb148-5" tabindex="-1"></a><span class="cf">for</span> key, value <span class="kw">in</span> world.items() :</span>
+<span id="cb148-6"><a href="#cb148-6" tabindex="-1"></a>    <span class="bu">print</span>(key <span class="op">+</span> <span class="st">&quot; -- &quot;</span> <span class="op">+</span> <span class="bu">str</span>(value))</span></code></pre></div>
+<p>Remember the europe dictionary that contained the names of some
+European countries as key and their capitals as corresponding value?
+Let’s write a loop to iterate over it!</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb149-1"><a href="#cb149-1" tabindex="-1"></a><span class="co"># Definition of dictionary</span></span>
+<span id="cb149-2"><a href="#cb149-2" tabindex="-1"></a>europe <span class="op">=</span> {<span class="st">&#39;spain&#39;</span>:<span class="st">&#39;madrid&#39;</span>, <span class="st">&#39;france&#39;</span>:<span class="st">&#39;paris&#39;</span>, <span class="st">&#39;germany&#39;</span>:<span class="st">&#39;berlin&#39;</span>,</span>
+<span id="cb149-3"><a href="#cb149-3" tabindex="-1"></a>          <span class="st">&#39;norway&#39;</span>:<span class="st">&#39;oslo&#39;</span>, <span class="st">&#39;italy&#39;</span>:<span class="st">&#39;rome&#39;</span>, <span class="st">&#39;poland&#39;</span>:<span class="st">&#39;warsaw&#39;</span>, <span class="st">&#39;austria&#39;</span>:<span class="st">&#39;vienna&#39;</span> }</span>
+<span id="cb149-4"><a href="#cb149-4" tabindex="-1"></a>          </span>
+<span id="cb149-5"><a href="#cb149-5" tabindex="-1"></a><span class="co"># Iterate over europe</span></span>
+<span id="cb149-6"><a href="#cb149-6" tabindex="-1"></a><span class="cf">for</span> key, value <span class="kw">in</span> europe.items():</span>
+<span id="cb149-7"><a href="#cb149-7" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">&#39;the capital of &#39;</span> <span class="op">+</span> <span class="bu">str</span>(key) <span class="op">+</span> <span class="st">&#39; is &#39;</span> <span class="op">+</span> <span class="bu">str</span>(value))</span></code></pre></div>
+<pre><code>## the capital of spain is madrid
+## the capital of france is paris
+## the capital of germany is berlin
+## the capital of norway is oslo
+## the capital of italy is rome
+## the capital of poland is warsaw
+## the capital of austria is vienna</code></pre>
 </div>
 <div id="loop-over-numpy-array" class="section level2" number="5.10">
 <h2><span class="header-section-number">5.10</span> Loop over NumPy
 array</h2>
+<p>If you’re dealing with a 1D NumPy array, looping over all elements
+can be as simple as:</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb151-1"><a href="#cb151-1" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> my_array :</span>
+<span id="cb151-2"><a href="#cb151-2" tabindex="-1"></a>    ...</span></code></pre></div>
+<p>If you’re dealing with a 2D NumPy array, it’s more complicated. A 2D
+array is built up of multiple 1D arrays. To explicitly iterate over all
+separate elements of a multi-dimensional array, you’ll need this
+syntax:</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb152-1"><a href="#cb152-1" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> np.nditer(my_array) :</span>
+<span id="cb152-2"><a href="#cb152-2" tabindex="-1"></a>    ...</span></code></pre></div>
+<p>Two NumPy arrays that you might recognize from the intro course are
+available: np_height, a NumPy array containing the heights of Major
+League Baseball players, and np_baseball, a 2D NumPy array that contains
+both the heights (first column) and weights (second column) of those
+players.</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb153-1"><a href="#cb153-1" tabindex="-1"></a><span class="co"># create height_in and weight_lb</span></span>
+<span id="cb153-2"><a href="#cb153-2" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Intro.%20to%20Python/baseball.csv&#39;</span></span>
+<span id="cb153-3"><a href="#cb153-3" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb153-4"><a href="#cb153-4" tabindex="-1"></a>height_in <span class="op">=</span> <span class="bu">list</span>(df.Height)</span>
+<span id="cb153-5"><a href="#cb153-5" tabindex="-1"></a>weight_lb <span class="op">=</span> <span class="bu">list</span>(df.Weight)</span>
+<span id="cb153-6"><a href="#cb153-6" tabindex="-1"></a>baseball <span class="op">=</span> [<span class="bu">list</span>(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">list</span>(<span class="bu">zip</span>(height_in, weight_lb))]</span>
+<span id="cb153-7"><a href="#cb153-7" tabindex="-1"></a>np_height <span class="op">=</span> np.array(height_in)</span>
+<span id="cb153-8"><a href="#cb153-8" tabindex="-1"></a>np_baseball <span class="op">=</span> np.array(baseball)</span>
+<span id="cb153-9"><a href="#cb153-9" tabindex="-1"></a></span>
+<span id="cb153-10"><a href="#cb153-10" tabindex="-1"></a><span class="co"># For loop over np_height</span></span>
+<span id="cb153-11"><a href="#cb153-11" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> np_height:</span>
+<span id="cb153-12"><a href="#cb153-12" tabindex="-1"></a>  <span class="bu">print</span>(<span class="bu">str</span>(x) <span class="op">+</span> <span class="st">&#39; inches&#39;</span>, end <span class="op">=</span> <span class="st">&#39;; &#39;</span>)</span></code></pre></div>
+<pre><code>## 74 inches; 74 inches; 72 inches; 72 inches; 73 inches; 69 inches; 69 inches; 71 inches; 76 inches; 71 inches; 73 inches; 73 inches; 74 inches; 74 inches; 69 inches; 70 inches; 73 inches; 75 inches; 78 inches; 79 inches; 76 inches; 74 inches; 76 inches; 72 inches; 71 inches; 75 inches; 77 inches; 74 inches; 73 inches; 74 inches; 78 inches; 73 inches; 75 inches; 73 inches; 75 inches; 75 inches; 74 inches; 69 inches; 71 inches; 74 inches; 73 inches; 73 inches; 76 inches; 74 inches; 74 inches; 70 inches; 72 inches; 77 inches; 74 inches; 70 inches; 73 inches; 75 inches; 76 inches; 76 inches; 78 inches; 74 inches; 74 inches; 76 inches; 77 inches; 81 inches; 78 inches; 75 inches; 77 inches; 75 inches; 76 inches; 74 inches; 72 inches; 72 inches; 75 inches; 73 inches; 73 inches; 73 inches; 70 inches; 70 inches; 70 inches; 76 inches; 68 inches; 71 inches; 72 inches; 75 inches; 75 inches; 75 inches; 75 inches; 68 inches; 74 inches; 78 inches; 71 inches; 73 inches; 76 inches; 74 inches; 74 inches; 79 inches; 75 inches; 73 inches; 76 inches; 74 inches; 74 inches; 73 inches; 72 inches; 74 inches; 73 inches; 74 inches; 72 inches; 73 inches; 69 inches; 72 inches; 73 inches; 75 inches; 75 inches; 73 inches; 72 inches; 72 inches; 76 inches; 74 inches; 72 inches; 77 inches; 74 inches; 77 inches; 75 inches; 76 inches; 80 inches; 74 inches; 74 inches; 75 inches; 78 inches; 73 inches; 73 inches; 74 inches; 75 inches; 76 inches; 71 inches; 73 inches; 74 inches; 76 inches; 76 inches; 74 inches; 73 inches; 74 inches; 70 inches; 72 inches; 73 inches; 73 inches; 73 inches; 73 inches; 71 inches; 74 inches; 74 inches; 72 inches; 74 inches; 71 inches; 74 inches; 73 inches; 75 inches; 75 inches; 79 inches; 73 inches; 75 inches; 76 inches; 74 inches; 76 inches; 78 inches; 74 inches; 76 inches; 72 inches; 74 inches; 76 inches; 74 inches; 75 inches; 78 inches; 75 inches; 72 inches; 74 inches; 72 inches; 74 inches; 70 inches; 71 inches; 70 inches; 75 inches; 71 inches; 71 inches; 73 inches; 72 inches; 71 inches; 73 inches; 72 inches; 75 inches; 74 inches; 74 inches; 75 inches; 73 inches; 77 inches; 73 inches; 76 inches; 75 inches; 74 inches; 76 inches; 75 inches; 73 inches; 71 inches; 76 inches; 75 inches; 72 inches; 71 inches; 77 inches; 73 inches; 74 inches; 71 inches; 72 inches; 74 inches; 75 inches; 73 inches; 72 inches; 75 inches; 75 inches; 74 inches; 72 inches; 74 inches; 71 inches; 70 inches; 74 inches; 77 inches; 77 inches; 75 inches; 75 inches; 78 inches; 75 inches; 76 inches; 73 inches; 75 inches; 75 inches; 79 inches; 77 inches; 76 inches; 71 inches; 75 inches; 74 inches; 69 inches; 71 inches; 76 inches; 72 inches; 72 inches; 70 inches; 72 inches; 73 inches; 71 inches; 72 inches; 71 inches; 73 inches; 72 inches; 73 inches; 74 inches; 74 inches; 72 inches; 75 inches; 74 inches; 74 inches; 77 inches; 75 inches; 73 inches; 72 inches; 71 inches; 74 inches; 77 inches; 75 inches; 75 inches; 75 inches; 78 inches; 78 inches; 74 inches; 76 inches; 78 inches; 76 inches; 70 inches; 72 inches; 80 inches; 74 inches; 74 inches; 71 inches; 70 inches; 72 inches; 71 inches; 74 inches; 71 inches; 72 inches; 71 inches; 74 inches; 69 inches; 76 inches; 75 inches; 75 inches; 76 inches; 73 inches; 76 inches; 73 inches; 77 inches; 73 inches; 72 inches; 72 inches; 77 inches; 77 inches; 71 inches; 74 inches; 74 inches; 73 inches; 78 inches; 75 inches; 73 inches; 70 inches; 74 inches; 72 inches; 73 inches; 73 inches; 75 inches; 75 inches; 74 inches; 76 inches; 73 inches; 74 inches; 75 inches; 75 inches; 72 inches; 73 inches; 73 inches; 72 inches; 74 inches; 78 inches; 76 inches; 73 inches; 74 inches; 75 inches; 70 inches; 75 inches; 71 inches; 72 inches; 78 inches; 75 inches; 73 inches; 73 inches; 71 inches; 75 inches; 77 inches; 72 inches; 69 inches; 73 inches; 74 inches; 72 inches; 70 inches; 75 inches; 70 inches; 72 inches; 72 inches; 74 inches; 73 inches; 74 inches; 76 inches; 75 inches; 80 inches; 72 inches; 75 inches; 73 inches; 74 inches; 74 inches; 73 inches; 75 inches; 75 inches; 71 inches; 73 inches; 75 inches; 74 inches; 74 inches; 72 inches; 74 inches; 74 inches; 74 inches; 73 inches; 76 inches; 75 inches; 72 inches; 73 inches; 73 inches; 73 inches; 72 inches; 72 inches; 72 inches; 72 inches; 71 inches; 75 inches; 75 inches; 74 inches; 73 inches; 75 inches; 79 inches; 74 inches; 76 inches; 73 inches; 74 inches; 74 inches; 72 inches; 74 inches; 74 inches; 75 inches; 78 inches; 74 inches; 74 inches; 74 inches; 77 inches; 70 inches; 73 inches; 74 inches; 73 inches; 71 inches; 75 inches; 71 inches; 72 inches; 77 inches; 74 inches; 70 inches; 77 inches; 73 inches; 72 inches; 76 inches; 71 inches; 76 inches; 78 inches; 75 inches; 73 inches; 78 inches; 74 inches; 79 inches; 75 inches; 76 inches; 72 inches; 75 inches; 75 inches; 70 inches; 72 inches; 70 inches; 74 inches; 71 inches; 76 inches; 73 inches; 76 inches; 71 inches; 69 inches; 72 inches; 72 inches; 69 inches; 73 inches; 69 inches; 73 inches; 74 inches; 74 inches; 72 inches; 71 inches; 72 inches; 72 inches; 76 inches; 76 inches; 76 inches; 74 inches; 76 inches; 75 inches; 71 inches; 72 inches; 71 inches; 73 inches; 75 inches; 76 inches; 75 inches; 71 inches; 75 inches; 74 inches; 72 inches; 73 inches; 73 inches; 73 inches; 73 inches; 76 inches; 72 inches; 76 inches; 73 inches; 73 inches; 73 inches; 75 inches; 75 inches; 77 inches; 73 inches; 72 inches; 75 inches; 70 inches; 74 inches; 72 inches; 80 inches; 71 inches; 71 inches; 74 inches; 74 inches; 73 inches; 75 inches; 76 inches; 73 inches; 77 inches; 72 inches; 73 inches; 77 inches; 76 inches; 71 inches; 75 inches; 73 inches; 74 inches; 77 inches; 71 inches; 72 inches; 73 inches; 69 inches; 73 inches; 70 inches; 74 inches; 76 inches; 73 inches; 73 inches; 75 inches; 73 inches; 79 inches; 74 inches; 73 inches; 74 inches; 77 inches; 75 inches; 74 inches; 73 inches; 77 inches; 73 inches; 77 inches; 74 inches; 74 inches; 73 inches; 77 inches; 74 inches; 77 inches; 75 inches; 77 inches; 75 inches; 71 inches; 74 inches; 70 inches; 79 inches; 72 inches; 72 inches; 70 inches; 74 inches; 74 inches; 72 inches; 73 inches; 72 inches; 74 inches; 74 inches; 76 inches; 82 inches; 74 inches; 74 inches; 70 inches; 73 inches; 73 inches; 74 inches; 77 inches; 72 inches; 76 inches; 73 inches; 73 inches; 72 inches; 74 inches; 74 inches; 71 inches; 72 inches; 75 inches; 74 inches; 74 inches; 77 inches; 70 inches; 71 inches; 73 inches; 76 inches; 71 inches; 75 inches; 74 inches; 72 inches; 76 inches; 79 inches; 76 inches; 73 inches; 76 inches; 78 inches; 75 inches; 76 inches; 72 inches; 72 inches; 73 inches; 73 inches; 75 inches; 71 inches; 76 inches; 70 inches; 75 inches; 74 inches; 75 inches; 73 inches; 71 inches; 71 inches; 72 inches; 73 inches; 73 inches; 72 inches; 69 inches; 73 inches; 78 inches; 71 inches; 73 inches; 75 inches; 76 inches; 70 inches; 74 inches; 77 inches; 75 inches; 79 inches; 72 inches; 77 inches; 73 inches; 75 inches; 75 inches; 75 inches; 73 inches; 73 inches; 76 inches; 77 inches; 75 inches; 70 inches; 71 inches; 71 inches; 75 inches; 74 inches; 69 inches; 70 inches; 75 inches; 72 inches; 75 inches; 73 inches; 72 inches; 72 inches; 72 inches; 76 inches; 75 inches; 74 inches; 69 inches; 73 inches; 72 inches; 72 inches; 75 inches; 77 inches; 76 inches; 80 inches; 77 inches; 76 inches; 79 inches; 71 inches; 75 inches; 73 inches; 76 inches; 77 inches; 73 inches; 76 inches; 70 inches; 75 inches; 73 inches; 75 inches; 70 inches; 69 inches; 71 inches; 72 inches; 72 inches; 73 inches; 70 inches; 70 inches; 73 inches; 76 inches; 75 inches; 72 inches; 73 inches; 79 inches; 71 inches; 72 inches; 74 inches; 74 inches; 74 inches; 72 inches; 76 inches; 76 inches; 72 inches; 72 inches; 71 inches; 72 inches; 72 inches; 70 inches; 77 inches; 74 inches; 72 inches; 76 inches; 71 inches; 76 inches; 71 inches; 73 inches; 70 inches; 73 inches; 73 inches; 72 inches; 71 inches; 71 inches; 71 inches; 72 inches; 72 inches; 74 inches; 74 inches; 74 inches; 71 inches; 72 inches; 75 inches; 72 inches; 71 inches; 72 inches; 72 inches; 72 inches; 72 inches; 74 inches; 74 inches; 77 inches; 75 inches; 73 inches; 75 inches; 73 inches; 76 inches; 72 inches; 77 inches; 75 inches; 72 inches; 71 inches; 71 inches; 75 inches; 72 inches; 73 inches; 73 inches; 71 inches; 70 inches; 75 inches; 71 inches; 76 inches; 73 inches; 68 inches; 71 inches; 72 inches; 74 inches; 77 inches; 72 inches; 76 inches; 78 inches; 81 inches; 72 inches; 73 inches; 76 inches; 72 inches; 72 inches; 74 inches; 76 inches; 73 inches; 76 inches; 75 inches; 70 inches; 71 inches; 74 inches; 72 inches; 73 inches; 76 inches; 76 inches; 73 inches; 71 inches; 68 inches; 71 inches; 71 inches; 74 inches; 77 inches; 69 inches; 72 inches; 76 inches; 75 inches; 76 inches; 75 inches; 76 inches; 72 inches; 74 inches; 76 inches; 74 inches; 72 inches; 75 inches; 78 inches; 77 inches; 70 inches; 72 inches; 79 inches; 74 inches; 71 inches; 68 inches; 77 inches; 75 inches; 71 inches; 72 inches; 70 inches; 72 inches; 72 inches; 73 inches; 72 inches; 74 inches; 72 inches; 72 inches; 75 inches; 72 inches; 73 inches; 74 inches; 72 inches; 78 inches; 75 inches; 72 inches; 74 inches; 75 inches; 75 inches; 76 inches; 74 inches; 74 inches; 73 inches; 74 inches; 71 inches; 74 inches; 75 inches; 76 inches; 74 inches; 76 inches; 76 inches; 73 inches; 75 inches; 75 inches; 74 inches; 68 inches; 72 inches; 75 inches; 71 inches; 70 inches; 72 inches; 73 inches; 72 inches; 75 inches; 74 inches; 70 inches; 76 inches; 71 inches; 82 inches; 72 inches; 73 inches; 74 inches; 71 inches; 75 inches; 77 inches; 72 inches; 74 inches; 72 inches; 73 inches; 78 inches; 77 inches; 73 inches; 73 inches; 73 inches; 73 inches; 73 inches; 76 inches; 75 inches; 70 inches; 73 inches; 72 inches; 73 inches; 75 inches; 74 inches; 73 inches; 73 inches; 76 inches; 73 inches; 75 inches; 70 inches; 77 inches; 72 inches; 77 inches; 74 inches; 75 inches; 75 inches; 75 inches; 75 inches; 72 inches; 74 inches; 71 inches; 76 inches; 71 inches; 75 inches; 76 inches; 83 inches; 75 inches; 74 inches; 76 inches; 72 inches; 72 inches; 75 inches; 75 inches; 72 inches; 77 inches; 73 inches; 72 inches; 70 inches; 74 inches; 72 inches; 74 inches; 72 inches; 71 inches; 70 inches; 71 inches; 76 inches; 74 inches; 76 inches; 74 inches; 74 inches; 74 inches; 75 inches; 75 inches; 71 inches; 71 inches; 74 inches; 77 inches; 71 inches; 74 inches; 75 inches; 77 inches; 76 inches; 74 inches; 76 inches; 72 inches; 71 inches; 72 inches; 75 inches; 73 inches; 68 inches; 72 inches; 69 inches; 73 inches; 73 inches; 75 inches; 70 inches; 70 inches; 74 inches; 75 inches; 74 inches; 74 inches; 73 inches; 74 inches; 75 inches; 77 inches; 73 inches; 74 inches; 76 inches; 74 inches; 75 inches; 73 inches; 76 inches; 78 inches; 75 inches; 73 inches; 77 inches; 74 inches; 72 inches; 74 inches; 72 inches; 71 inches; 73 inches; 75 inches; 73 inches; 67 inches; 67 inches; 76 inches; 74 inches; 73 inches; 70 inches; 75 inches; 70 inches; 72 inches; 77 inches; 79 inches; 78 inches; 74 inches; 75 inches; 75 inches; 78 inches; 76 inches; 75 inches; 69 inches; 75 inches; 72 inches; 75 inches; 73 inches; 74 inches; 75 inches; 75 inches; 73 inches;</code></pre>
+<div class="sourceCode" id="cb155"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb155-1"><a href="#cb155-1" tabindex="-1"></a><span class="co"># For loop over np_baseball</span></span>
+<span id="cb155-2"><a href="#cb155-2" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> np.nditer(np_baseball):</span>
+<span id="cb155-3"><a href="#cb155-3" tabindex="-1"></a>  <span class="bu">print</span>(x, end <span class="op">=</span> <span class="st">&#39;; &#39;</span>)</span></code></pre></div>
+<pre><code>## 74; 180; 74; 215; 72; 210; 72; 210; 73; 188; 69; 176; 69; 209; 71; 200; 76; 231; 71; 180; 73; 188; 73; 180; 74; 185; 74; 160; 69; 180; 70; 185; 73; 189; 75; 185; 78; 219; 79; 230; 76; 205; 74; 230; 76; 195; 72; 180; 71; 192; 75; 225; 77; 203; 74; 195; 73; 182; 74; 188; 78; 200; 73; 180; 75; 200; 73; 200; 75; 245; 75; 240; 74; 215; 69; 185; 71; 175; 74; 199; 73; 200; 73; 215; 76; 200; 74; 205; 74; 206; 70; 186; 72; 188; 77; 220; 74; 210; 70; 195; 73; 200; 75; 200; 76; 212; 76; 224; 78; 210; 74; 205; 74; 220; 76; 195; 77; 200; 81; 260; 78; 228; 75; 270; 77; 200; 75; 210; 76; 190; 74; 220; 72; 180; 72; 205; 75; 210; 73; 220; 73; 211; 73; 200; 70; 180; 70; 190; 70; 170; 76; 230; 68; 155; 71; 185; 72; 185; 75; 200; 75; 225; 75; 225; 75; 220; 68; 160; 74; 205; 78; 235; 71; 250; 73; 210; 76; 190; 74; 160; 74; 200; 79; 205; 75; 222; 73; 195; 76; 205; 74; 220; 74; 220; 73; 170; 72; 185; 74; 195; 73; 220; 74; 230; 72; 180; 73; 220; 69; 180; 72; 180; 73; 170; 75; 210; 75; 215; 73; 200; 72; 213; 72; 180; 76; 192; 74; 235; 72; 185; 77; 235; 74; 210; 77; 222; 75; 210; 76; 230; 80; 220; 74; 180; 74; 190; 75; 200; 78; 210; 73; 194; 73; 180; 74; 190; 75; 240; 76; 200; 71; 198; 73; 200; 74; 195; 76; 210; 76; 220; 74; 190; 73; 210; 74; 225; 70; 180; 72; 185; 73; 170; 73; 185; 73; 185; 73; 180; 71; 178; 74; 175; 74; 200; 72; 204; 74; 211; 71; 190; 74; 210; 73; 190; 75; 190; 75; 185; 79; 290; 73; 175; 75; 185; 76; 200; 74; 220; 76; 170; 78; 220; 74; 190; 76; 220; 72; 205; 74; 200; 76; 250; 74; 225; 75; 215; 78; 210; 75; 215; 72; 195; 74; 200; 72; 194; 74; 220; 70; 180; 71; 180; 70; 170; 75; 195; 71; 180; 71; 170; 73; 206; 72; 205; 71; 200; 73; 225; 72; 201; 75; 225; 74; 233; 74; 180; 75; 225; 73; 180; 77; 220; 73; 180; 76; 237; 75; 215; 74; 190; 76; 235; 75; 190; 73; 180; 71; 165; 76; 195; 75; 200; 72; 190; 71; 190; 77; 185; 73; 185; 74; 205; 71; 190; 72; 205; 74; 206; 75; 220; 73; 208; 72; 170; 75; 195; 75; 210; 74; 190; 72; 211; 74; 230; 71; 170; 70; 185; 74; 185; 77; 241; 77; 225; 75; 210; 75; 175; 78; 230; 75; 200; 76; 215; 73; 198; 75; 226; 75; 278; 79; 215; 77; 230; 76; 240; 71; 184; 75; 219; 74; 170; 69; 218; 71; 190; 76; 225; 72; 220; 72; 176; 70; 190; 72; 197; 73; 204; 71; 167; 72; 180; 71; 195; 73; 220; 72; 215; 73; 185; 74; 190; 74; 205; 72; 205; 75; 200; 74; 210; 74; 215; 77; 200; 75; 205; 73; 211; 72; 190; 71; 208; 74; 200; 77; 210; 75; 232; 75; 230; 75; 210; 78; 220; 78; 210; 74; 202; 76; 212; 78; 225; 76; 170; 70; 190; 72; 200; 80; 237; 74; 220; 74; 170; 71; 193; 70; 190; 72; 150; 71; 220; 74; 200; 71; 190; 72; 185; 71; 185; 74; 200; 69; 172; 76; 220; 75; 225; 75; 190; 76; 195; 73; 219; 76; 190; 73; 197; 77; 200; 73; 195; 72; 210; 72; 177; 77; 220; 77; 235; 71; 180; 74; 195; 74; 195; 73; 190; 78; 230; 75; 190; 73; 200; 70; 190; 74; 190; 72; 200; 73; 200; 73; 184; 75; 200; 75; 180; 74; 219; 76; 187; 73; 200; 74; 220; 75; 205; 75; 190; 72; 170; 73; 160; 73; 215; 72; 175; 74; 205; 78; 200; 76; 214; 73; 200; 74; 190; 75; 180; 70; 205; 75; 220; 71; 190; 72; 215; 78; 235; 75; 191; 73; 200; 73; 181; 71; 200; 75; 210; 77; 240; 72; 185; 69; 165; 73; 190; 74; 185; 72; 175; 70; 155; 75; 210; 70; 170; 72; 175; 72; 220; 74; 210; 73; 205; 74; 200; 76; 205; 75; 195; 80; 240; 72; 150; 75; 200; 73; 215; 74; 202; 74; 200; 73; 190; 75; 205; 75; 190; 71; 160; 73; 215; 75; 185; 74; 200; 74; 190; 72; 210; 74; 185; 74; 220; 74; 190; 73; 202; 76; 205; 75; 220; 72; 175; 73; 160; 73; 190; 73; 200; 72; 229; 72; 206; 72; 220; 72; 180; 71; 195; 75; 175; 75; 188; 74; 230; 73; 190; 75; 200; 79; 190; 74; 219; 76; 235; 73; 180; 74; 180; 74; 180; 72; 200; 74; 234; 74; 185; 75; 220; 78; 223; 74; 200; 74; 210; 74; 200; 77; 210; 70; 190; 73; 177; 74; 227; 73; 180; 71; 195; 75; 199; 71; 175; 72; 185; 77; 240; 74; 210; 70; 180; 77; 194; 73; 225; 72; 180; 76; 205; 71; 193; 76; 230; 78; 230; 75; 220; 73; 200; 78; 249; 74; 190; 79; 208; 75; 245; 76; 250; 72; 160; 75; 192; 75; 220; 70; 170; 72; 197; 70; 155; 74; 190; 71; 200; 76; 220; 73; 210; 76; 228; 71; 190; 69; 160; 72; 184; 72; 180; 69; 180; 73; 200; 69; 176; 73; 160; 74; 222; 74; 211; 72; 195; 71; 200; 72; 175; 72; 206; 76; 240; 76; 185; 76; 260; 74; 185; 76; 221; 75; 205; 71; 200; 72; 170; 71; 201; 73; 205; 75; 185; 76; 205; 75; 245; 71; 220; 75; 210; 74; 220; 72; 185; 73; 175; 73; 170; 73; 180; 73; 200; 76; 210; 72; 175; 76; 220; 73; 206; 73; 180; 73; 210; 75; 195; 75; 200; 77; 200; 73; 164; 72; 180; 75; 220; 70; 195; 74; 205; 72; 170; 80; 240; 71; 210; 71; 195; 74; 200; 74; 205; 73; 192; 75; 190; 76; 170; 73; 240; 77; 200; 72; 205; 73; 175; 77; 250; 76; 220; 71; 224; 75; 210; 73; 195; 74; 180; 77; 245; 71; 175; 72; 180; 73; 215; 69; 175; 73; 180; 70; 195; 74; 230; 76; 230; 73; 205; 73; 215; 75; 195; 73; 180; 79; 205; 74; 180; 73; 190; 74; 180; 77; 190; 75; 190; 74; 220; 73; 210; 77; 255; 73; 190; 77; 230; 74; 200; 74; 205; 73; 210; 77; 225; 74; 215; 77; 220; 75; 205; 77; 200; 75; 220; 71; 197; 74; 225; 70; 187; 79; 245; 72; 185; 72; 185; 70; 175; 74; 200; 74; 180; 72; 188; 73; 225; 72; 200; 74; 210; 74; 245; 76; 213; 82; 231; 74; 165; 74; 228; 70; 210; 73; 250; 73; 191; 74; 190; 77; 200; 72; 215; 76; 254; 73; 232; 73; 180; 72; 215; 74; 220; 74; 180; 71; 200; 72; 170; 75; 195; 74; 210; 74; 200; 77; 220; 70; 165; 71; 180; 73; 200; 76; 200; 71; 170; 75; 224; 74; 220; 72; 180; 76; 198; 79; 240; 76; 239; 73; 185; 76; 210; 78; 220; 75; 200; 76; 195; 72; 220; 72; 230; 73; 170; 73; 220; 75; 230; 71; 165; 76; 205; 70; 192; 75; 210; 74; 205; 75; 200; 73; 210; 71; 185; 71; 195; 72; 202; 73; 205; 73; 195; 72; 180; 69; 200; 73; 185; 78; 240; 71; 185; 73; 220; 75; 205; 76; 205; 70; 180; 74; 201; 77; 190; 75; 208; 79; 240; 72; 180; 77; 230; 73; 195; 75; 215; 75; 190; 75; 195; 73; 215; 73; 215; 76; 220; 77; 220; 75; 230; 70; 195; 71; 190; 71; 195; 75; 209; 74; 204; 69; 170; 70; 185; 75; 205; 72; 175; 75; 210; 73; 190; 72; 180; 72; 180; 72; 160; 76; 235; 75; 200; 74; 210; 69; 180; 73; 190; 72; 197; 72; 203; 75; 205; 77; 170; 76; 200; 80; 250; 77; 200; 76; 220; 79; 200; 71; 190; 75; 170; 73; 190; 76; 220; 77; 215; 73; 206; 76; 215; 70; 185; 75; 235; 73; 188; 75; 230; 70; 195; 69; 168; 71; 190; 72; 160; 72; 200; 73; 200; 70; 189; 70; 180; 73; 190; 76; 200; 75; 220; 72; 187; 73; 240; 79; 190; 71; 180; 72; 185; 74; 210; 74; 220; 74; 219; 72; 190; 76; 193; 76; 175; 72; 180; 72; 215; 71; 210; 72; 200; 72; 190; 70; 185; 77; 220; 74; 170; 72; 195; 76; 205; 71; 195; 76; 210; 71; 190; 73; 190; 70; 180; 73; 220; 73; 190; 72; 186; 71; 185; 71; 190; 71; 180; 72; 190; 72; 170; 74; 210; 74; 240; 74; 220; 71; 180; 72; 210; 75; 210; 72; 195; 71; 160; 72; 180; 72; 205; 72; 200; 72; 185; 74; 245; 74; 190; 77; 210; 75; 200; 73; 200; 75; 222; 73; 215; 76; 240; 72; 170; 77; 220; 75; 156; 72; 190; 71; 202; 71; 221; 75; 200; 72; 190; 73; 210; 73; 190; 71; 200; 70; 165; 75; 190; 71; 185; 76; 230; 73; 208; 68; 209; 71; 175; 72; 180; 74; 200; 77; 205; 72; 200; 76; 250; 78; 210; 81; 230; 72; 244; 73; 202; 76; 240; 72; 200; 72; 215; 74; 177; 76; 210; 73; 170; 76; 215; 75; 217; 70; 198; 71; 200; 74; 220; 72; 170; 73; 200; 76; 230; 76; 231; 73; 183; 71; 192; 68; 167; 71; 190; 71; 180; 74; 180; 77; 215; 69; 160; 72; 205; 76; 223; 75; 175; 76; 170; 75; 190; 76; 240; 72; 175; 74; 230; 76; 223; 74; 196; 72; 167; 75; 195; 78; 190; 77; 250; 70; 190; 72; 190; 79; 190; 74; 170; 71; 160; 68; 150; 77; 225; 75; 220; 71; 209; 72; 210; 70; 176; 72; 260; 72; 195; 73; 190; 72; 184; 74; 180; 72; 195; 72; 195; 75; 219; 72; 225; 73; 212; 74; 202; 72; 185; 78; 200; 75; 209; 72; 200; 74; 195; 75; 228; 75; 210; 76; 190; 74; 212; 74; 190; 73; 218; 74; 220; 71; 190; 74; 235; 75; 210; 76; 200; 74; 188; 76; 210; 76; 235; 73; 188; 75; 215; 75; 216; 74; 220; 68; 180; 72; 185; 75; 200; 71; 210; 70; 220; 72; 185; 73; 231; 72; 210; 75; 195; 74; 200; 70; 205; 76; 200; 71; 190; 82; 250; 72; 185; 73; 180; 74; 170; 71; 180; 75; 208; 77; 235; 72; 215; 74; 244; 72; 220; 73; 185; 78; 230; 77; 190; 73; 200; 73; 180; 73; 190; 73; 196; 73; 180; 76; 230; 75; 224; 70; 160; 73; 178; 72; 205; 73; 185; 75; 210; 74; 180; 73; 190; 73; 200; 76; 257; 73; 190; 75; 220; 70; 165; 77; 205; 72; 200; 77; 208; 74; 185; 75; 215; 75; 170; 75; 235; 75; 210; 72; 170; 74; 180; 71; 170; 76; 190; 71; 150; 75; 230; 76; 203; 83; 260; 75; 246; 74; 186; 76; 210; 72; 198; 72; 210; 75; 215; 75; 180; 72; 200; 77; 245; 73; 200; 72; 192; 70; 192; 74; 200; 72; 192; 74; 205; 72; 190; 71; 186; 70; 170; 71; 197; 76; 219; 74; 200; 76; 220; 74; 207; 74; 225; 74; 207; 75; 212; 75; 225; 71; 170; 71; 190; 74; 210; 77; 230; 71; 210; 74; 200; 75; 238; 77; 234; 76; 222; 74; 200; 76; 190; 72; 170; 71; 220; 72; 223; 75; 210; 73; 215; 68; 196; 72; 175; 69; 175; 73; 189; 73; 205; 75; 210; 70; 180; 70; 180; 74; 197; 75; 220; 74; 228; 74; 190; 73; 204; 74; 165; 75; 216; 77; 220; 73; 208; 74; 210; 76; 215; 74; 195; 75; 200; 73; 215; 76; 229; 78; 240; 75; 207; 73; 205; 77; 208; 74; 185; 72; 190; 74; 170; 72; 208; 71; 225; 73; 190; 75; 225; 73; 185; 67; 180; 67; 165; 76; 240; 74; 220; 73; 212; 70; 163; 75; 215; 70; 175; 72; 205; 77; 210; 79; 205; 78; 208; 74; 215; 75; 180; 75; 200; 78; 230; 76; 211; 75; 230; 69; 190; 75; 220; 72; 180; 75; 205; 73; 190; 74; 180; 75; 205; 75; 190; 73; 195;</code></pre>
 </div>
 <div id="lecture-loop-data-structures-part-2" class="section level2" number="5.11">
 <h2><span class="header-section-number">5.11</span> Lecture: Loop Data
@@ -2825,9 +3008,117 @@ Structures, Part 2</h2>
 <div id="loop-over-dataframe" class="section level2" number="5.12">
 <h2><span class="header-section-number">5.12</span> Loop over
 DataFrame</h2>
+<p>Iterating over a Pandas DataFrame is typically done with the
+iterrows() method. Used in a for loop, every observation is iterated
+over and on every iteration the row label and actual row contents are
+available:</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb157-1"><a href="#cb157-1" tabindex="-1"></a><span class="cf">for</span> lab, row <span class="kw">in</span> brics.iterrows() :</span>
+<span id="cb157-2"><a href="#cb157-2" tabindex="-1"></a>    ...</span></code></pre></div>
+<p>In this exercise you will be working on the cars DataFrame. It
+contains information on the cars per capita and whether people drive
+right or left for seven countries in the world.</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb158-1"><a href="#cb158-1" tabindex="-1"></a><span class="cf">for</span> lab, row <span class="kw">in</span> cars.iterrows():</span>
+<span id="cb158-2"><a href="#cb158-2" tabindex="-1"></a>  <span class="bu">print</span>(lab)</span>
+<span id="cb158-3"><a href="#cb158-3" tabindex="-1"></a>  <span class="bu">print</span>(row)</span></code></pre></div>
+<pre><code>## US
+## cars_per_cap              809
+## country         United States
+## drives_right             True
+## Name: US, dtype: object
+## AUS
+## cars_per_cap          731
+## country         Australia
+## drives_right        False
+## Name: AUS, dtype: object
+## JPN
+## cars_per_cap      588
+## country         Japan
+## drives_right    False
+## Name: JPN, dtype: object
+## IN
+## cars_per_cap       18
+## country         India
+## drives_right    False
+## Name: IN, dtype: object
+## RU
+## cars_per_cap       200
+## country         Russia
+## drives_right      True
+## Name: RU, dtype: object
+## MOR
+## cars_per_cap         70
+## country         Morocco
+## drives_right       True
+## Name: MOR, dtype: object
+## EG
+## cars_per_cap       45
+## country         Egypt
+## drives_right     True
+## Name: EG, dtype: object</code></pre>
+<p>The row data that’s generated by iterrows() on every run is a Pandas
+Series. This format is not very convenient to print out. Luckily, you
+can easily select variables from the Pandas Series using square
+brackets:</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb160-1"><a href="#cb160-1" tabindex="-1"></a><span class="cf">for</span> lab, row <span class="kw">in</span> brics.iterrows() :</span>
+<span id="cb160-2"><a href="#cb160-2" tabindex="-1"></a>    <span class="bu">print</span>(row[<span class="st">&#39;country&#39;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb161-1"><a href="#cb161-1" tabindex="-1"></a><span class="co"># Adapt for loop</span></span>
+<span id="cb161-2"><a href="#cb161-2" tabindex="-1"></a><span class="cf">for</span> lab, row <span class="kw">in</span> cars.iterrows() :</span>
+<span id="cb161-3"><a href="#cb161-3" tabindex="-1"></a>    <span class="bu">print</span>(<span class="bu">str</span>(lab) <span class="op">+</span> <span class="st">&#39;: &#39;</span> <span class="op">+</span> <span class="bu">str</span>(row[<span class="st">&#39;cars_per_cap&#39;</span>]))</span></code></pre></div>
+<pre><code>## US: 809
+## AUS: 731
+## JPN: 588
+## IN: 18
+## RU: 200
+## MOR: 70
+## EG: 45</code></pre>
 </div>
 <div id="add-column" class="section level2" number="5.13">
 <h2><span class="header-section-number">5.13</span> Add column</h2>
+<p>In the video, Hugo showed you how to add the length of the country
+names of the brics DataFrame in a new column:</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb163-1"><a href="#cb163-1" tabindex="-1"></a><span class="cf">for</span> lab, row <span class="kw">in</span> brics.iterrows() :</span>
+<span id="cb163-2"><a href="#cb163-2" tabindex="-1"></a>    brics.loc[lab, <span class="st">&quot;name_length&quot;</span>] <span class="op">=</span> <span class="bu">len</span>(row[<span class="st">&quot;country&quot;</span>])</span></code></pre></div>
+<p>You can do similar things on the cars DataFrame.</p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb164-1"><a href="#cb164-1" tabindex="-1"></a><span class="co"># loop that adds COUNTRY column</span></span>
+<span id="cb164-2"><a href="#cb164-2" tabindex="-1"></a><span class="cf">for</span> lab, row <span class="kw">in</span> cars.iterrows():</span>
+<span id="cb164-3"><a href="#cb164-3" tabindex="-1"></a>  cars.loc[lab, <span class="st">&#39;COUNTRY&#39;</span>] <span class="op">=</span> row[<span class="st">&#39;country&#39;</span>].upper()</span>
+<span id="cb164-4"><a href="#cb164-4" tabindex="-1"></a></span>
+<span id="cb164-5"><a href="#cb164-5" tabindex="-1"></a><span class="co"># Print cars</span></span>
+<span id="cb164-6"><a href="#cb164-6" tabindex="-1"></a><span class="bu">print</span>(cars)</span></code></pre></div>
+<pre><code>##      cars_per_cap        country  drives_right        COUNTRY
+## US            809  United States          True  UNITED STATES
+## AUS           731      Australia         False      AUSTRALIA
+## JPN           588          Japan         False          JAPAN
+## IN             18          India         False          INDIA
+## RU            200         Russia          True         RUSSIA
+## MOR            70        Morocco          True        MOROCCO
+## EG             45          Egypt          True          EGYPT</code></pre>
+<p>Using iterrows() to iterate over every observation of a Pandas
+DataFrame is easy to understand, but not very efficient. On every
+iteration, you’re creating a new Pandas Series.</p>
+<p>If you want to add a column to a DataFrame by calling a function on
+another column, the iterrows() method in combination with a for loop is
+not the preferred way to go. Instead, you’ll want to use apply().</p>
+<p>Compare the iterrows() version with the apply() version to get the
+same result in the brics DataFrame:</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb166-1"><a href="#cb166-1" tabindex="-1"></a><span class="cf">for</span> lab, row <span class="kw">in</span> brics.iterrows() :</span>
+<span id="cb166-2"><a href="#cb166-2" tabindex="-1"></a>    brics.loc[lab, <span class="st">&quot;name_length&quot;</span>] <span class="op">=</span> <span class="bu">len</span>(row[<span class="st">&quot;country&quot;</span>])</span>
+<span id="cb166-3"><a href="#cb166-3" tabindex="-1"></a></span>
+<span id="cb166-4"><a href="#cb166-4" tabindex="-1"></a>brics[<span class="st">&quot;name_length&quot;</span>] <span class="op">=</span> brics[<span class="st">&quot;country&quot;</span>].<span class="bu">apply</span>(<span class="bu">len</span>)</span></code></pre></div>
+<p>We can do a similar thing to call the upper() method on every name in
+the country column. However, upper() is a method, so we’ll need a
+slightly different approach:</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb167-1"><a href="#cb167-1" tabindex="-1"></a><span class="co"># Use .apply(str.upper)</span></span>
+<span id="cb167-2"><a href="#cb167-2" tabindex="-1"></a>cars[<span class="st">&#39;COUNTRY&#39;</span>] <span class="op">=</span> cars[<span class="st">&quot;country&quot;</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x.upper())</span>
+<span id="cb167-3"><a href="#cb167-3" tabindex="-1"></a><span class="bu">print</span>(cars)</span></code></pre></div>
+<pre><code>##      cars_per_cap        country  drives_right        COUNTRY
+## US            809  United States          True  UNITED STATES
+## AUS           731      Australia         False      AUSTRALIA
+## JPN           588          Japan         False          JAPAN
+## IN             18          India         False          INDIA
+## RU            200         Russia          True         RUSSIA
+## MOR            70        Morocco          True        MOROCCO
+## EG             45          Egypt          True          EGYPT</code></pre>
 </div>
 </div>
 <div id="case-study-hacker-statistics" class="section level1" number="6">
