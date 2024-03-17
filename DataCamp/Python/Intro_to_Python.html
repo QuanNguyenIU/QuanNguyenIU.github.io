@@ -1619,8 +1619,8 @@ margin-left: 0 !important;
           <li class="divider"></li>
                                 <li><span><i class="glyphicon glyphicon-user"></i> Quan
 Nguyen</span></li>
-                                         <li><span><i class="glyphicon glyphicon-calendar"></i> November
-2023</span></li>
+                                         <li><span><i class="glyphicon glyphicon-calendar"></i> March
+2024</span></li>
                   </ul>     
       </div>
       <div class="book-body fixed">
@@ -2471,14 +2471,11 @@ data can be found
 <p>The height is expressed in inches. Let’s make a
 <strong>numpy</strong> array out of it and convert the units to
 meters!</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1" tabindex="-1"></a><span class="co"># Import numpy</span></span>
-<span id="cb102-2"><a href="#cb102-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div class="sourceCode" id="cb102"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1" tabindex="-1"></a><span class="co"># Create a numpy array from height_in: np_height_in</span></span>
+<span id="cb102-2"><a href="#cb102-2" tabindex="-1"></a>np_height_in <span class="op">=</span> np.array(height_in)</span>
 <span id="cb102-3"><a href="#cb102-3" tabindex="-1"></a></span>
-<span id="cb102-4"><a href="#cb102-4" tabindex="-1"></a><span class="co"># Create a numpy array from height_in: np_height_in</span></span>
-<span id="cb102-5"><a href="#cb102-5" tabindex="-1"></a>np_height_in <span class="op">=</span> np.array(height_in)</span>
-<span id="cb102-6"><a href="#cb102-6" tabindex="-1"></a></span>
-<span id="cb102-7"><a href="#cb102-7" tabindex="-1"></a><span class="co"># Print out np_height_in</span></span>
-<span id="cb102-8"><a href="#cb102-8" tabindex="-1"></a><span class="bu">print</span>(np_height_in)</span></code></pre></div>
+<span id="cb102-4"><a href="#cb102-4" tabindex="-1"></a><span class="co"># Print out np_height_in</span></span>
+<span id="cb102-5"><a href="#cb102-5" tabindex="-1"></a><span class="bu">print</span>(np_height_in)</span></code></pre></div>
 <pre><code>## [74 74 72 ... 75 75 73]</code></pre>
 <div class="sourceCode" id="cb104"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb104-1"><a href="#cb104-1" tabindex="-1"></a><span class="co"># Convert np_height_in to m: np_height_m</span></span>
 <span id="cb104-2"><a href="#cb104-2" tabindex="-1"></a>np_height_m <span class="op">=</span> np_height_in <span class="op">*</span> <span class="fl">0.0254</span></span>
@@ -2506,20 +2503,17 @@ are available as regular Python lists: <strong>height_in</strong> and
 <strong>weight_lb</strong> is in pounds.</p>
 <p>It’s now possible to calculate the BMI of each baseball player, with
 the formula: <span class="math display">\[\textrm{BMI}=\frac{\textrm{weight(kg)}}{\textrm{height(m)}^2}.\]</span></p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb108-1"><a href="#cb108-1" tabindex="-1"></a><span class="co"># Import numpy</span></span>
-<span id="cb108-2"><a href="#cb108-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div class="sourceCode" id="cb108"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb108-1"><a href="#cb108-1" tabindex="-1"></a><span class="co"># Create array from height_in with metric units: np_height_m</span></span>
+<span id="cb108-2"><a href="#cb108-2" tabindex="-1"></a>np_height_m <span class="op">=</span> np.array(height_in) <span class="op">*</span> <span class="fl">0.0254</span></span>
 <span id="cb108-3"><a href="#cb108-3" tabindex="-1"></a></span>
-<span id="cb108-4"><a href="#cb108-4" tabindex="-1"></a><span class="co"># Create array from height_in with metric units: np_height_m</span></span>
-<span id="cb108-5"><a href="#cb108-5" tabindex="-1"></a>np_height_m <span class="op">=</span> np.array(height_in) <span class="op">*</span> <span class="fl">0.0254</span></span>
+<span id="cb108-4"><a href="#cb108-4" tabindex="-1"></a><span class="co"># Create array from weight_lb with metric units: np_weight_kg</span></span>
+<span id="cb108-5"><a href="#cb108-5" tabindex="-1"></a>np_weight_kg <span class="op">=</span> np.array(weight_lb) <span class="op">*</span> <span class="fl">0.453592</span></span>
 <span id="cb108-6"><a href="#cb108-6" tabindex="-1"></a></span>
-<span id="cb108-7"><a href="#cb108-7" tabindex="-1"></a><span class="co"># Create array from weight_lb with metric units: np_weight_kg</span></span>
-<span id="cb108-8"><a href="#cb108-8" tabindex="-1"></a>np_weight_kg <span class="op">=</span> np.array(weight_lb) <span class="op">*</span> <span class="fl">0.453592</span></span>
+<span id="cb108-7"><a href="#cb108-7" tabindex="-1"></a><span class="co"># Calculate the BMI: bmi</span></span>
+<span id="cb108-8"><a href="#cb108-8" tabindex="-1"></a>bmi <span class="op">=</span> np_weight_kg <span class="op">/</span> np_height_m <span class="op">/</span> np_height_m</span>
 <span id="cb108-9"><a href="#cb108-9" tabindex="-1"></a></span>
-<span id="cb108-10"><a href="#cb108-10" tabindex="-1"></a><span class="co"># Calculate the BMI: bmi</span></span>
-<span id="cb108-11"><a href="#cb108-11" tabindex="-1"></a>bmi <span class="op">=</span> np_weight_kg <span class="op">/</span> np_height_m <span class="op">/</span> np_height_m</span>
-<span id="cb108-12"><a href="#cb108-12" tabindex="-1"></a></span>
-<span id="cb108-13"><a href="#cb108-13" tabindex="-1"></a><span class="co"># Print out bmi</span></span>
-<span id="cb108-14"><a href="#cb108-14" tabindex="-1"></a><span class="bu">print</span>(bmi)</span></code></pre></div>
+<span id="cb108-10"><a href="#cb108-10" tabindex="-1"></a><span class="co"># Print out bmi</span></span>
+<span id="cb108-11"><a href="#cb108-11" tabindex="-1"></a><span class="bu">print</span>(bmi)</span></code></pre></div>
 <pre><code>## [23.11037639 27.60406069 28.48080465 ... 25.62295933 23.74810865
 ##  25.72686361]</code></pre>
 </div>
@@ -2531,9 +2525,8 @@ arrays, you can use square brackets:</p>
 <div class="sourceCode" id="cb110"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb110-1"><a href="#cb110-1" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">4</span> , <span class="dv">9</span> , <span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">1</span>]</span>
 <span id="cb110-2"><a href="#cb110-2" tabindex="-1"></a>x[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## 9</code></pre>
-<div class="sourceCode" id="cb112"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb112-1"><a href="#cb112-1" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb112-2"><a href="#cb112-2" tabindex="-1"></a>y <span class="op">=</span> np.array(x)</span>
-<span id="cb112-3"><a href="#cb112-3" tabindex="-1"></a>y[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb112-1"><a href="#cb112-1" tabindex="-1"></a>y <span class="op">=</span> np.array(x)</span>
+<span id="cb112-2"><a href="#cb112-2" tabindex="-1"></a>y[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## 9</code></pre>
 <p>For <strong>numpy</strong> specifically, you can also use boolean
 <strong>numpy</strong> arrays:</p>
@@ -2541,17 +2534,12 @@ arrays, you can use square brackets:</p>
 <span id="cb114-2"><a href="#cb114-2" tabindex="-1"></a>y[high]</span></code></pre></div>
 <pre><code>## array([9, 6])</code></pre>
 <p>Let’s reveal interesting things from the baseball data!</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb116-1"><a href="#cb116-1" tabindex="-1"></a><span class="co"># height_in and weight_lb are available as a regular lists</span></span>
-<span id="cb116-2"><a href="#cb116-2" tabindex="-1"></a></span>
-<span id="cb116-3"><a href="#cb116-3" tabindex="-1"></a><span class="co"># Import numpy</span></span>
-<span id="cb116-4"><a href="#cb116-4" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb116-5"><a href="#cb116-5" tabindex="-1"></a></span>
-<span id="cb116-6"><a href="#cb116-6" tabindex="-1"></a><span class="co"># Store weight and height lists as numpy arrays</span></span>
-<span id="cb116-7"><a href="#cb116-7" tabindex="-1"></a>np_weight_lb <span class="op">=</span> np.array(weight_lb)</span>
-<span id="cb116-8"><a href="#cb116-8" tabindex="-1"></a>np_height_in <span class="op">=</span> np.array(height_in)</span>
-<span id="cb116-9"><a href="#cb116-9" tabindex="-1"></a></span>
-<span id="cb116-10"><a href="#cb116-10" tabindex="-1"></a><span class="co"># Print out the weight at index 50</span></span>
-<span id="cb116-11"><a href="#cb116-11" tabindex="-1"></a><span class="bu">print</span>(np_weight_lb[<span class="dv">50</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb116-1"><a href="#cb116-1" tabindex="-1"></a><span class="co"># Store weight and height lists as numpy arrays</span></span>
+<span id="cb116-2"><a href="#cb116-2" tabindex="-1"></a>np_weight_lb <span class="op">=</span> np.array(weight_lb)</span>
+<span id="cb116-3"><a href="#cb116-3" tabindex="-1"></a>np_height_in <span class="op">=</span> np.array(height_in)</span>
+<span id="cb116-4"><a href="#cb116-4" tabindex="-1"></a></span>
+<span id="cb116-5"><a href="#cb116-5" tabindex="-1"></a><span class="co"># Print out the weight at index 50</span></span>
+<span id="cb116-6"><a href="#cb116-6" tabindex="-1"></a><span class="bu">print</span>(np_weight_lb[<span class="dv">50</span>])</span></code></pre></div>
 <pre><code>## 200</code></pre>
 <div class="sourceCode" id="cb118"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb118-1"><a href="#cb118-1" tabindex="-1"></a><span class="co"># Print out sub-array of np_height_in: index 100 up to and including index 110</span></span>
 <span id="cb118-2"><a href="#cb118-2" tabindex="-1"></a><span class="bu">print</span>(np_height_in[<span class="dv">100</span>:<span class="dv">111</span>])</span></code></pre></div>
@@ -2614,14 +2602,11 @@ this order.</p>
 <span id="cb126-4"><a href="#cb126-4" tabindex="-1"></a>            [<span class="dv">210</span>, <span class="fl">98.5</span>],</span>
 <span id="cb126-5"><a href="#cb126-5" tabindex="-1"></a>            [<span class="dv">188</span>, <span class="fl">75.2</span>]]</span>
 <span id="cb126-6"><a href="#cb126-6" tabindex="-1"></a></span>
-<span id="cb126-7"><a href="#cb126-7" tabindex="-1"></a><span class="co"># Import numpy</span></span>
-<span id="cb126-8"><a href="#cb126-8" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb126-7"><a href="#cb126-7" tabindex="-1"></a><span class="co"># Create a 2D numpy array from baseball: np_baseball</span></span>
+<span id="cb126-8"><a href="#cb126-8" tabindex="-1"></a>np_baseball <span class="op">=</span> np.array(baseball)</span>
 <span id="cb126-9"><a href="#cb126-9" tabindex="-1"></a></span>
-<span id="cb126-10"><a href="#cb126-10" tabindex="-1"></a><span class="co"># Create a 2D numpy array from baseball: np_baseball</span></span>
-<span id="cb126-11"><a href="#cb126-11" tabindex="-1"></a>np_baseball <span class="op">=</span> np.array(baseball)</span>
-<span id="cb126-12"><a href="#cb126-12" tabindex="-1"></a></span>
-<span id="cb126-13"><a href="#cb126-13" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(np_baseball), <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
-<span id="cb126-14"><a href="#cb126-14" tabindex="-1"></a>      np_baseball.shape)</span></code></pre></div>
+<span id="cb126-10"><a href="#cb126-10" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(np_baseball), <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
+<span id="cb126-11"><a href="#cb126-11" tabindex="-1"></a>      np_baseball.shape)</span></code></pre></div>
 <pre><code>## &lt;class &#39;numpy.ndarray&#39;&gt; 
 ##  (4, 2)</code></pre>
 <p>Great! You’re ready to convert the actual MLB data to a <span class="math inline">\(2\textrm{D}\)</span> <strong>numpy</strong> array
@@ -2649,14 +2634,11 @@ can be found
 <pre><code>## [[74, 180], [74, 215], [72, 210], [72, 210], [73, 188], [69, 176]]</code></pre>
 <p>Let’s store the data as a <span class="math inline">\(2\textrm{D}\)</span> array to unlock
 <strong>numpy</strong>’s extra functionality!</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb130-1"><a href="#cb130-1" tabindex="-1"></a><span class="co"># Import numpy package</span></span>
-<span id="cb130-2"><a href="#cb130-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div class="sourceCode" id="cb130"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb130-1"><a href="#cb130-1" tabindex="-1"></a><span class="co"># Create a 2D numpy array from baseball: np_baseball</span></span>
+<span id="cb130-2"><a href="#cb130-2" tabindex="-1"></a>np_baseball <span class="op">=</span> np.array(baseball)</span>
 <span id="cb130-3"><a href="#cb130-3" tabindex="-1"></a></span>
-<span id="cb130-4"><a href="#cb130-4" tabindex="-1"></a><span class="co"># Create a 2D numpy array from baseball: np_baseball</span></span>
-<span id="cb130-5"><a href="#cb130-5" tabindex="-1"></a>np_baseball <span class="op">=</span> np.array(baseball)</span>
-<span id="cb130-6"><a href="#cb130-6" tabindex="-1"></a></span>
-<span id="cb130-7"><a href="#cb130-7" tabindex="-1"></a><span class="co"># Print out the shape of np_baseball</span></span>
-<span id="cb130-8"><a href="#cb130-8" tabindex="-1"></a><span class="bu">print</span>(np_baseball.shape)</span></code></pre></div>
+<span id="cb130-4"><a href="#cb130-4" tabindex="-1"></a><span class="co"># Print out the shape of np_baseball</span></span>
+<span id="cb130-5"><a href="#cb130-5" tabindex="-1"></a><span class="bu">print</span>(np_baseball.shape)</span></code></pre></div>
 <pre><code>## (1015, 2)</code></pre>
 <p>Slick! Time to show off some killer features of multi-dimensional
 <strong>numpy</strong> arrays!</p>
@@ -2675,9 +2657,8 @@ of lists.</p>
 <span id="cb132-3"><a href="#cb132-3" tabindex="-1"></a>[x[<span class="dv">0</span>][<span class="dv">0</span>], x[<span class="dv">1</span>][<span class="dv">0</span>]]</span></code></pre></div>
 <pre><code>## [&#39;a&#39;, &#39;c&#39;]</code></pre>
 <div class="sourceCode" id="cb134"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb134-1"><a href="#cb134-1" tabindex="-1"></a><span class="co"># numpy</span></span>
-<span id="cb134-2"><a href="#cb134-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb134-3"><a href="#cb134-3" tabindex="-1"></a>np_x <span class="op">=</span> np.array(x)</span>
-<span id="cb134-4"><a href="#cb134-4" tabindex="-1"></a>np_x[:, <span class="dv">0</span>]</span></code></pre></div>
+<span id="cb134-2"><a href="#cb134-2" tabindex="-1"></a>np_x <span class="op">=</span> np.array(x)</span>
+<span id="cb134-3"><a href="#cb134-3" tabindex="-1"></a>np_x[:, <span class="dv">0</span>]</span></code></pre></div>
 <pre><code>## array([&#39;a&#39;, &#39;c&#39;], dtype=&#39;&lt;U1&#39;)</code></pre>
 <p>For regular Python lists, this is a real pain. For <span class="math inline">\(2\textrm{D}\)</span> <strong>numpy</strong>
 arrays, however, it’s pretty intuitive! The indexes before the comma
@@ -2685,16 +2666,11 @@ refer to the rows, while those after the comma refer to the columns. The
 <strong>:</strong> is for slicing; in this example, it tells Python to
 include all rows.</p>
 <p>Below is an example for the MLB data.</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb136-1"><a href="#cb136-1" tabindex="-1"></a><span class="co"># baseball is available as a regular list of lists</span></span>
-<span id="cb136-2"><a href="#cb136-2" tabindex="-1"></a></span>
-<span id="cb136-3"><a href="#cb136-3" tabindex="-1"></a><span class="co"># Import numpy package</span></span>
-<span id="cb136-4"><a href="#cb136-4" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb136-5"><a href="#cb136-5" tabindex="-1"></a></span>
-<span id="cb136-6"><a href="#cb136-6" tabindex="-1"></a><span class="co"># Create np_baseball (2 cols)</span></span>
-<span id="cb136-7"><a href="#cb136-7" tabindex="-1"></a>np_baseball <span class="op">=</span> np.array(baseball)</span>
-<span id="cb136-8"><a href="#cb136-8" tabindex="-1"></a></span>
-<span id="cb136-9"><a href="#cb136-9" tabindex="-1"></a><span class="co"># Print out the 50th row of np_baseball</span></span>
-<span id="cb136-10"><a href="#cb136-10" tabindex="-1"></a><span class="bu">print</span>(np_baseball[<span class="dv">49</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb136-1"><a href="#cb136-1" tabindex="-1"></a><span class="co"># Create np_baseball (2 cols)</span></span>
+<span id="cb136-2"><a href="#cb136-2" tabindex="-1"></a>np_baseball <span class="op">=</span> np.array(baseball)</span>
+<span id="cb136-3"><a href="#cb136-3" tabindex="-1"></a></span>
+<span id="cb136-4"><a href="#cb136-4" tabindex="-1"></a><span class="co"># Print out the 50th row of np_baseball</span></span>
+<span id="cb136-5"><a href="#cb136-5" tabindex="-1"></a><span class="bu">print</span>(np_baseball[<span class="dv">49</span>])</span></code></pre></div>
 <pre><code>## [ 70 195]</code></pre>
 <div class="sourceCode" id="cb138"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb138-1"><a href="#cb138-1" tabindex="-1"></a><span class="co"># Select the entire second column of np_baseball: np_weight_lb</span></span>
 <span id="cb138-2"><a href="#cb138-2" tabindex="-1"></a>np_weight_lb <span class="op">=</span> np_baseball[:, <span class="dv">1</span>]</span>
@@ -2710,11 +2686,10 @@ include all rows.</p>
 (i.e. element by element). For <span class="math inline">\(2\textrm{D}\)</span> <strong>numpy</strong> arrays
 this isn’t any different! You can combine matrices with single numbers,
 with vectors, and with other matrices.</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb140-1"><a href="#cb140-1" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb140-2"><a href="#cb140-2" tabindex="-1"></a>np_mat <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>],</span>
-<span id="cb140-3"><a href="#cb140-3" tabindex="-1"></a>                   [<span class="dv">3</span>, <span class="dv">4</span>],</span>
-<span id="cb140-4"><a href="#cb140-4" tabindex="-1"></a>                   [<span class="dv">5</span>, <span class="dv">6</span>]])</span>
-<span id="cb140-5"><a href="#cb140-5" tabindex="-1"></a>np_mat <span class="op">*</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb140-1"><a href="#cb140-1" tabindex="-1"></a>np_mat <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>],</span>
+<span id="cb140-2"><a href="#cb140-2" tabindex="-1"></a>                   [<span class="dv">3</span>, <span class="dv">4</span>],</span>
+<span id="cb140-3"><a href="#cb140-3" tabindex="-1"></a>                   [<span class="dv">5</span>, <span class="dv">6</span>]])</span>
+<span id="cb140-4"><a href="#cb140-4" tabindex="-1"></a>np_mat <span class="op">*</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## array([[ 2,  4],
 ##        [ 6,  8],
 ##        [10, 12]])</code></pre>
@@ -2738,17 +2713,14 @@ years).</p>
 <pre><code>## [[74, 180, 22.99], [74, 215, 34.69], [72, 210, 30.78], [72, 210, 35.43], [73, 188, 35.71], [69, 176, 29.39]]</code></pre>
 <p>You want to convert the units of height and weight to metric (meters
 and kilograms, respectively).</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb148-1"><a href="#cb148-1" tabindex="-1"></a><span class="co"># Import numpy package</span></span>
-<span id="cb148-2"><a href="#cb148-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div class="sourceCode" id="cb148"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb148-1"><a href="#cb148-1" tabindex="-1"></a><span class="co"># Create np_baseball (3 cols)</span></span>
+<span id="cb148-2"><a href="#cb148-2" tabindex="-1"></a>np_baseball <span class="op">=</span> np.array(baseball)</span>
 <span id="cb148-3"><a href="#cb148-3" tabindex="-1"></a></span>
-<span id="cb148-4"><a href="#cb148-4" tabindex="-1"></a><span class="co"># Create np_baseball (3 cols)</span></span>
-<span id="cb148-5"><a href="#cb148-5" tabindex="-1"></a>np_baseball <span class="op">=</span> np.array(baseball)</span>
+<span id="cb148-4"><a href="#cb148-4" tabindex="-1"></a><span class="co"># Create numpy array: conversion</span></span>
+<span id="cb148-5"><a href="#cb148-5" tabindex="-1"></a>conversion <span class="op">=</span> np.array([<span class="fl">0.0254</span>, <span class="fl">0.453592</span>, <span class="dv">1</span>])</span>
 <span id="cb148-6"><a href="#cb148-6" tabindex="-1"></a></span>
-<span id="cb148-7"><a href="#cb148-7" tabindex="-1"></a><span class="co"># Create numpy array: conversion</span></span>
-<span id="cb148-8"><a href="#cb148-8" tabindex="-1"></a>conversion <span class="op">=</span> np.array([<span class="fl">0.0254</span>, <span class="fl">0.453592</span>, <span class="dv">1</span>])</span>
-<span id="cb148-9"><a href="#cb148-9" tabindex="-1"></a></span>
-<span id="cb148-10"><a href="#cb148-10" tabindex="-1"></a><span class="co"># Print out product of np_baseball and conversion</span></span>
-<span id="cb148-11"><a href="#cb148-11" tabindex="-1"></a><span class="bu">print</span>(np_baseball <span class="op">*</span> conversion)</span></code></pre></div>
+<span id="cb148-7"><a href="#cb148-7" tabindex="-1"></a><span class="co"># Print out product of np_baseball and conversion</span></span>
+<span id="cb148-8"><a href="#cb148-8" tabindex="-1"></a><span class="bu">print</span>(np_baseball <span class="op">*</span> conversion)</span></code></pre></div>
 <pre><code>## [[ 1.8796  81.64656 22.99   ]
 ##  [ 1.8796  97.52228 34.69   ]
 ##  [ 1.8288  95.25432 30.78   ]
@@ -2773,9 +2745,8 @@ Data</h2>
 functions to get a better feeling for your data. It basically comes down
 to importing <strong>numpy</strong> and then calling several simple
 functions on the <strong>numpy</strong> arrays:</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb150-1"><a href="#cb150-1" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb150-2"><a href="#cb150-2" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">12</span>]</span>
-<span id="cb150-3"><a href="#cb150-3" tabindex="-1"></a>np.mean(x)</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb150-1"><a href="#cb150-1" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">12</span>]</span>
+<span id="cb150-2"><a href="#cb150-2" tabindex="-1"></a>np.mean(x)</span></code></pre></div>
 <pre><code>## 7.0</code></pre>
 <div class="sourceCode" id="cb152"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb152-1"><a href="#cb152-1" tabindex="-1"></a>np.median(x)</span></code></pre></div>
 <pre><code>## 8.0</code></pre>
@@ -2787,14 +2758,9 @@ data can be found
 <a href="https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Intro.%20to%20Python/baseball.csv"><strong>here</strong><a></a>.
 Let’s print out informative messages with the different summary
 statistics!</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb154-1"><a href="#cb154-1" tabindex="-1"></a><span class="co"># np_baseball is available</span></span>
-<span id="cb154-2"><a href="#cb154-2" tabindex="-1"></a></span>
-<span id="cb154-3"><a href="#cb154-3" tabindex="-1"></a><span class="co"># Import numpy</span></span>
-<span id="cb154-4"><a href="#cb154-4" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb154-5"><a href="#cb154-5" tabindex="-1"></a></span>
-<span id="cb154-6"><a href="#cb154-6" tabindex="-1"></a><span class="co"># Print mean height (first column)</span></span>
-<span id="cb154-7"><a href="#cb154-7" tabindex="-1"></a>avg <span class="op">=</span> np.mean(np_baseball[:,<span class="dv">0</span>])</span>
-<span id="cb154-8"><a href="#cb154-8" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Average: &quot;</span> <span class="op">+</span> <span class="bu">str</span>(avg))</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb154-1"><a href="#cb154-1" tabindex="-1"></a><span class="co"># Print mean height (first column)</span></span>
+<span id="cb154-2"><a href="#cb154-2" tabindex="-1"></a>avg <span class="op">=</span> np.mean(np_baseball[:,<span class="dv">0</span>])</span>
+<span id="cb154-3"><a href="#cb154-3" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Average: &quot;</span> <span class="op">+</span> <span class="bu">str</span>(avg))</span></code></pre></div>
 <pre><code>## Average: 73.6896551724138</code></pre>
 <div class="sourceCode" id="cb156"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb156-1"><a href="#cb156-1" tabindex="-1"></a><span class="co"># Print median height. Replace &#39;None&#39;</span></span>
 <span id="cb156-2"><a href="#cb156-2" tabindex="-1"></a>med <span class="op">=</span> np.median(np_baseball[:,<span class="dv">0</span>])</span>
@@ -2821,14 +2787,13 @@ into another sport: soccer.</p>
 <p>You’ve contacted FIFA for some data and they handed you two lists, as
 follows:</p>
 <div class="sourceCode" id="cb162"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb162-1"><a href="#cb162-1" tabindex="-1"></a><span class="co"># create positions and heights</span></span>
-<span id="cb162-2"><a href="#cb162-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb162-3"><a href="#cb162-3" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Intro.%20to%20Python/fifa.csv&#39;</span></span>
-<span id="cb162-4"><a href="#cb162-4" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span>
-<span id="cb162-5"><a href="#cb162-5" tabindex="-1"></a>positions <span class="op">=</span> [i.replace(<span class="st">&#39; &#39;</span>, <span class="st">&#39;&#39;</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">list</span>(df[<span class="st">&#39; position&#39;</span>])]</span>
-<span id="cb162-6"><a href="#cb162-6" tabindex="-1"></a>heights <span class="op">=</span> <span class="bu">list</span>(df[<span class="st">&#39; height&#39;</span>])</span>
-<span id="cb162-7"><a href="#cb162-7" tabindex="-1"></a></span>
-<span id="cb162-8"><a href="#cb162-8" tabindex="-1"></a><span class="co"># Examine positions and heights</span></span>
-<span id="cb162-9"><a href="#cb162-9" tabindex="-1"></a><span class="bu">print</span>(positions[:<span class="dv">6</span>], <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>, heights[:<span class="dv">6</span>])</span></code></pre></div>
+<span id="cb162-2"><a href="#cb162-2" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Intro.%20to%20Python/fifa.csv&#39;</span></span>
+<span id="cb162-3"><a href="#cb162-3" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb162-4"><a href="#cb162-4" tabindex="-1"></a>positions <span class="op">=</span> [i.replace(<span class="st">&#39; &#39;</span>, <span class="st">&#39;&#39;</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">list</span>(df[<span class="st">&#39; position&#39;</span>])]</span>
+<span id="cb162-5"><a href="#cb162-5" tabindex="-1"></a>heights <span class="op">=</span> <span class="bu">list</span>(df[<span class="st">&#39; height&#39;</span>])</span>
+<span id="cb162-6"><a href="#cb162-6" tabindex="-1"></a></span>
+<span id="cb162-7"><a href="#cb162-7" tabindex="-1"></a><span class="co"># Examine positions and heights</span></span>
+<span id="cb162-8"><a href="#cb162-8" tabindex="-1"></a><span class="bu">print</span>(positions[:<span class="dv">6</span>], <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>, heights[:<span class="dv">6</span>])</span></code></pre></div>
 <pre><code>## [&#39;GK&#39;, &#39;M&#39;, &#39;A&#39;, &#39;D&#39;, &#39;M&#39;, &#39;D&#39;] 
 ##  [191, 184, 185, 180, 181, 187]</code></pre>
 <p>Each element in the lists corresponds to a player. The first list,
@@ -2845,21 +2810,18 @@ be found
 higher than that of other players on the soccer field. Some of your
 friends don’t believe you, so you are determined to show them using the
 data you received from FIFA and your newly acquired Python skills.</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb164-1"><a href="#cb164-1" tabindex="-1"></a><span class="co"># Import numpy</span></span>
-<span id="cb164-2"><a href="#cb164-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb164-3"><a href="#cb164-3" tabindex="-1"></a></span>
-<span id="cb164-4"><a href="#cb164-4" tabindex="-1"></a><span class="co"># Convert positions and heights to numpy arrays: np_positions, np_heights</span></span>
-<span id="cb164-5"><a href="#cb164-5" tabindex="-1"></a>np_positions <span class="op">=</span> np.array(positions)</span>
-<span id="cb164-6"><a href="#cb164-6" tabindex="-1"></a>np_heights <span class="op">=</span> np.array(heights)</span>
+<div class="sourceCode" id="cb164"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb164-1"><a href="#cb164-1" tabindex="-1"></a><span class="co"># Convert positions and heights to numpy arrays: np_positions, np_heights</span></span>
+<span id="cb164-2"><a href="#cb164-2" tabindex="-1"></a>np_positions <span class="op">=</span> np.array(positions)</span>
+<span id="cb164-3"><a href="#cb164-3" tabindex="-1"></a>np_heights <span class="op">=</span> np.array(heights)</span>
+<span id="cb164-4"><a href="#cb164-4" tabindex="-1"></a></span>
+<span id="cb164-5"><a href="#cb164-5" tabindex="-1"></a><span class="co"># Heights of the goalkeepers: gk_heights</span></span>
+<span id="cb164-6"><a href="#cb164-6" tabindex="-1"></a>gk_heights <span class="op">=</span> np_heights[np_positions <span class="op">==</span> <span class="st">&#39;GK&#39;</span>]</span>
 <span id="cb164-7"><a href="#cb164-7" tabindex="-1"></a></span>
-<span id="cb164-8"><a href="#cb164-8" tabindex="-1"></a><span class="co"># Heights of the goalkeepers: gk_heights</span></span>
-<span id="cb164-9"><a href="#cb164-9" tabindex="-1"></a>gk_heights <span class="op">=</span> np_heights[np_positions <span class="op">==</span> <span class="st">&#39;GK&#39;</span>]</span>
+<span id="cb164-8"><a href="#cb164-8" tabindex="-1"></a><span class="co"># Heights of the other players: other_heights</span></span>
+<span id="cb164-9"><a href="#cb164-9" tabindex="-1"></a>other_heights <span class="op">=</span> np_heights[np_positions <span class="op">!=</span> <span class="st">&#39;GK&#39;</span>]</span>
 <span id="cb164-10"><a href="#cb164-10" tabindex="-1"></a></span>
-<span id="cb164-11"><a href="#cb164-11" tabindex="-1"></a><span class="co"># Heights of the other players: other_heights</span></span>
-<span id="cb164-12"><a href="#cb164-12" tabindex="-1"></a>other_heights <span class="op">=</span> np_heights[np_positions <span class="op">!=</span> <span class="st">&#39;GK&#39;</span>]</span>
-<span id="cb164-13"><a href="#cb164-13" tabindex="-1"></a></span>
-<span id="cb164-14"><a href="#cb164-14" tabindex="-1"></a><span class="co"># Print out the median height of goalkeepers</span></span>
-<span id="cb164-15"><a href="#cb164-15" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Median height of goalkeepers: &quot;</span> <span class="op">+</span> <span class="bu">str</span>(np.median(gk_heights)))</span></code></pre></div>
+<span id="cb164-11"><a href="#cb164-11" tabindex="-1"></a><span class="co"># Print out the median height of goalkeepers</span></span>
+<span id="cb164-12"><a href="#cb164-12" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Median height of goalkeepers: &quot;</span> <span class="op">+</span> <span class="bu">str</span>(np.median(gk_heights)))</span></code></pre></div>
 <pre><code>## Median height of goalkeepers: 188.0</code></pre>
 <div class="sourceCode" id="cb166"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb166-1"><a href="#cb166-1" tabindex="-1"></a><span class="co"># Print out the median height of other players</span></span>
 <span id="cb166-2"><a href="#cb166-2" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Median height of other players: &quot;</span> <span class="op">+</span> <span class="bu">str</span>(np.median(other_heights)))</span></code></pre></div>
