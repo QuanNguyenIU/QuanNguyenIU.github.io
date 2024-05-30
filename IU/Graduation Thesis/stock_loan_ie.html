@@ -1702,7 +1702,7 @@ t\sum_{j=2}^{i-1}J_1(S,x_i,x_j,B_j).\]</span></p>
 <span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a></span>
 <span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="co"># optimal exit price &amp; option price at maturity</span></span>
 <span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>B[<span class="dv">1</span>] <span class="ot">=</span> <span class="fu">max</span>(<span class="fu">a</span>(<span class="dv">0</span>), (r <span class="sc">-</span> eta) <span class="sc">*</span> <span class="fu">a</span>(<span class="dv">0</span>) <span class="sc">/</span> delta)</span>
-<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>V[<span class="dv">1</span>] <span class="ot">=</span> <span class="fu">V_value</span>(<span class="dv">1</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="co"># V[1] = V_value(1)</span></span>
 <span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a></span>
 <span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a><span class="co"># Newton-Raphson algorithm</span></span>
 <span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a>i <span class="ot">=</span> <span class="dv">2</span></span>
@@ -1714,7 +1714,7 @@ t\sum_{j=2}^{i-1}J_1(S,x_i,x_j,B_j).\]</span></p>
 <span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a>        <span class="cf">if</span> (<span class="fu">abs</span>(approx <span class="sc">-</span> B[i]) <span class="sc">/</span> approx <span class="sc">&lt;</span> <span class="dv">10</span> <span class="sc">^</span> (<span class="sc">-</span><span class="dv">6</span>)) {continue <span class="ot">=</span> <span class="cn">FALSE</span>}</span>
 <span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a>        B[i] <span class="ot">=</span> approx</span>
 <span id="cb10-27"><a href="#cb10-27" tabindex="-1"></a>    }</span>
-<span id="cb10-28"><a href="#cb10-28" tabindex="-1"></a>    V[i] <span class="ot">=</span> <span class="fu">V_value</span>(i)</span>
+<span id="cb10-28"><a href="#cb10-28" tabindex="-1"></a>    <span class="co"># V[i] = V_value(i)</span></span>
 <span id="cb10-29"><a href="#cb10-29" tabindex="-1"></a>    i <span class="ot">=</span> i <span class="sc">+</span> <span class="dv">1</span></span>
 <span id="cb10-30"><a href="#cb10-30" tabindex="-1"></a>}</span></code></pre></div>
 <p>An alternative is to use the Secant algorithm, with the <span class="math inline">\(k^{\textrm{th}}\)</span> order approximation <span class="math display">\[B_i^{(k)}=\frac{B_i^{(k-2)}\cdot
@@ -1735,7 +1735,7 @@ that the Secant algorithm helps avoiding calculations on the term <span class="m
 <span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>        previous <span class="ot">=</span> current</span>
 <span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>        current <span class="ot">=</span> B[i]</span>
 <span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>    }</span>
-<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>    V[i] <span class="ot">=</span> <span class="fu">V_value</span>(i)</span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>    <span class="co"># V[i] = V_value(i)</span></span>
 <span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>    i <span class="ot">=</span> i <span class="sc">+</span> <span class="dv">1</span></span>
 <span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a>}</span></code></pre></div>
 <p>Visualizations are provided below.</p>
@@ -1849,7 +1849,7 @@ the price of a stock loan at time to maturity <span class="math inline">\(\tau\)
 <span id="cb15-43"><a href="#cb15-43" tabindex="-1"></a>}</span>
 <span id="cb15-44"><a href="#cb15-44" tabindex="-1"></a></span>
 <span id="cb15-45"><a href="#cb15-45" tabindex="-1"></a>R <span class="ot">=</span> V_M <span class="sc">-</span> paybacks</span></code></pre></div>
-<p>We visualise <span class="math inline">\(\Delta\cdot a(\tau)\)</span>
+<p>We visualize <span class="math inline">\(\Delta\cdot a(\tau)\)</span>
 and <span class="math inline">\(R(\tau)\)</span> at each <span class="math inline">\(\tau\in[0, T]\)</span> below.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">plot</span>(endpoints, paybacks, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>,</span>
 <span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">&#39;Time to Maturity (&#39;</span>, tau, <span class="st">&#39;)&#39;</span>)),</span>
@@ -1978,7 +1978,7 @@ t\sum_{j=2}^{i-1}Q_2(S,x_i,x_j,B_j).\end{align*}\]</span></p>
 <span id="cb27-11"><a href="#cb27-11" tabindex="-1"></a>    <span class="fu">return</span>(result)</span>
 <span id="cb27-12"><a href="#cb27-12" tabindex="-1"></a>}</span>
 <span id="cb27-13"><a href="#cb27-13" tabindex="-1"></a></span>
-<span id="cb27-14"><a href="#cb27-14" tabindex="-1"></a>V_M[<span class="dv">1</span>] <span class="ot">=</span> <span class="fu">V_M_value</span>(<span class="dv">1</span>)</span>
+<span id="cb27-14"><a href="#cb27-14" tabindex="-1"></a><span class="co"># V_M[1] = V_M_value(1)</span></span>
 <span id="cb27-15"><a href="#cb27-15" tabindex="-1"></a></span>
 <span id="cb27-16"><a href="#cb27-16" tabindex="-1"></a><span class="co"># Secant algorithm</span></span>
 <span id="cb27-17"><a href="#cb27-17" tabindex="-1"></a>i <span class="ot">=</span> <span class="dv">2</span></span>
@@ -1991,14 +1991,14 @@ t\sum_{j=2}^{i-1}Q_2(S,x_i,x_j,B_j).\end{align*}\]</span></p>
 <span id="cb27-24"><a href="#cb27-24" tabindex="-1"></a>        current <span class="ot">=</span> <span class="dv">2</span> <span class="sc">*</span> B[i <span class="sc">-</span> <span class="dv">1</span>] <span class="sc">-</span> B[i <span class="sc">-</span> <span class="dv">2</span>]</span>
 <span id="cb27-25"><a href="#cb27-25" tabindex="-1"></a>    }</span>
 <span id="cb27-26"><a href="#cb27-26" tabindex="-1"></a>    continue <span class="ot">=</span> <span class="cn">TRUE</span></span>
-<span id="cb27-27"><a href="#cb27-27" tabindex="-1"></a>    <span class="cf">while</span> (continue) {</span>
+<span id="cb27-27"><a href="#cb27-27" tabindex="-1"></a>  <span class="cf">while</span> (continue) {</span>
 <span id="cb27-28"><a href="#cb27-28" tabindex="-1"></a>        B[i] <span class="ot">=</span> (previous <span class="sc">*</span> <span class="fu">Q_4</span>(current, i) <span class="sc">-</span> current <span class="sc">*</span> <span class="fu">Q_4</span>(previous, i)) <span class="sc">/</span> (<span class="fu">Q_4</span>(current, i) <span class="sc">-</span> <span class="fu">Q_4</span>(previous, i))</span>
-<span id="cb27-29"><a href="#cb27-29" tabindex="-1"></a>        <span class="cf">if</span> (<span class="fu">abs</span>(current <span class="sc">-</span> B[i]) <span class="sc">/</span> current <span class="sc">&lt;</span> <span class="dv">10</span> <span class="sc">^</span> (<span class="sc">-</span><span class="dv">6</span>)) {continue <span class="ot">=</span> <span class="cn">FALSE</span>}</span>
-<span id="cb27-30"><a href="#cb27-30" tabindex="-1"></a>        previous <span class="ot">=</span> current</span>
+<span id="cb27-29"><a href="#cb27-29" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">abs</span>(current <span class="sc">-</span> B[i]) <span class="sc">/</span> current <span class="sc">&lt;</span> <span class="dv">10</span> <span class="sc">^</span> (<span class="sc">-</span><span class="dv">6</span>)) {continue <span class="ot">=</span> <span class="cn">FALSE</span>}</span>
+<span id="cb27-30"><a href="#cb27-30" tabindex="-1"></a>    previous <span class="ot">=</span> current</span>
 <span id="cb27-31"><a href="#cb27-31" tabindex="-1"></a>        current <span class="ot">=</span> B[i]</span>
-<span id="cb27-32"><a href="#cb27-32" tabindex="-1"></a>    }</span>
-<span id="cb27-33"><a href="#cb27-33" tabindex="-1"></a>    V_M[i] <span class="ot">=</span> <span class="fu">V_M_value</span>(i)</span>
-<span id="cb27-34"><a href="#cb27-34" tabindex="-1"></a>    i <span class="ot">=</span> i <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb27-32"><a href="#cb27-32" tabindex="-1"></a>  }</span>
+<span id="cb27-33"><a href="#cb27-33" tabindex="-1"></a>    <span class="co"># V_M[i] = V_M_value(i)</span></span>
+<span id="cb27-34"><a href="#cb27-34" tabindex="-1"></a>  i <span class="ot">=</span> i <span class="sc">+</span> <span class="dv">1</span></span>
 <span id="cb27-35"><a href="#cb27-35" tabindex="-1"></a>}</span>
 <span id="cb27-36"><a href="#cb27-36" tabindex="-1"></a></span>
 <span id="cb27-37"><a href="#cb27-37" tabindex="-1"></a><span class="fu">plot</span>(endpoints, B, <span class="at">xlab =</span> <span class="st">&#39;Time to Maturity (\U1D70F)&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;&#39;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>,</span>
