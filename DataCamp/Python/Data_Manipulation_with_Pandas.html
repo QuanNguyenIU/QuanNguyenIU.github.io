@@ -2078,12 +2078,11 @@ many numbers in one statistic. For example, mean, median, minimum,
 maximum, and standard deviation are summary statistics. Calculating
 summary statistics allows you to get a better sense of your data, even
 if there’s a lot of it.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas/sales.csv&#39;</span></span>
-<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a>sales <span class="op">=</span> pd.read_csv(url)</span>
-<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a></span>
-<span id="cb33-5"><a href="#cb33-5" tabindex="-1"></a><span class="co"># Print the head of the sales DataFrame</span></span>
-<span id="cb33-6"><a href="#cb33-6" tabindex="-1"></a><span class="bu">print</span>(sales.head())</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas/sales.csv&#39;</span></span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>sales <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a><span class="co"># Print the head of the sales DataFrame</span></span>
+<span id="cb33-5"><a href="#cb33-5" tabindex="-1"></a><span class="bu">print</span>(sales.head())</span></code></pre></div>
 <pre><code>##    Unnamed: 0  store type  ...  temperature_c fuel_price_usd_per_l  unemployment
 ## 0           0      1    A  ...       5.727778             0.679451         8.106
 ## 1           1      1    A  ...       8.055556             0.693452         8.106
@@ -2125,14 +2124,96 @@ that are making the mean so much higher than the median.</p>
 <div id="summarizing-dates" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Summarizing
 dates</h2>
+<p>Summary statistics can also be calculated on date columns that have
+values with the data type datetime64. Some summary statistics — like
+mean — don’t make a ton of sense on dates, but others are super helpful,
+for example, minimum and maximum, which allow you to see what time range
+your data covers.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="co"># Print the maximum of the date column</span></span>
+<span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a><span class="bu">print</span>(sales[<span class="st">&#39;date&#39;</span>].<span class="bu">max</span>())</span></code></pre></div>
+<pre><code>## 2012-10-26</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a><span class="co"># Print the minimum of the date column</span></span>
+<span id="cb43-2"><a href="#cb43-2" tabindex="-1"></a><span class="bu">print</span>(sales[<span class="st">&#39;date&#39;</span>].<span class="bu">min</span>())</span></code></pre></div>
+<pre><code>## 2010-02-05</code></pre>
+<p>In this case, there are data from February of 2010 to October of
+2012.</p>
 </div>
 <div id="efficient-summaries" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Efficient
 summaries</h2>
+<p>While pandas and NumPy have tons of functions, sometimes, you may
+need a different function to summarize your data.</p>
+<p>The .agg() method allows you to apply your own custom functions to a
+DataFrame, as well as apply functions to more than one column of a
+DataFrame at once, making your aggregations super-efficient. For
+example,</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a>df[<span class="st">&#39;column&#39;</span>].agg(function)</span></code></pre></div>
+<p>In the custom function for this exercise, “IQR” is short for
+inter-quartile range, which is the 75th percentile minus the 25th
+percentile. It’s an alternative to standard deviation that is helpful if
+your data contains outliers.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" tabindex="-1"></a><span class="co"># A custom IQR function</span></span>
+<span id="cb46-2"><a href="#cb46-2" tabindex="-1"></a><span class="kw">def</span> iqr(column):</span>
+<span id="cb46-3"><a href="#cb46-3" tabindex="-1"></a>    <span class="cf">return</span> column.quantile(<span class="fl">0.75</span>) <span class="op">-</span> column.quantile(<span class="fl">0.25</span>)</span>
+<span id="cb46-4"><a href="#cb46-4" tabindex="-1"></a>    </span>
+<span id="cb46-5"><a href="#cb46-5" tabindex="-1"></a><span class="co"># Print IQR of the temperature_c column</span></span>
+<span id="cb46-6"><a href="#cb46-6" tabindex="-1"></a><span class="bu">print</span>(sales[<span class="st">&#39;temperature_c&#39;</span>].agg(iqr))</span></code></pre></div>
+<pre><code>## 16.583333333333336</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a><span class="co"># Update to print IQR of temperature_c, fuel_price_usd_per_l, &amp; unemployment</span></span>
+<span id="cb48-2"><a href="#cb48-2" tabindex="-1"></a><span class="bu">print</span>(sales[[<span class="st">&quot;temperature_c&quot;</span>, <span class="st">&#39;fuel_price_usd_per_l&#39;</span>, <span class="st">&#39;unemployment&#39;</span>]].agg(iqr))</span></code></pre></div>
+<pre><code>## temperature_c           16.583333
+## fuel_price_usd_per_l     0.073176
+## unemployment             0.565000
+## dtype: float64</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" tabindex="-1"></a><span class="co"># Update to print IQR and median of temperature_c, fuel_price_usd_per_l, &amp; unemployment</span></span>
+<span id="cb50-2"><a href="#cb50-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb50-3"><a href="#cb50-3" tabindex="-1"></a><span class="bu">print</span>(sales[[<span class="st">&quot;temperature_c&quot;</span>, <span class="st">&quot;fuel_price_usd_per_l&quot;</span>, <span class="st">&quot;unemployment&quot;</span>]].agg([iqr, np.median]))</span></code></pre></div>
+<pre><code>##         temperature_c  fuel_price_usd_per_l  unemployment
+## iqr         16.583333              0.073176         0.565
+## median      16.966667              0.743381         8.099</code></pre>
+<p>The .agg() method makes it easy to compute multiple statistics on
+multiple columns, all in just one line of code.</p>
 </div>
 <div id="cumulative-statistics" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Cumulative
 statistics</h2>
+<p>Cumulative statistics can also be helpful in tracking summary
+statistics over time. In this exercise, you’ll calculate the cumulative
+sum and cumulative max of a department’s weekly sales, which will allow
+you to identify what the total sales were so far as well as what the
+highest weekly sales were so far.</p>
+<p>A DataFrame called sales_1_1 has been created for you, which contains
+the sales data for department 1 of store 1.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas/sales_1_1.csv&#39;</span></span>
+<span id="cb52-2"><a href="#cb52-2" tabindex="-1"></a>sales_1_1 <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb52-3"><a href="#cb52-3" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="#cb52-4" tabindex="-1"></a><span class="co"># Sort sales_1_1 by date</span></span>
+<span id="cb52-5"><a href="#cb52-5" tabindex="-1"></a>sales_1_1 <span class="op">=</span> sales_1_1.sort_values(<span class="st">&#39;date&#39;</span>)</span>
+<span id="cb52-6"><a href="#cb52-6" tabindex="-1"></a></span>
+<span id="cb52-7"><a href="#cb52-7" tabindex="-1"></a><span class="co"># Get the cumulative sum of weekly_sales, add as cum_weekly_sales col</span></span>
+<span id="cb52-8"><a href="#cb52-8" tabindex="-1"></a>sales_1_1[<span class="st">&#39;cum_weekly_sales&#39;</span>] <span class="op">=</span> sales_1_1[<span class="st">&#39;weekly_sales&#39;</span>].cumsum()</span>
+<span id="cb52-9"><a href="#cb52-9" tabindex="-1"></a></span>
+<span id="cb52-10"><a href="#cb52-10" tabindex="-1"></a><span class="co"># Get the cumulative max of weekly_sales, add as cum_max_sales col</span></span>
+<span id="cb52-11"><a href="#cb52-11" tabindex="-1"></a>sales_1_1[<span class="st">&#39;cum_max_sales&#39;</span>] <span class="op">=</span> sales_1_1[<span class="st">&#39;weekly_sales&#39;</span>].cummax()</span>
+<span id="cb52-12"><a href="#cb52-12" tabindex="-1"></a></span>
+<span id="cb52-13"><a href="#cb52-13" tabindex="-1"></a><span class="co"># See the columns you calculated</span></span>
+<span id="cb52-14"><a href="#cb52-14" tabindex="-1"></a><span class="bu">print</span>(sales_1_1[[<span class="st">&quot;date&quot;</span>, <span class="st">&quot;weekly_sales&quot;</span>, <span class="st">&quot;cum_weekly_sales&quot;</span>, <span class="st">&quot;cum_max_sales&quot;</span>]])</span></code></pre></div>
+<pre><code>##           date  weekly_sales  cum_weekly_sales  cum_max_sales
+## 1   2010-02-05      24924.50          24924.50       24924.50
+## 8   2010-03-05      21827.90          46752.40       24924.50
+## 11  2010-04-02      57258.43         104010.83       57258.43
+## 7   2010-05-07      17413.94         121424.77       57258.43
+## 2   2010-06-04      17558.09         138982.86       57258.43
+## 0   2010-07-02      16333.14         155316.00       57258.43
+## 9   2010-08-06      17508.41         172824.41       57258.43
+## 5   2010-09-03      16241.78         189066.19       57258.43
+## 4   2010-10-01      20094.19         209160.38       57258.43
+## 3   2010-11-05      34238.88         243399.26       57258.43
+## 6   2010-12-03      22517.56         265916.82       57258.43
+## 10  2011-01-07      15984.24         281901.06       57258.43</code></pre>
+<p>Not all functions that calculate on columns return a single number.
+Some, like the cumulative statistic functions, return a whole
+column.</p>
 </div>
 <div id="lecture-counting" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Lecture:
@@ -2143,10 +2224,103 @@ Counting</h2>
 <div id="dropping-duplicates" class="section level2" number="3.7">
 <h2><span class="header-section-number">3.7</span> Dropping
 duplicates</h2>
+<p>Removing duplicates is an essential skill to get accurate counts
+because often, you don’t want to count the same thing multiple times. In
+this exercise, you’ll create some new DataFrames using unique values
+from sales.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" tabindex="-1"></a><span class="co"># Drop duplicate store/type combinations</span></span>
+<span id="cb54-2"><a href="#cb54-2" tabindex="-1"></a>store_types <span class="op">=</span> sales.drop_duplicates([<span class="st">&#39;store&#39;</span>, <span class="st">&#39;type&#39;</span>])</span>
+<span id="cb54-3"><a href="#cb54-3" tabindex="-1"></a><span class="bu">print</span>(store_types.head())</span></code></pre></div>
+<pre><code>##       Unnamed: 0  store type  ...  temperature_c fuel_price_usd_per_l  unemployment
+## 0              0      1    A  ...       5.727778             0.679451         8.106
+## 901          901      2    A  ...       4.550000             0.679451         8.324
+## 1798        1798      4    A  ...       6.533333             0.686319         8.623
+## 2699        2699      6    A  ...       4.683333             0.679451         7.259
+## 3593        3593     10    B  ...      12.411111             0.782478         9.765
+## 
+## [5 rows x 10 columns]</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" tabindex="-1"></a><span class="co"># Drop duplicate store/department combinations</span></span>
+<span id="cb56-2"><a href="#cb56-2" tabindex="-1"></a>store_depts <span class="op">=</span> sales.drop_duplicates([<span class="st">&#39;store&#39;</span>, <span class="st">&#39;department&#39;</span>])</span>
+<span id="cb56-3"><a href="#cb56-3" tabindex="-1"></a><span class="bu">print</span>(store_depts.head())</span></code></pre></div>
+<pre><code>##     Unnamed: 0  store type  ...  temperature_c fuel_price_usd_per_l  unemployment
+## 0            0      1    A  ...       5.727778             0.679451         8.106
+## 12          12      1    A  ...       5.727778             0.679451         8.106
+## 24          24      1    A  ...       5.727778             0.679451         8.106
+## 36          36      1    A  ...       5.727778             0.679451         8.106
+## 48          48      1    A  ...       5.727778             0.679451         8.106
+## 
+## [5 rows x 10 columns]</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" tabindex="-1"></a><span class="co"># Subset the rows where is_holiday is True and drop duplicate dates</span></span>
+<span id="cb58-2"><a href="#cb58-2" tabindex="-1"></a>holiday_dates <span class="op">=</span> sales[sales[<span class="st">&#39;is_holiday&#39;</span>] <span class="op">==</span> <span class="va">True</span>].drop_duplicates(<span class="st">&#39;date&#39;</span>)</span>
+<span id="cb58-3"><a href="#cb58-3" tabindex="-1"></a></span>
+<span id="cb58-4"><a href="#cb58-4" tabindex="-1"></a><span class="co"># Print date col of holiday_dates</span></span>
+<span id="cb58-5"><a href="#cb58-5" tabindex="-1"></a><span class="bu">print</span>(holiday_dates[<span class="st">&#39;date&#39;</span>])</span></code></pre></div>
+<pre><code>## 498     2010-09-10
+## 691     2011-11-25
+## 2315    2010-02-12
+## 6735    2012-09-07
+## 6810    2010-12-31
+## 6815    2012-02-10
+## 6820    2011-09-09
+## Name: date, dtype: object</code></pre>
+<p>The holiday weeks correspond to the Superbowl in February, Labor Day
+in September, Thanksgiving in November, and Christmas in December. Now
+that the duplicates are removed, it’s time to do some counting.</p>
 </div>
 <div id="counting-categorical-variables" class="section level2" number="3.8">
 <h2><span class="header-section-number">3.8</span> Counting categorical
 variables</h2>
+<p>Counting is a great way to get an overview of your data and to spot
+curiosities that you might not notice otherwise. In this exercise,
+you’ll count the number of each type of store and the number of each
+department number using the DataFrames created in the previous
+exercise.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" tabindex="-1"></a><span class="co"># Count the number of stores of each type</span></span>
+<span id="cb60-2"><a href="#cb60-2" tabindex="-1"></a>store_counts <span class="op">=</span> store_types[<span class="st">&#39;type&#39;</span>].value_counts()</span>
+<span id="cb60-3"><a href="#cb60-3" tabindex="-1"></a><span class="bu">print</span>(store_counts)</span></code></pre></div>
+<pre><code>## type
+## A    11
+## B     1
+## Name: count, dtype: int64</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" tabindex="-1"></a><span class="co"># Get the proportion of stores of each type</span></span>
+<span id="cb62-2"><a href="#cb62-2" tabindex="-1"></a>store_props <span class="op">=</span> store_types[<span class="st">&#39;type&#39;</span>].value_counts(normalize <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb62-3"><a href="#cb62-3" tabindex="-1"></a><span class="bu">print</span>(store_props)</span></code></pre></div>
+<pre><code>## type
+## A    0.916667
+## B    0.083333
+## Name: proportion, dtype: float64</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" tabindex="-1"></a><span class="co"># Count the number of each department number and sort</span></span>
+<span id="cb64-2"><a href="#cb64-2" tabindex="-1"></a>dept_counts_sorted <span class="op">=</span> store_depts[<span class="st">&#39;department&#39;</span>].value_counts(sort <span class="op">=</span> <span class="st">&#39;descending&#39;</span>)</span>
+<span id="cb64-3"><a href="#cb64-3" tabindex="-1"></a><span class="bu">print</span>(dept_counts_sorted)</span></code></pre></div>
+<pre><code>## department
+## 1     12
+## 55    12
+## 72    12
+## 71    12
+## 67    12
+##       ..
+## 37    10
+## 48     8
+## 50     6
+## 39     4
+## 43     2
+## Name: count, Length: 80, dtype: int64</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" tabindex="-1"></a><span class="co"># Get the proportion of departments of each number and sort</span></span>
+<span id="cb66-2"><a href="#cb66-2" tabindex="-1"></a>dept_props_sorted <span class="op">=</span> store_depts[<span class="st">&#39;department&#39;</span>].value_counts(sort<span class="op">=</span> <span class="st">&#39;descending&#39;</span>, normalize<span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb66-3"><a href="#cb66-3" tabindex="-1"></a><span class="bu">print</span>(dept_props_sorted)</span></code></pre></div>
+<pre><code>## department
+## 1     0.012917
+## 55    0.012917
+## 72    0.012917
+## 71    0.012917
+## 67    0.012917
+##         ...   
+## 37    0.010764
+## 48    0.008611
+## 50    0.006459
+## 39    0.004306
+## 43    0.002153
+## Name: proportion, Length: 80, dtype: float64</code></pre>
 </div>
 <div id="lecture-grouped-summary-statistics" class="section level2" number="3.9">
 <h2><span class="header-section-number">3.9</span> Lecture: Grouped
@@ -2157,14 +2331,95 @@ summary statistics</h2>
 <div id="what-percent-of-sales-occurred-at-each-store-type" class="section level2" number="3.10">
 <h2><span class="header-section-number">3.10</span> What percent of
 sales occurred at each store type?</h2>
+<p>While .groupby() is useful, you can calculate grouped summary
+statistics without it.</p>
+<p>Walmart distinguishes three types of stores: “supercenters,”
+“discount stores,” and “neighborhood markets,” encoded in this dataset
+as type “A,” “B,” and “C.” In this exercise, you’ll calculate the total
+sales made at each store type, without using .groupby(). You can then
+use these numbers to see what proportion of Walmart’s total sales were
+made at each type.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" tabindex="-1"></a><span class="co"># Calc total weekly sales</span></span>
+<span id="cb68-2"><a href="#cb68-2" tabindex="-1"></a>sales_all <span class="op">=</span> sales[<span class="st">&quot;weekly_sales&quot;</span>].<span class="bu">sum</span>()</span>
+<span id="cb68-3"><a href="#cb68-3" tabindex="-1"></a></span>
+<span id="cb68-4"><a href="#cb68-4" tabindex="-1"></a><span class="co"># Subset for type A stores, calc total weekly sales</span></span>
+<span id="cb68-5"><a href="#cb68-5" tabindex="-1"></a>sales_A <span class="op">=</span> sales[sales[<span class="st">&quot;type&quot;</span>] <span class="op">==</span> <span class="st">&quot;A&quot;</span>][<span class="st">&quot;weekly_sales&quot;</span>].<span class="bu">sum</span>()</span>
+<span id="cb68-6"><a href="#cb68-6" tabindex="-1"></a></span>
+<span id="cb68-7"><a href="#cb68-7" tabindex="-1"></a><span class="co"># Subset for type B stores, calc total weekly sales</span></span>
+<span id="cb68-8"><a href="#cb68-8" tabindex="-1"></a>sales_B <span class="op">=</span> sales[sales[<span class="st">&quot;type&quot;</span>] <span class="op">==</span> <span class="st">&quot;B&quot;</span>][<span class="st">&quot;weekly_sales&quot;</span>].<span class="bu">sum</span>()</span>
+<span id="cb68-9"><a href="#cb68-9" tabindex="-1"></a></span>
+<span id="cb68-10"><a href="#cb68-10" tabindex="-1"></a><span class="co"># Subset for type C stores, calc total weekly sales</span></span>
+<span id="cb68-11"><a href="#cb68-11" tabindex="-1"></a>sales_C <span class="op">=</span> sales[sales[<span class="st">&quot;type&quot;</span>] <span class="op">==</span> <span class="st">&quot;C&quot;</span>][<span class="st">&quot;weekly_sales&quot;</span>].<span class="bu">sum</span>()</span>
+<span id="cb68-12"><a href="#cb68-12" tabindex="-1"></a></span>
+<span id="cb68-13"><a href="#cb68-13" tabindex="-1"></a><span class="co"># Get proportion for each type</span></span>
+<span id="cb68-14"><a href="#cb68-14" tabindex="-1"></a>sales_propn_by_type <span class="op">=</span> [sales_A, sales_B, sales_C] <span class="op">/</span> sales_all</span>
+<span id="cb68-15"><a href="#cb68-15" tabindex="-1"></a><span class="bu">print</span>(sales_propn_by_type)</span></code></pre></div>
+<pre><code>## [0.9097747 0.0902253 0.       ]</code></pre>
+<p>About 91% of sales occurred in stores of type A’, 9% in stores of
+type B, and there are no sales records for stores of type C. Now see if
+you can do this calculation using .groupby().</p>
 </div>
 <div id="calculations-with-.groupby" class="section level2" number="3.11">
 <h2><span class="header-section-number">3.11</span> Calculations with
 .groupby()</h2>
+<p>The .groupby() method makes life much easier. In this exercise,
+you’ll perform the same calculations as last time, except you’ll use the
+.groupby() method. You’ll also perform calculations on data grouped by
+two variables to see if sales differ by store type depending on if it’s
+a holiday week or not.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" tabindex="-1"></a><span class="co"># Group by type; calc total weekly sales</span></span>
+<span id="cb70-2"><a href="#cb70-2" tabindex="-1"></a>sales_by_type <span class="op">=</span> sales.groupby(<span class="st">&quot;type&quot;</span>)[<span class="st">&quot;weekly_sales&quot;</span>].<span class="bu">sum</span>()</span>
+<span id="cb70-3"><a href="#cb70-3" tabindex="-1"></a></span>
+<span id="cb70-4"><a href="#cb70-4" tabindex="-1"></a><span class="co"># Get proportion for each type</span></span>
+<span id="cb70-5"><a href="#cb70-5" tabindex="-1"></a>sales_propn_by_type <span class="op">=</span> sales_by_type <span class="op">/</span> <span class="bu">sum</span>(sales_by_type)</span>
+<span id="cb70-6"><a href="#cb70-6" tabindex="-1"></a><span class="bu">print</span>(sales_propn_by_type)</span></code></pre></div>
+<pre><code>## type
+## A    0.909775
+## B    0.090225
+## Name: weekly_sales, dtype: float64</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" tabindex="-1"></a><span class="co"># Group by type and is_holiday; calc total weekly sales</span></span>
+<span id="cb72-2"><a href="#cb72-2" tabindex="-1"></a>sales_by_type_is_holiday <span class="op">=</span> sales.groupby([<span class="st">&quot;type&quot;</span>, <span class="st">&#39;is_holiday&#39;</span>])[<span class="st">&quot;weekly_sales&quot;</span>].<span class="bu">sum</span>()</span>
+<span id="cb72-3"><a href="#cb72-3" tabindex="-1"></a><span class="bu">print</span>(sales_by_type_is_holiday)</span></code></pre></div>
+<pre><code>## type  is_holiday
+## A     False         2.336927e+08
+##       True          2.360181e+04
+## B     False         2.317678e+07
+##       True          1.621410e+03
+## Name: weekly_sales, dtype: float64</code></pre>
+<p>You were able to do the same calculation as in the previous exercise
+while writing much less code.</p>
 </div>
 <div id="multiple-grouped-summaries" class="section level2" number="3.12">
 <h2><span class="header-section-number">3.12</span> Multiple grouped
 summaries</h2>
+<p>Earlier in this chapter, you saw that the .agg() method is useful to
+compute multiple statistics on multiple variables. It also works with
+grouped data. NumPy, which is imported as np, has many different summary
+statistics functions, including: np.min, np.max, np.mean, and
+np.median.</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" tabindex="-1"></a><span class="co"># For each store type, aggregate weekly_sales: get min, max, mean, and median</span></span>
+<span id="cb74-2"><a href="#cb74-2" tabindex="-1"></a>sales_stats <span class="op">=</span> sales.groupby(<span class="st">&#39;type&#39;</span>)[<span class="st">&#39;weekly_sales&#39;</span>].agg([np.<span class="bu">min</span>, np.<span class="bu">max</span>, np.mean, np.median])</span>
+<span id="cb74-3"><a href="#cb74-3" tabindex="-1"></a></span>
+<span id="cb74-4"><a href="#cb74-4" tabindex="-1"></a><span class="co"># Print sales_stats</span></span>
+<span id="cb74-5"><a href="#cb74-5" tabindex="-1"></a><span class="bu">print</span>(sales_stats)</span></code></pre></div>
+<pre><code>##          min        max          mean    median
+## type                                           
+## A    -1098.0  293966.05  23674.667242  11943.92
+## B     -798.0  232558.51  25696.678370  13336.08</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" tabindex="-1"></a><span class="co"># For each store type, aggregate unemployment and fuel_price_usd_per_l: get min, max, mean, and median</span></span>
+<span id="cb76-2"><a href="#cb76-2" tabindex="-1"></a>unemp_fuel_stats <span class="op">=</span> sales.groupby(<span class="st">&#39;type&#39;</span>)[[<span class="st">&#39;unemployment&#39;</span>, <span class="st">&#39;fuel_price_usd_per_l&#39;</span>]].agg([np.<span class="bu">min</span>, np.<span class="bu">max</span>, np.mean, np.median])</span>
+<span id="cb76-3"><a href="#cb76-3" tabindex="-1"></a></span>
+<span id="cb76-4"><a href="#cb76-4" tabindex="-1"></a><span class="co"># Print unemp_fuel_stats</span></span>
+<span id="cb76-5"><a href="#cb76-5" tabindex="-1"></a><span class="bu">print</span>(unemp_fuel_stats)</span></code></pre></div>
+<pre><code>##      unemployment                   ... fuel_price_usd_per_l                    
+##               min    max      mean  ...                  max      mean    median
+## type                                ...                                         
+## A           3.879  8.992  7.972611  ...             1.107410  0.744619  0.735455
+## B           7.170  9.765  9.279323  ...             1.107674  0.805858  0.803348
+## 
+## [2 rows x 8 columns]</code></pre>
+<p>Notice that the minimum weekly_sales is negative because some stores
+had more returns than sales.</p>
 </div>
 <div id="lecture-pivot-tables" class="section level2" number="3.13">
 <h2><span class="header-section-number">3.13</span> Lecture: Pivot
@@ -2175,10 +2430,99 @@ tables</h2>
 <div id="pivoting-on-one-variable" class="section level2" number="3.14">
 <h2><span class="header-section-number">3.14</span> Pivoting on one
 variable</h2>
+<p>Pivot tables are the standard way of aggregating data in
+spreadsheets.</p>
+<p>In pandas, pivot tables are essentially another way of performing
+grouped calculations. That is, the .pivot_table() method is an
+alternative to .groupby().</p>
+<p>In this exercise, you’ll perform calculations using .pivot_table() to
+replicate the calculations you performed in the last lesson using
+.groupby().</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" tabindex="-1"></a><span class="co"># Pivot for mean weekly_sales for each store type</span></span>
+<span id="cb78-2"><a href="#cb78-2" tabindex="-1"></a>mean_sales_by_type <span class="op">=</span> sales.pivot_table(values <span class="op">=</span> <span class="st">&#39;weekly_sales&#39;</span>, index <span class="op">=</span> <span class="st">&#39;type&#39;</span>)</span>
+<span id="cb78-3"><a href="#cb78-3" tabindex="-1"></a></span>
+<span id="cb78-4"><a href="#cb78-4" tabindex="-1"></a><span class="co"># Print mean_sales_by_type</span></span>
+<span id="cb78-5"><a href="#cb78-5" tabindex="-1"></a><span class="bu">print</span>(mean_sales_by_type)</span></code></pre></div>
+<pre><code>##       weekly_sales
+## type              
+## A     23674.667242
+## B     25696.678370</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" tabindex="-1"></a><span class="co"># Pivot for mean and median weekly_sales for each store type</span></span>
+<span id="cb80-2"><a href="#cb80-2" tabindex="-1"></a>mean_med_sales_by_type <span class="op">=</span> sales.pivot_table(values <span class="op">=</span> <span class="st">&#39;weekly_sales&#39;</span>, index <span class="op">=</span> <span class="st">&#39;type&#39;</span>, aggfunc <span class="op">=</span> [np.mean, np.median])</span>
+<span id="cb80-3"><a href="#cb80-3" tabindex="-1"></a></span>
+<span id="cb80-4"><a href="#cb80-4" tabindex="-1"></a><span class="co"># Print mean_med_sales_by_type</span></span>
+<span id="cb80-5"><a href="#cb80-5" tabindex="-1"></a><span class="bu">print</span>(mean_med_sales_by_type)</span></code></pre></div>
+<pre><code>##               mean       median
+##       weekly_sales weekly_sales
+## type                           
+## A     23674.667242     11943.92
+## B     25696.678370     13336.08</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" tabindex="-1"></a><span class="co"># Pivot for mean weekly_sales by store type and holiday </span></span>
+<span id="cb82-2"><a href="#cb82-2" tabindex="-1"></a>mean_sales_by_type_holiday <span class="op">=</span> sales.pivot_table(values <span class="op">=</span> <span class="st">&#39;weekly_sales&#39;</span>, index <span class="op">=</span> <span class="st">&#39;type&#39;</span>, columns <span class="op">=</span> <span class="st">&#39;is_holiday&#39;</span>)</span>
+<span id="cb82-3"><a href="#cb82-3" tabindex="-1"></a></span>
+<span id="cb82-4"><a href="#cb82-4" tabindex="-1"></a><span class="co"># Print mean_sales_by_type_holiday</span></span>
+<span id="cb82-5"><a href="#cb82-5" tabindex="-1"></a><span class="bu">print</span>(mean_sales_by_type_holiday)</span></code></pre></div>
+<pre><code>## is_holiday         False      True 
+## type                               
+## A           23768.583523  590.04525
+## B           25751.980533  810.70500</code></pre>
+<p>Pivot tables are another way to do the same thing as a
+group-by-then-summarize.</p>
 </div>
 <div id="fill-in-missing-values-and-sum-values" class="section level2" number="3.15">
 <h2><span class="header-section-number">3.15</span> Fill in missing
 values and sum values</h2>
+<p>The .pivot_table() method has several useful arguments, including
+fill_value and margins.</p>
+<p>fill_value replaces missing values with a real value (known as
+imputation). What to replace missing values with is a topic big enough
+to have its own course (Dealing with Missing Data in Python), but the
+simplest thing to do is to substitute a dummy value. margins is a
+shortcut for when you pivoted by two variables, but also wanted to pivot
+by each of those variables separately: it gives the row and column
+totals of the pivot table contents.</p>
+<p>In this exercise, you’ll practice using these arguments to up your
+pivot table skills, which will help you crunch numbers more
+efficiently!</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" tabindex="-1"></a><span class="co"># Print mean weekly_sales by department and type; fill missing values with 0</span></span>
+<span id="cb84-2"><a href="#cb84-2" tabindex="-1"></a><span class="bu">print</span>(sales.pivot_table(<span class="st">&#39;weekly_sales&#39;</span>, index <span class="op">=</span> <span class="st">&#39;department&#39;</span>, columns <span class="op">=</span> <span class="st">&#39;type&#39;</span>, fill_value <span class="op">=</span> <span class="dv">0</span>))</span></code></pre></div>
+<pre><code>## type                    A              B
+## department                              
+## 1            30961.725379   44050.626667
+## 2            67600.158788  112958.526667
+## 3            17160.002955   30580.655000
+## 4            44285.399091   51219.654167
+## 5            34821.011364   63236.875000
+## ...                   ...            ...
+## 95          123933.787121   77082.102500
+## 96           21367.042857    9528.538333
+## 97           28471.266970    5828.873333
+## 98           12875.423182     217.428333
+## 99             379.123659       0.000000
+## 
+## [80 rows x 2 columns]</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1" tabindex="-1"></a><span class="co"># Print the mean weekly_sales by department and type; fill missing values with 0s; sum all rows and cols</span></span>
+<span id="cb86-2"><a href="#cb86-2" tabindex="-1"></a><span class="bu">print</span>(sales.pivot_table(values<span class="op">=</span><span class="st">&quot;weekly_sales&quot;</span>, index<span class="op">=</span><span class="st">&quot;department&quot;</span>, columns<span class="op">=</span><span class="st">&quot;type&quot;</span>, fill_value <span class="op">=</span> <span class="dv">0</span>, margins <span class="op">=</span> <span class="va">True</span>))</span></code></pre></div>
+<pre><code>## type                   A              B           All
+## department                                           
+## 1           30961.725379   44050.626667  32052.467153
+## 2           67600.158788  112958.526667  71380.022778
+## 3           17160.002955   30580.655000  18278.390625
+## 4           44285.399091   51219.654167  44863.253681
+## 5           34821.011364   63236.875000  37189.000000
+## ...                  ...            ...           ...
+## 96          21367.042857    9528.538333  20337.607681
+## 97          28471.266970    5828.873333  26584.400833
+## 98          12875.423182     217.428333  11820.590278
+## 99            379.123659       0.000000    379.123659
+## All         23674.667242   25696.678370  23843.950149
+## 
+## [81 rows x 3 columns]</code></pre>
+<p>You are now armed with pivot table skills that can help you compute
+summaries at multiple grouped levels in one line of code. Note the
+subtlety in the value of margins here. The column ‘All’ returns an
+overall mean for each department, not (A+B)/2. (A+B)/2 would be a mean
+of means, rather than an overall mean per department!</p>
 </div>
 </div>
 <div id="slicing-and-indexing-dataframes" class="section level1" number="4">
@@ -2195,18 +2539,234 @@ indexes</h2>
 <div id="setting-and-removing-indexes" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Setting and removing
 indexes</h2>
+<p>pandas allows you to designate columns as an index. This enables
+cleaner code when taking subsets (as well as providing more efficient
+lookup under some circumstances).</p>
+<p>In this chapter, you’ll be exploring temperatures, a DataFrame of
+average temperatures in cities around the world.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas/temperatures.csv&#39;</span></span>
+<span id="cb88-2"><a href="#cb88-2" tabindex="-1"></a>temperatures <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb88-3"><a href="#cb88-3" tabindex="-1"></a></span>
+<span id="cb88-4"><a href="#cb88-4" tabindex="-1"></a><span class="co"># Look at temperatures</span></span>
+<span id="cb88-5"><a href="#cb88-5" tabindex="-1"></a><span class="bu">print</span>(temperatures)</span></code></pre></div>
+<pre><code>##        Unnamed: 0        date     city        country  avg_temp_c
+## 0               0  2000-01-01  Abidjan  Côte D&#39;Ivoire      27.293
+## 1               1  2000-02-01  Abidjan  Côte D&#39;Ivoire      27.685
+## 2               2  2000-03-01  Abidjan  Côte D&#39;Ivoire      29.061
+## 3               3  2000-04-01  Abidjan  Côte D&#39;Ivoire      28.162
+## 4               4  2000-05-01  Abidjan  Côte D&#39;Ivoire      27.547
+## ...           ...         ...      ...            ...         ...
+## 16495       16495  2013-05-01     Xian          China      18.979
+## 16496       16496  2013-06-01     Xian          China      23.522
+## 16497       16497  2013-07-01     Xian          China      25.251
+## 16498       16498  2013-08-01     Xian          China      24.528
+## 16499       16499  2013-09-01     Xian          China         NaN
+## 
+## [16500 rows x 5 columns]</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb90-1"><a href="#cb90-1" tabindex="-1"></a><span class="co"># Index temperatures by city</span></span>
+<span id="cb90-2"><a href="#cb90-2" tabindex="-1"></a>temperatures_ind <span class="op">=</span> temperatures.set_index(<span class="st">&#39;city&#39;</span>)</span>
+<span id="cb90-3"><a href="#cb90-3" tabindex="-1"></a></span>
+<span id="cb90-4"><a href="#cb90-4" tabindex="-1"></a><span class="co"># Look at temperatures_ind</span></span>
+<span id="cb90-5"><a href="#cb90-5" tabindex="-1"></a><span class="bu">print</span>(temperatures_ind)</span></code></pre></div>
+<pre><code>##          Unnamed: 0        date        country  avg_temp_c
+## city                                                      
+## Abidjan           0  2000-01-01  Côte D&#39;Ivoire      27.293
+## Abidjan           1  2000-02-01  Côte D&#39;Ivoire      27.685
+## Abidjan           2  2000-03-01  Côte D&#39;Ivoire      29.061
+## Abidjan           3  2000-04-01  Côte D&#39;Ivoire      28.162
+## Abidjan           4  2000-05-01  Côte D&#39;Ivoire      27.547
+## ...             ...         ...            ...         ...
+## Xian          16495  2013-05-01          China      18.979
+## Xian          16496  2013-06-01          China      23.522
+## Xian          16497  2013-07-01          China      25.251
+## Xian          16498  2013-08-01          China      24.528
+## Xian          16499  2013-09-01          China         NaN
+## 
+## [16500 rows x 4 columns]</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1" tabindex="-1"></a><span class="co"># Reset the index, keeping its contents</span></span>
+<span id="cb92-2"><a href="#cb92-2" tabindex="-1"></a><span class="bu">print</span>(temperatures_ind.reset_index())</span></code></pre></div>
+<pre><code>##           city  Unnamed: 0        date        country  avg_temp_c
+## 0      Abidjan           0  2000-01-01  Côte D&#39;Ivoire      27.293
+## 1      Abidjan           1  2000-02-01  Côte D&#39;Ivoire      27.685
+## 2      Abidjan           2  2000-03-01  Côte D&#39;Ivoire      29.061
+## 3      Abidjan           3  2000-04-01  Côte D&#39;Ivoire      28.162
+## 4      Abidjan           4  2000-05-01  Côte D&#39;Ivoire      27.547
+## ...        ...         ...         ...            ...         ...
+## 16495     Xian       16495  2013-05-01          China      18.979
+## 16496     Xian       16496  2013-06-01          China      23.522
+## 16497     Xian       16497  2013-07-01          China      25.251
+## 16498     Xian       16498  2013-08-01          China      24.528
+## 16499     Xian       16499  2013-09-01          China         NaN
+## 
+## [16500 rows x 5 columns]</code></pre>
+<div class="sourceCode" id="cb94"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb94-1"><a href="#cb94-1" tabindex="-1"></a><span class="co"># Reset the index, dropping its contents</span></span>
+<span id="cb94-2"><a href="#cb94-2" tabindex="-1"></a><span class="bu">print</span>(temperatures_ind.reset_index(drop <span class="op">=</span> <span class="va">True</span>))</span></code></pre></div>
+<pre><code>##        Unnamed: 0        date        country  avg_temp_c
+## 0               0  2000-01-01  Côte D&#39;Ivoire      27.293
+## 1               1  2000-02-01  Côte D&#39;Ivoire      27.685
+## 2               2  2000-03-01  Côte D&#39;Ivoire      29.061
+## 3               3  2000-04-01  Côte D&#39;Ivoire      28.162
+## 4               4  2000-05-01  Côte D&#39;Ivoire      27.547
+## ...           ...         ...            ...         ...
+## 16495       16495  2013-05-01          China      18.979
+## 16496       16496  2013-06-01          China      23.522
+## 16497       16497  2013-07-01          China      25.251
+## 16498       16498  2013-08-01          China      24.528
+## 16499       16499  2013-09-01          China         NaN
+## 
+## [16500 rows x 4 columns]</code></pre>
+<p>Setting an index allows more concise code for subsetting for rows of
+a categorical variable via .loc[]</p>
 </div>
 <div id="subsetting-with-.loc" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Subsetting with
 .loc[]</h2>
+<p>The killer feature for indexes is .loc[]: a subsetting method that
+accepts index values. When you pass it a single argument, it will take a
+subset of rows.</p>
+<p>The code for subsetting using .loc[] can be easier to read than
+standard square bracket subsetting, which can make your code less
+burdensome to maintain.</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb96-1"><a href="#cb96-1" tabindex="-1"></a><span class="co"># Make a list of cities to subset on</span></span>
+<span id="cb96-2"><a href="#cb96-2" tabindex="-1"></a>cities <span class="op">=</span> [<span class="st">&quot;Moscow&quot;</span>, <span class="st">&quot;Saint Petersburg&quot;</span>]</span>
+<span id="cb96-3"><a href="#cb96-3" tabindex="-1"></a></span>
+<span id="cb96-4"><a href="#cb96-4" tabindex="-1"></a><span class="co"># Subset temperatures using square brackets</span></span>
+<span id="cb96-5"><a href="#cb96-5" tabindex="-1"></a><span class="bu">print</span>(temperatures[temperatures[<span class="st">&#39;city&#39;</span>].isin(cities)])</span></code></pre></div>
+<pre><code>##        Unnamed: 0        date              city country  avg_temp_c
+## 10725       10725  2000-01-01            Moscow  Russia      -7.313
+## 10726       10726  2000-02-01            Moscow  Russia      -3.551
+## 10727       10727  2000-03-01            Moscow  Russia      -1.661
+## 10728       10728  2000-04-01            Moscow  Russia      10.096
+## 10729       10729  2000-05-01            Moscow  Russia      10.357
+## ...           ...         ...               ...     ...         ...
+## 13360       13360  2013-05-01  Saint Petersburg  Russia      12.355
+## 13361       13361  2013-06-01  Saint Petersburg  Russia      17.185
+## 13362       13362  2013-07-01  Saint Petersburg  Russia      17.234
+## 13363       13363  2013-08-01  Saint Petersburg  Russia      17.153
+## 13364       13364  2013-09-01  Saint Petersburg  Russia         NaN
+## 
+## [330 rows x 5 columns]</code></pre>
+<div class="sourceCode" id="cb98"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb98-1"><a href="#cb98-1" tabindex="-1"></a><span class="co"># Subset temperatures_ind using .loc[]</span></span>
+<span id="cb98-2"><a href="#cb98-2" tabindex="-1"></a><span class="bu">print</span>(temperatures_ind.loc[cities])</span></code></pre></div>
+<pre><code>##                   Unnamed: 0        date country  avg_temp_c
+## city                                                        
+## Moscow                 10725  2000-01-01  Russia      -7.313
+## Moscow                 10726  2000-02-01  Russia      -3.551
+## Moscow                 10727  2000-03-01  Russia      -1.661
+## Moscow                 10728  2000-04-01  Russia      10.096
+## Moscow                 10729  2000-05-01  Russia      10.357
+## ...                      ...         ...     ...         ...
+## Saint Petersburg       13360  2013-05-01  Russia      12.355
+## Saint Petersburg       13361  2013-06-01  Russia      17.185
+## Saint Petersburg       13362  2013-07-01  Russia      17.234
+## Saint Petersburg       13363  2013-08-01  Russia      17.153
+## Saint Petersburg       13364  2013-09-01  Russia         NaN
+## 
+## [330 rows x 4 columns]</code></pre>
+<p>.loc[] is used by all the best folk! Setting an index allows more
+concise code for subsetting rows via .loc[].</p>
 </div>
 <div id="setting-multi-level-indexes" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Setting multi-level
 indexes</h2>
+<p>Indexes can also be made out of multiple columns, forming a
+multi-level index (sometimes called a hierarchical index). There is a
+trade-off to using these.</p>
+<p>The benefit is that multi-level indexes make it more natural to
+reason about nested categorical variables. For example, in a clinical
+trial, you might have control and treatment groups. Then each test
+subject belongs to one or another group, and we can say that a test
+subject is nested inside the treatment group. Similarly, in the
+temperature dataset, the city is located in the country, so we can say a
+city is nested inside the country.</p>
+<p>The main downside is that the code for manipulating indexes is
+different from the code for manipulating columns, so you have to learn
+two syntaxes and keep track of how your data is represented.</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1" tabindex="-1"></a><span class="co"># Index temperatures by country &amp; city</span></span>
+<span id="cb100-2"><a href="#cb100-2" tabindex="-1"></a>temperatures_ind <span class="op">=</span> temperatures.set_index([<span class="st">&#39;country&#39;</span>, <span class="st">&#39;city&#39;</span>])</span>
+<span id="cb100-3"><a href="#cb100-3" tabindex="-1"></a></span>
+<span id="cb100-4"><a href="#cb100-4" tabindex="-1"></a><span class="co"># List of tuples: Brazil, Rio De Janeiro &amp; Pakistan, Lahore</span></span>
+<span id="cb100-5"><a href="#cb100-5" tabindex="-1"></a>rows_to_keep <span class="op">=</span> [(<span class="st">&#39;Brazil&#39;</span>, <span class="st">&#39;Rio De Janeiro&#39;</span>), (<span class="st">&#39;Pakistan&#39;</span>, <span class="st">&#39;Lahore&#39;</span>)]</span>
+<span id="cb100-6"><a href="#cb100-6" tabindex="-1"></a></span>
+<span id="cb100-7"><a href="#cb100-7" tabindex="-1"></a><span class="co"># Subset for rows to keep</span></span>
+<span id="cb100-8"><a href="#cb100-8" tabindex="-1"></a><span class="bu">print</span>(temperatures_ind.loc[rows_to_keep])</span></code></pre></div>
+<pre><code>##                          Unnamed: 0        date  avg_temp_c
+## country  city                                              
+## Brazil   Rio De Janeiro       12540  2000-01-01      25.974
+##          Rio De Janeiro       12541  2000-02-01      26.699
+##          Rio De Janeiro       12542  2000-03-01      26.270
+##          Rio De Janeiro       12543  2000-04-01      25.750
+##          Rio De Janeiro       12544  2000-05-01      24.356
+## ...                             ...         ...         ...
+## Pakistan Lahore                8575  2013-05-01      33.457
+##          Lahore                8576  2013-06-01      34.456
+##          Lahore                8577  2013-07-01      33.279
+##          Lahore                8578  2013-08-01      31.511
+##          Lahore                8579  2013-09-01         NaN
+## 
+## [330 rows x 3 columns]</code></pre>
+<p>Multi-level indexes can make it easy to comprehend your dataset when
+one category is nested inside another category.</p>
 </div>
 <div id="sorting-by-index-values" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> Sorting by index
 values</h2>
+<p>Previously, you changed the order of the rows in a DataFrame by
+calling .sort_values(). It’s also useful to be able to sort by elements
+in the index. For this, you need to use .sort_index().</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1" tabindex="-1"></a><span class="co"># Sort temperatures_ind by index values</span></span>
+<span id="cb102-2"><a href="#cb102-2" tabindex="-1"></a><span class="bu">print</span>(temperatures_ind.sort_index())</span></code></pre></div>
+<pre><code>##                     Unnamed: 0        date  avg_temp_c
+## country     city                                      
+## Afghanistan Kabul         7260  2000-01-01       3.326
+##             Kabul         7261  2000-02-01       3.454
+##             Kabul         7262  2000-03-01       9.612
+##             Kabul         7263  2000-04-01      17.925
+##             Kabul         7264  2000-05-01      24.658
+## ...                        ...         ...         ...
+## Zimbabwe    Harare        5605  2013-05-01      18.298
+##             Harare        5606  2013-06-01      17.020
+##             Harare        5607  2013-07-01      16.299
+##             Harare        5608  2013-08-01      19.232
+##             Harare        5609  2013-09-01         NaN
+## 
+## [16500 rows x 3 columns]</code></pre>
+<div class="sourceCode" id="cb104"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb104-1"><a href="#cb104-1" tabindex="-1"></a><span class="co"># Sort temperatures_ind by index values at the city level</span></span>
+<span id="cb104-2"><a href="#cb104-2" tabindex="-1"></a><span class="bu">print</span>(temperatures_ind.sort_index(level <span class="op">=</span> <span class="st">&#39;city&#39;</span>))</span></code></pre></div>
+<pre><code>##                        Unnamed: 0        date  avg_temp_c
+## country       city                                       
+## Côte D&#39;Ivoire Abidjan           0  2000-01-01      27.293
+##               Abidjan           1  2000-02-01      27.685
+##               Abidjan           2  2000-03-01      29.061
+##               Abidjan           3  2000-04-01      28.162
+##               Abidjan           4  2000-05-01      27.547
+## ...                           ...         ...         ...
+## China         Xian          16495  2013-05-01      18.979
+##               Xian          16496  2013-06-01      23.522
+##               Xian          16497  2013-07-01      25.251
+##               Xian          16498  2013-08-01      24.528
+##               Xian          16499  2013-09-01         NaN
+## 
+## [16500 rows x 3 columns]</code></pre>
+<div class="sourceCode" id="cb106"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb106-1"><a href="#cb106-1" tabindex="-1"></a><span class="co"># Sort temperatures_ind by country then descending city</span></span>
+<span id="cb106-2"><a href="#cb106-2" tabindex="-1"></a><span class="bu">print</span>(temperatures_ind.sort_index(level <span class="op">=</span> [<span class="st">&#39;country&#39;</span>,<span class="st">&#39;city&#39;</span>], ascending <span class="op">=</span> [<span class="va">True</span>, <span class="va">False</span>]))</span></code></pre></div>
+<pre><code>##                     Unnamed: 0        date  avg_temp_c
+## country     city                                      
+## Afghanistan Kabul         7260  2000-01-01       3.326
+##             Kabul         7261  2000-02-01       3.454
+##             Kabul         7262  2000-03-01       9.612
+##             Kabul         7263  2000-04-01      17.925
+##             Kabul         7264  2000-05-01      24.658
+## ...                        ...         ...         ...
+## Zimbabwe    Harare        5605  2013-05-01      18.298
+##             Harare        5606  2013-06-01      17.020
+##             Harare        5607  2013-07-01      16.299
+##             Harare        5608  2013-08-01      19.232
+##             Harare        5609  2013-09-01         NaN
+## 
+## [16500 rows x 3 columns]</code></pre>
+<p>Sorting index values is similar to sorting values in columns, except
+that you call .sort_index() instead of .sort_values()</p>
 </div>
 <div id="lecture-slicing-and-subsetting-with-loc-and-iloc" class="section level2" number="4.6">
 <h2><span class="header-section-number">4.6</span> Lecture: Slicing and
@@ -2217,18 +2777,245 @@ subsetting with loc and iloc</h2>
 <div id="slicing-index-values" class="section level2" number="4.7">
 <h2><span class="header-section-number">4.7</span> Slicing index
 values</h2>
+<p>Slicing lets you select consecutive elements of an object using
+first:last syntax. DataFrames can be sliced by index values or by
+row/column number; we’ll start with the first case. This involves
+slicing inside the .loc[] method.</p>
+<p>Compared to slicing lists, there are a few things to remember.</p>
+<p>You can only slice an index if the index is sorted (using
+.sort_index()). To slice at the outer level, first and last can be
+strings. To slice at inner levels, first and last should be tuples. If
+you pass a single slice to .loc[], it will slice the rows.</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb108-1"><a href="#cb108-1" tabindex="-1"></a><span class="co"># Sort the index of temperatures_ind</span></span>
+<span id="cb108-2"><a href="#cb108-2" tabindex="-1"></a>temperatures_srt <span class="op">=</span> temperatures_ind.sort_index()</span>
+<span id="cb108-3"><a href="#cb108-3" tabindex="-1"></a></span>
+<span id="cb108-4"><a href="#cb108-4" tabindex="-1"></a><span class="co"># Subset rows from Pakistan to Russia</span></span>
+<span id="cb108-5"><a href="#cb108-5" tabindex="-1"></a><span class="bu">print</span>(temperatures_srt.loc[<span class="st">&#39;Pakistan&#39;</span>:<span class="st">&#39;Russia&#39;</span>])</span></code></pre></div>
+<pre><code>##                            Unnamed: 0        date  avg_temp_c
+## country  city                                                
+## Pakistan Faisalabad              4785  2000-01-01      12.792
+##          Faisalabad              4786  2000-02-01      14.339
+##          Faisalabad              4787  2000-03-01      20.309
+##          Faisalabad              4788  2000-04-01      29.072
+##          Faisalabad              4789  2000-05-01      34.845
+## ...                               ...         ...         ...
+## Russia   Saint Petersburg       13360  2013-05-01      12.355
+##          Saint Petersburg       13361  2013-06-01      17.185
+##          Saint Petersburg       13362  2013-07-01      17.234
+##          Saint Petersburg       13363  2013-08-01      17.153
+##          Saint Petersburg       13364  2013-09-01         NaN
+## 
+## [1155 rows x 3 columns]</code></pre>
+<div class="sourceCode" id="cb110"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb110-1"><a href="#cb110-1" tabindex="-1"></a><span class="co"># Try to subset rows from Lahore to Moscow</span></span>
+<span id="cb110-2"><a href="#cb110-2" tabindex="-1"></a><span class="bu">print</span>(temperatures_srt.loc[<span class="st">&#39;Lahore&#39;</span>:<span class="st">&#39;Moscow&#39;</span>])</span></code></pre></div>
+<pre><code>##                     Unnamed: 0        date  avg_temp_c
+## country city                                          
+## Mexico  Mexico           10230  2000-01-01      12.694
+##         Mexico           10231  2000-02-01      14.677
+##         Mexico           10232  2000-03-01      17.376
+##         Mexico           10233  2000-04-01      18.294
+##         Mexico           10234  2000-05-01      18.562
+## ...                        ...         ...         ...
+## Morocco Casablanca        3130  2013-05-01      19.217
+##         Casablanca        3131  2013-06-01      23.649
+##         Casablanca        3132  2013-07-01      27.488
+##         Casablanca        3133  2013-08-01      27.952
+##         Casablanca        3134  2013-09-01         NaN
+## 
+## [330 rows x 3 columns]</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb112-1"><a href="#cb112-1" tabindex="-1"></a><span class="co"># Subset rows from Pakistan, Lahore to Russia, Moscow</span></span>
+<span id="cb112-2"><a href="#cb112-2" tabindex="-1"></a><span class="bu">print</span>(temperatures_srt.loc[(<span class="st">&#39;Pakistan&#39;</span>, <span class="st">&#39;Lahore&#39;</span>):(<span class="st">&#39;Russia&#39;</span>, <span class="st">&#39;Moscow&#39;</span>)])</span></code></pre></div>
+<pre><code>##                  Unnamed: 0        date  avg_temp_c
+## country  city                                      
+## Pakistan Lahore        8415  2000-01-01      12.792
+##          Lahore        8416  2000-02-01      14.339
+##          Lahore        8417  2000-03-01      20.309
+##          Lahore        8418  2000-04-01      29.072
+##          Lahore        8419  2000-05-01      34.845
+## ...                     ...         ...         ...
+## Russia   Moscow       10885  2013-05-01      16.152
+##          Moscow       10886  2013-06-01      18.718
+##          Moscow       10887  2013-07-01      18.136
+##          Moscow       10888  2013-08-01      17.485
+##          Moscow       10889  2013-09-01         NaN
+## 
+## [660 rows x 3 columns]</code></pre>
+<p>Combining slicing with .loc[] provides a concise syntax for
+subsetting.</p>
 </div>
 <div id="slicing-in-both-directions" class="section level2" number="4.8">
 <h2><span class="header-section-number">4.8</span> Slicing in both
 directions</h2>
+<p>You’ve seen slicing DataFrames by rows and by columns, but since
+DataFrames are two-dimensional objects, it is often natural to slice
+both dimensions at once. That is, by passing two arguments to .loc[],
+you can subset by rows and columns in one go.</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb114-1"><a href="#cb114-1" tabindex="-1"></a><span class="co"># Subset rows from India, Hyderabad to Iraq, Baghdad</span></span>
+<span id="cb114-2"><a href="#cb114-2" tabindex="-1"></a><span class="bu">print</span>(temperatures_srt.loc[(<span class="st">&#39;India&#39;</span>, <span class="st">&#39;Hyderabad&#39;</span>):(<span class="st">&#39;Iraq&#39;</span>, <span class="st">&#39;Baghdad&#39;</span>)])</span></code></pre></div>
+<pre><code>##                    Unnamed: 0        date  avg_temp_c
+## country city                                         
+## India   Hyderabad        5940  2000-01-01      23.779
+##         Hyderabad        5941  2000-02-01      25.826
+##         Hyderabad        5942  2000-03-01      28.821
+##         Hyderabad        5943  2000-04-01      32.698
+##         Hyderabad        5944  2000-05-01      32.438
+## ...                       ...         ...         ...
+## Iraq    Baghdad          1150  2013-05-01      28.673
+##         Baghdad          1151  2013-06-01      33.803
+##         Baghdad          1152  2013-07-01      36.392
+##         Baghdad          1153  2013-08-01      35.463
+##         Baghdad          1154  2013-09-01         NaN
+## 
+## [2145 rows x 3 columns]</code></pre>
+<div class="sourceCode" id="cb116"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb116-1"><a href="#cb116-1" tabindex="-1"></a><span class="co"># Subset columns from date to avg_temp_c</span></span>
+<span id="cb116-2"><a href="#cb116-2" tabindex="-1"></a><span class="bu">print</span>(temperatures_srt.loc[:,<span class="st">&#39;date&#39;</span>:<span class="st">&#39;avg_temp_c&#39;</span>])</span></code></pre></div>
+<pre><code>##                           date  avg_temp_c
+## country     city                          
+## Afghanistan Kabul   2000-01-01       3.326
+##             Kabul   2000-02-01       3.454
+##             Kabul   2000-03-01       9.612
+##             Kabul   2000-04-01      17.925
+##             Kabul   2000-05-01      24.658
+## ...                        ...         ...
+## Zimbabwe    Harare  2013-05-01      18.298
+##             Harare  2013-06-01      17.020
+##             Harare  2013-07-01      16.299
+##             Harare  2013-08-01      19.232
+##             Harare  2013-09-01         NaN
+## 
+## [16500 rows x 2 columns]</code></pre>
+<div class="sourceCode" id="cb118"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb118-1"><a href="#cb118-1" tabindex="-1"></a><span class="co"># Subset in both directions at once</span></span>
+<span id="cb118-2"><a href="#cb118-2" tabindex="-1"></a><span class="bu">print</span>(temperatures_srt.loc[(<span class="st">&#39;India&#39;</span>, <span class="st">&#39;Hyderabad&#39;</span>):(<span class="st">&#39;Iraq&#39;</span>, <span class="st">&#39;Baghdad&#39;</span>), <span class="st">&#39;date&#39;</span>:<span class="st">&#39;avg_temp_c&#39;</span>])</span></code></pre></div>
+<pre><code>##                          date  avg_temp_c
+## country city                             
+## India   Hyderabad  2000-01-01      23.779
+##         Hyderabad  2000-02-01      25.826
+##         Hyderabad  2000-03-01      28.821
+##         Hyderabad  2000-04-01      32.698
+##         Hyderabad  2000-05-01      32.438
+## ...                       ...         ...
+## Iraq    Baghdad    2013-05-01      28.673
+##         Baghdad    2013-06-01      33.803
+##         Baghdad    2013-07-01      36.392
+##         Baghdad    2013-08-01      35.463
+##         Baghdad    2013-09-01         NaN
+## 
+## [2145 rows x 2 columns]</code></pre>
+<p>Slicing with .loc[] lets you take subsets in both directions at
+once.</p>
 </div>
 <div id="slicing-time-series" class="section level2" number="4.9">
 <h2><span class="header-section-number">4.9</span> Slicing time
 series</h2>
+<p>Slicing is particularly useful for time series since it’s a common
+thing to want to filter for data within a date range. Add the date
+column to the index, then use .loc[] to perform the subsetting. The
+important thing to remember is to keep your dates in ISO 8601 format,
+that is, “yyyy-mm-dd” for year-month-day, “yyyy-mm” for year-month, and
+“yyyy” for year.</p>
+<p>Recall from Chapter 1 that you can combine multiple Boolean
+conditions using logical operators, such as &amp;. To do so in one line
+of code, you’ll need to add parentheses () around each condition.</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb120-1"><a href="#cb120-1" tabindex="-1"></a><span class="co"># Use Boolean conditions to subset temperatures for rows in 2010 and 2011</span></span>
+<span id="cb120-2"><a href="#cb120-2" tabindex="-1"></a>temperatures_bool <span class="op">=</span> temperatures[(temperatures[<span class="st">&#39;date&#39;</span>] <span class="op">&gt;=</span> <span class="st">&#39;2010-01-01&#39;</span>) <span class="op">&amp;</span> (temperatures[<span class="st">&#39;date&#39;</span>] <span class="op">&lt;=</span> <span class="st">&#39;2011-12-31&#39;</span>)]</span>
+<span id="cb120-3"><a href="#cb120-3" tabindex="-1"></a><span class="bu">print</span>(temperatures_bool)</span></code></pre></div>
+<pre><code>##        Unnamed: 0        date     city        country  avg_temp_c
+## 120           120  2010-01-01  Abidjan  Côte D&#39;Ivoire      28.270
+## 121           121  2010-02-01  Abidjan  Côte D&#39;Ivoire      29.262
+## 122           122  2010-03-01  Abidjan  Côte D&#39;Ivoire      29.596
+## 123           123  2010-04-01  Abidjan  Côte D&#39;Ivoire      29.068
+## 124           124  2010-05-01  Abidjan  Côte D&#39;Ivoire      28.258
+## ...           ...         ...      ...            ...         ...
+## 16474       16474  2011-08-01     Xian          China      23.069
+## 16475       16475  2011-09-01     Xian          China      16.775
+## 16476       16476  2011-10-01     Xian          China      12.587
+## 16477       16477  2011-11-01     Xian          China       7.543
+## 16478       16478  2011-12-01     Xian          China      -0.490
+## 
+## [2400 rows x 5 columns]</code></pre>
+<div class="sourceCode" id="cb122"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb122-1"><a href="#cb122-1" tabindex="-1"></a><span class="co"># Set date as the index and sort the index</span></span>
+<span id="cb122-2"><a href="#cb122-2" tabindex="-1"></a>temperatures_ind <span class="op">=</span> temperatures.set_index(<span class="st">&#39;date&#39;</span>).sort_index()</span>
+<span id="cb122-3"><a href="#cb122-3" tabindex="-1"></a></span>
+<span id="cb122-4"><a href="#cb122-4" tabindex="-1"></a><span class="co"># Use .loc[] to subset temperatures_ind for rows in 2010 and 2011</span></span>
+<span id="cb122-5"><a href="#cb122-5" tabindex="-1"></a><span class="bu">print</span>(temperatures_ind.loc[<span class="st">&#39;2010&#39;</span>:<span class="st">&#39;2011&#39;</span>])</span></code></pre></div>
+<pre><code>##             Unnamed: 0        city    country  avg_temp_c
+## date                                                     
+## 2010-01-01        4905  Faisalabad   Pakistan      11.810
+## 2010-01-01       10185   Melbourne  Australia      20.016
+## 2010-01-01        3750   Chongqing      China       7.921
+## 2010-01-01       13155   São Paulo     Brazil      23.738
+## 2010-01-01        5400   Guangzhou      China      14.136
+## ...                ...         ...        ...         ...
+## 2010-12-01        6896     Jakarta  Indonesia      26.602
+## 2010-12-01        5246       Gizeh      Egypt      16.530
+## 2010-12-01       11186      Nagpur      India      19.120
+## 2010-12-01       14981      Sydney  Australia      19.559
+## 2010-12-01       13496    Salvador     Brazil      26.265
+## 
+## [1200 rows x 4 columns]</code></pre>
+<div class="sourceCode" id="cb124"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb124-1"><a href="#cb124-1" tabindex="-1"></a><span class="co"># Use .loc[] to subset temperatures_ind for rows from Aug 2010 to Feb 2011</span></span>
+<span id="cb124-2"><a href="#cb124-2" tabindex="-1"></a><span class="bu">print</span>(temperatures_ind.loc[<span class="st">&#39;2010-08&#39;</span>:<span class="st">&#39;2011-02&#39;</span>])</span></code></pre></div>
+<pre><code>##             Unnamed: 0           city        country  avg_temp_c
+## date                                                            
+## 2010-08-01        2602       Calcutta          India      30.226
+## 2010-08-01       12337           Pune          India      24.941
+## 2010-08-01        6562          Izmir         Turkey      28.352
+## 2010-08-01       15637        Tianjin          China      25.543
+## 2010-08-01        9862         Manila    Philippines      27.101
+## ...                ...            ...            ...         ...
+## 2011-01-01        4257  Dar Es Salaam       Tanzania      28.541
+## 2011-01-01       11352        Nairobi          Kenya      17.768
+## 2011-01-01         297    Addis Abeba       Ethiopia      17.708
+## 2011-01-01       11517        Nanjing          China       0.144
+## 2011-01-01       11847       New York  United States      -4.463
+## 
+## [600 rows x 4 columns]</code></pre>
+<p>Using .loc[] in conjunction with a date index provides an easy way to
+subset for rows before or after some date.</p>
 </div>
 <div id="subsetting-by-rowcolumn-number" class="section level2" number="4.10">
 <h2><span class="header-section-number">4.10</span> Subsetting by
 row/column number</h2>
+<p>The most common ways to subset rows are the ways we’ve previously
+discussed: using a Boolean condition or by index labels. However, it is
+also occasionally useful to pass row numbers.</p>
+<p>This is done using .iloc[], and like .loc[], it can take two
+arguments to let you subset by rows and columns.</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb126-1"><a href="#cb126-1" tabindex="-1"></a><span class="co"># Get 23rd row, 2nd column (index 22, 1)</span></span>
+<span id="cb126-2"><a href="#cb126-2" tabindex="-1"></a><span class="bu">print</span>(temperatures.iloc[<span class="dv">22</span>, <span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## 2001-11-01</code></pre>
+<div class="sourceCode" id="cb128"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb128-1"><a href="#cb128-1" tabindex="-1"></a><span class="co"># Use slicing to get the first 5 rows</span></span>
+<span id="cb128-2"><a href="#cb128-2" tabindex="-1"></a><span class="bu">print</span>(temperatures.iloc[:<span class="dv">5</span>])</span></code></pre></div>
+<pre><code>##    Unnamed: 0        date     city        country  avg_temp_c
+## 0           0  2000-01-01  Abidjan  Côte D&#39;Ivoire      27.293
+## 1           1  2000-02-01  Abidjan  Côte D&#39;Ivoire      27.685
+## 2           2  2000-03-01  Abidjan  Côte D&#39;Ivoire      29.061
+## 3           3  2000-04-01  Abidjan  Côte D&#39;Ivoire      28.162
+## 4           4  2000-05-01  Abidjan  Côte D&#39;Ivoire      27.547</code></pre>
+<div class="sourceCode" id="cb130"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb130-1"><a href="#cb130-1" tabindex="-1"></a><span class="co"># Use slicing to get columns 3 to 4</span></span>
+<span id="cb130-2"><a href="#cb130-2" tabindex="-1"></a><span class="bu">print</span>(temperatures.iloc[:, <span class="dv">2</span>:<span class="dv">4</span>])</span></code></pre></div>
+<pre><code>##           city        country
+## 0      Abidjan  Côte D&#39;Ivoire
+## 1      Abidjan  Côte D&#39;Ivoire
+## 2      Abidjan  Côte D&#39;Ivoire
+## 3      Abidjan  Côte D&#39;Ivoire
+## 4      Abidjan  Côte D&#39;Ivoire
+## ...        ...            ...
+## 16495     Xian          China
+## 16496     Xian          China
+## 16497     Xian          China
+## 16498     Xian          China
+## 16499     Xian          China
+## 
+## [16500 rows x 2 columns]</code></pre>
+<div class="sourceCode" id="cb132"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb132-1"><a href="#cb132-1" tabindex="-1"></a><span class="co"># Use slicing in both directions at once</span></span>
+<span id="cb132-2"><a href="#cb132-2" tabindex="-1"></a><span class="bu">print</span>(temperatures.iloc[:<span class="dv">5</span>, <span class="dv">2</span>:<span class="dv">4</span>])</span></code></pre></div>
+<pre><code>##       city        country
+## 0  Abidjan  Côte D&#39;Ivoire
+## 1  Abidjan  Côte D&#39;Ivoire
+## 2  Abidjan  Côte D&#39;Ivoire
+## 3  Abidjan  Côte D&#39;Ivoire
+## 4  Abidjan  Côte D&#39;Ivoire</code></pre>
 </div>
 <div id="lecture-working-with-pivot-tables" class="section level2" number="4.11">
 <h2><span class="header-section-number">4.11</span> Lecture: Working
@@ -2239,14 +3026,136 @@ with pivot tables</h2>
 <div id="pivot-temperature-by-city-and-year" class="section level2" number="4.12">
 <h2><span class="header-section-number">4.12</span> Pivot temperature by
 city and year</h2>
+<p>It’s interesting to see how temperatures for each city change over
+time—looking at every month results in a big table, which can be tricky
+to reason about. Instead, let’s look at how temperatures change by
+year.</p>
+<p>You can access the components of a date (year, month and day) using
+code of the form dataframe[“column”].dt.component. For example, the
+month component is dataframe[“column”].dt.month, and the year component
+is dataframe[“column”].dt.year.</p>
+<p>Once you have the year column, you can create a pivot table with the
+data aggregated by city and year, which you’ll explore in the coming
+exercises.</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb134-1"><a href="#cb134-1" tabindex="-1"></a><span class="co"># Add a year column to temperatures</span></span>
+<span id="cb134-2"><a href="#cb134-2" tabindex="-1"></a>temperatures[<span class="st">&#39;date&#39;</span>] <span class="op">=</span> pd.to_datetime(temperatures[<span class="st">&#39;date&#39;</span>])</span>
+<span id="cb134-3"><a href="#cb134-3" tabindex="-1"></a>temperatures[<span class="st">&#39;year&#39;</span>] <span class="op">=</span> temperatures[<span class="st">&#39;date&#39;</span>].dt.year</span>
+<span id="cb134-4"><a href="#cb134-4" tabindex="-1"></a></span>
+<span id="cb134-5"><a href="#cb134-5" tabindex="-1"></a><span class="co"># Pivot avg_temp_c by country and city vs year</span></span>
+<span id="cb134-6"><a href="#cb134-6" tabindex="-1"></a>temp_by_country_city_vs_year <span class="op">=</span> temperatures.pivot_table(values <span class="op">=</span> <span class="st">&#39;avg_temp_c&#39;</span>, index <span class="op">=</span> [<span class="st">&#39;country&#39;</span>, <span class="st">&#39;city&#39;</span>], columns <span class="op">=</span> <span class="st">&#39;year&#39;</span>)</span>
+<span id="cb134-7"><a href="#cb134-7" tabindex="-1"></a></span>
+<span id="cb134-8"><a href="#cb134-8" tabindex="-1"></a><span class="co"># See the result</span></span>
+<span id="cb134-9"><a href="#cb134-9" tabindex="-1"></a><span class="bu">print</span>(temp_by_country_city_vs_year)</span></code></pre></div>
+<pre><code>## year                                 2000       2001  ...       2012       2013
+## country       city                                    ...                      
+## Afghanistan   Kabul             15.822667  15.847917  ...  14.510333  16.206125
+## Angola        Luanda            24.410333  24.427083  ...  24.240083  24.553875
+## Australia     Melbourne         14.320083  14.180000  ...  14.268667  14.741500
+##               Sydney            17.567417  17.854500  ...  17.474333  18.089750
+## Bangladesh    Dhaka             25.905250  25.931250  ...  26.283583  26.587000
+## ...                                   ...        ...  ...        ...        ...
+## United States Chicago           11.089667  11.703083  ...  12.821250  11.586889
+##               Los Angeles       16.643333  16.466250  ...  17.089583  18.120667
+##               New York           9.969083  10.931000  ...  11.971500  12.163889
+## Vietnam       Ho Chi Minh City  27.588917  27.831750  ...  28.248750  28.455000
+## Zimbabwe      Harare            20.283667  20.861000  ...  20.523333  19.756500
+## 
+## [100 rows x 14 columns]</code></pre>
+<p>Now you have the pivot table, let’s manipulate it.</p>
 </div>
 <div id="subsetting-pivot-tables" class="section level2" number="4.13">
 <h2><span class="header-section-number">4.13</span> Subsetting pivot
 tables</h2>
+<p>A pivot table is just a DataFrame with sorted indexes, so the
+techniques you have learned already can be used to subset them. In
+particular, the .loc[] + slicing combination is often helpful.</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb136-1"><a href="#cb136-1" tabindex="-1"></a><span class="co"># Subset for Egypt to India</span></span>
+<span id="cb136-2"><a href="#cb136-2" tabindex="-1"></a><span class="bu">print</span>(temp_by_country_city_vs_year.loc[<span class="st">&#39;Egypt&#39;</span>:<span class="st">&#39;India&#39;</span>])</span></code></pre></div>
+<pre><code>## year                       2000       2001  ...       2012       2013
+## country  city                               ...                      
+## Egypt    Alexandria   20.744500  21.454583  ...  21.552583  21.438500
+##          Cairo        21.486167  22.330833  ...  22.484250  22.907000
+##          Gizeh        21.486167  22.330833  ...  22.484250  22.907000
+## Ethiopia Addis Abeba  18.241250  18.296417  ...  18.448583  19.539000
+## France   Paris        11.739667  11.371250  ...  11.219917  11.011625
+## Germany  Berlin       10.963667   9.690250  ...   9.964333  10.121500
+## India    Ahmadabad    27.436000  27.198083  ...  27.027250  27.608625
+##          Bangalore    25.337917  25.528167  ...  26.042333  26.610500
+##          Bombay       27.203667  27.243667  ...  27.192500  26.713000
+##          Calcutta     26.491333  26.515167  ...  26.935083  27.369250
+##          Delhi        26.048333  25.862917  ...  25.889417  26.709250
+##          Hyderabad    27.231833  27.555167  ...  28.018583  28.851250
+##          Jaipur       26.430250  26.023000  ...  25.884500  26.844125
+##          Kanpur       25.353917  25.326500  ...  25.445417  26.121250
+##          Lakhnau      25.353917  25.326500  ...  25.445417  26.121250
+##          Madras       28.811667  29.162917  ...  29.778417  30.411750
+##          Nagpur       26.181417  26.321667  ...  26.327917  27.112375
+##          New Delhi    26.048333  25.862917  ...  25.889417  26.709250
+##          Pune         25.110917  25.337833  ...  25.296833  25.847625
+##          Surat        27.029000  26.897250  ...  26.889250  27.437750
+## 
+## [20 rows x 14 columns]</code></pre>
+<div class="sourceCode" id="cb138"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb138-1"><a href="#cb138-1" tabindex="-1"></a><span class="co"># Subset for Egypt, Cairo to India, Delhi</span></span>
+<span id="cb138-2"><a href="#cb138-2" tabindex="-1"></a><span class="bu">print</span>(temp_by_country_city_vs_year.loc[(<span class="st">&#39;Egypt&#39;</span>, <span class="st">&#39;Cairo&#39;</span>):(<span class="st">&#39;India&#39;</span>, <span class="st">&#39;Delhi&#39;</span>)])</span></code></pre></div>
+<pre><code>## year                       2000       2001  ...       2012       2013
+## country  city                               ...                      
+## Egypt    Cairo        21.486167  22.330833  ...  22.484250  22.907000
+##          Gizeh        21.486167  22.330833  ...  22.484250  22.907000
+## Ethiopia Addis Abeba  18.241250  18.296417  ...  18.448583  19.539000
+## France   Paris        11.739667  11.371250  ...  11.219917  11.011625
+## Germany  Berlin       10.963667   9.690250  ...   9.964333  10.121500
+## India    Ahmadabad    27.436000  27.198083  ...  27.027250  27.608625
+##          Bangalore    25.337917  25.528167  ...  26.042333  26.610500
+##          Bombay       27.203667  27.243667  ...  27.192500  26.713000
+##          Calcutta     26.491333  26.515167  ...  26.935083  27.369250
+##          Delhi        26.048333  25.862917  ...  25.889417  26.709250
+## 
+## [10 rows x 14 columns]</code></pre>
+<div class="sourceCode" id="cb140"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb140-1"><a href="#cb140-1" tabindex="-1"></a><span class="co"># Subset for Egypt, Cairo to India, Delhi, and 2005 to 2010</span></span>
+<span id="cb140-2"><a href="#cb140-2" tabindex="-1"></a><span class="bu">print</span>(temp_by_country_city_vs_year.loc[(<span class="st">&#39;Egypt&#39;</span>, <span class="st">&#39;Cairo&#39;</span>):(<span class="st">&#39;India&#39;</span>, <span class="st">&#39;Delhi&#39;</span>), <span class="dv">2005</span>:<span class="dv">2010</span>])</span></code></pre></div>
+<pre><code>## year                       2005       2006  ...       2009       2010
+## country  city                               ...                      
+## Egypt    Cairo        22.006500  22.050000  ...  22.625000  23.718250
+##          Gizeh        22.006500  22.050000  ...  22.625000  23.718250
+## Ethiopia Addis Abeba  18.312833  18.427083  ...  18.765333  18.298250
+## France   Paris        11.552917  11.788500  ...  11.464083  10.409833
+## Germany  Berlin        9.919083  10.545333  ...  10.062500   8.606833
+## India    Ahmadabad    26.828083  27.282833  ...  28.095833  28.017833
+##          Bangalore    25.476500  25.418250  ...  25.725750  25.705250
+##          Bombay       27.035750  27.381500  ...  27.844500  27.765417
+##          Calcutta     26.729167  26.986250  ...  27.153250  27.288833
+##          Delhi        25.716083  26.365917  ...  26.554250  26.520250
+## 
+## [10 rows x 6 columns]</code></pre>
 </div>
 <div id="calculating-on-a-pivot-table" class="section level2" number="4.14">
 <h2><span class="header-section-number">4.14</span> Calculating on a
 pivot table</h2>
+<p>Pivot tables are filled with summary statistics, but they are only a
+first step to finding something insightful. Often you’ll need to perform
+further calculations on them. A common thing to do is to find the rows
+or columns where the highest or lowest value occurs.</p>
+<p>Recall from Chapter 1 that you can easily subset a Series or
+DataFrame to find rows of interest using a logical condition inside of
+square brackets. For example: series[series &gt; value].</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb142-1"><a href="#cb142-1" tabindex="-1"></a><span class="co"># Get the worldwide mean temp by year</span></span>
+<span id="cb142-2"><a href="#cb142-2" tabindex="-1"></a>mean_temp_by_year <span class="op">=</span> temp_by_country_city_vs_year.mean()</span>
+<span id="cb142-3"><a href="#cb142-3" tabindex="-1"></a></span>
+<span id="cb142-4"><a href="#cb142-4" tabindex="-1"></a><span class="co"># Filter for the year that had the highest mean temp</span></span>
+<span id="cb142-5"><a href="#cb142-5" tabindex="-1"></a><span class="bu">print</span>(mean_temp_by_year[mean_temp_by_year <span class="op">==</span> <span class="bu">max</span>(mean_temp_by_year)])</span></code></pre></div>
+<pre><code>## year
+## 2013    20.312285
+## dtype: float64</code></pre>
+<div class="sourceCode" id="cb144"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb144-1"><a href="#cb144-1" tabindex="-1"></a><span class="co"># Get the mean temp by city</span></span>
+<span id="cb144-2"><a href="#cb144-2" tabindex="-1"></a>mean_temp_by_city <span class="op">=</span> temp_by_country_city_vs_year.mean(axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb144-3"><a href="#cb144-3" tabindex="-1"></a></span>
+<span id="cb144-4"><a href="#cb144-4" tabindex="-1"></a><span class="co"># Filter for the city that had the lowest mean temp</span></span>
+<span id="cb144-5"><a href="#cb144-5" tabindex="-1"></a><span class="bu">print</span>(mean_temp_by_city[mean_temp_by_city <span class="op">==</span> <span class="bu">min</span>(mean_temp_by_city)])</span></code></pre></div>
+<pre><code>## country  city  
+## China    Harbin    4.876551
+## dtype: float64</code></pre>
+<p>With an average temperature just above freezing, Harbin is famous for
+its ice sculpture festival.</p>
 </div>
 </div>
 <div id="creating-and-visualizing-dataframes" class="section level1" number="5">
