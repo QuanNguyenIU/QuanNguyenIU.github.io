@@ -3301,14 +3301,75 @@ values</h2>
 <div id="finding-missing-values" class="section level2" number="5.7">
 <h2><span class="header-section-number">5.7</span> Finding missing
 values</h2>
+<p>Missing values are everywhere, and you don’t want them interfering
+with your work. Some functions ignore missing data by default, but
+that’s not always the behavior you might want. Some functions can’t
+handle missing values at all, so these values need to be taken care of
+before you can use them. If you don’t know where your missing values
+are, or if they exist, you could make mistakes in your analysis. In this
+exercise, you’ll determine if there are missing values in the dataset,
+and if so, how many.</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb154-1"><a href="#cb154-1" tabindex="-1"></a>avocados_2016 <span class="op">=</span> avocados[avocados[<span class="st">&#39;date&#39;</span>] <span class="op">&gt;=</span> <span class="st">&#39;2016-01-01&#39;</span>]</span>
+<span id="cb154-2"><a href="#cb154-2" tabindex="-1"></a></span>
+<span id="cb154-3"><a href="#cb154-3" tabindex="-1"></a><span class="co"># Check individual values for missing values</span></span>
+<span id="cb154-4"><a href="#cb154-4" tabindex="-1"></a><span class="bu">print</span>(avocados_2016.isna())</span>
+<span id="cb154-5"><a href="#cb154-5" tabindex="-1"></a><span class="co"># Check each column for missing values</span></span>
+<span id="cb154-6"><a href="#cb154-6" tabindex="-1"></a><span class="bu">print</span>(avocados_2016.isna().<span class="bu">any</span>())</span>
+<span id="cb154-7"><a href="#cb154-7" tabindex="-1"></a><span class="co"># Bar plot of missing values by variable</span></span>
+<span id="cb154-8"><a href="#cb154-8" tabindex="-1"></a>avocados_2016.isna().<span class="bu">sum</span>().plot(kind <span class="op">=</span> <span class="st">&#39;bar&#39;</span>)</span>
+<span id="cb154-9"><a href="#cb154-9" tabindex="-1"></a></span>
+<span id="cb154-10"><a href="#cb154-10" tabindex="-1"></a><span class="co"># Show plot</span></span>
+<span id="cb154-11"><a href="#cb154-11" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>It looks like there are missing values in the small_sold, large_sold,
+and xl_sold columns.</p>
 </div>
 <div id="removing-missing-values" class="section level2" number="5.8">
 <h2><span class="header-section-number">5.8</span> Removing missing
 values</h2>
+<p>Now that you know there are some missing values in your DataFrame,
+you have a few options to deal with them. One way is to remove them from
+the dataset completely. In this exercise, you’ll remove missing values
+by removing all rows that contain missing values.</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb155-1"><a href="#cb155-1" tabindex="-1"></a><span class="co"># Remove rows with missing values</span></span>
+<span id="cb155-2"><a href="#cb155-2" tabindex="-1"></a>avocados_complete <span class="op">=</span> avocados_2016.dropna()</span>
+<span id="cb155-3"><a href="#cb155-3" tabindex="-1"></a></span>
+<span id="cb155-4"><a href="#cb155-4" tabindex="-1"></a><span class="co"># Check if any columns contain missing values</span></span>
+<span id="cb155-5"><a href="#cb155-5" tabindex="-1"></a><span class="bu">print</span>(avocados_complete.isna().<span class="bu">any</span>())</span></code></pre></div>
+<p>Removing observations with missing values is a quick and dirty way to
+deal with missing data, but this can introduce bias to your data if the
+values are not missing at random.</p>
 </div>
 <div id="replacing-missing-values" class="section level2" number="5.9">
 <h2><span class="header-section-number">5.9</span> Replacing missing
 values</h2>
+<p>Another way of handling missing values is to replace them all with
+the same value. For numerical variables, one option is to replace values
+with 0— you’ll do this here. However, when you replace missing values,
+you make assumptions about what a missing value means. In this case, you
+will assume that a missing number sold means that no sales for that
+avocado type were made that week.</p>
+<p>In this exercise, you’ll see how replacing missing values can affect
+the distribution of a variable using histograms. You can plot histograms
+for multiple variables at a time as follows:</p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb156-1"><a href="#cb156-1" tabindex="-1"></a>dogs[[<span class="st">&quot;height_cm&quot;</span>, <span class="st">&quot;weight_kg&quot;</span>]].hist()</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb157-1"><a href="#cb157-1" tabindex="-1"></a><span class="co"># List the columns with missing values</span></span>
+<span id="cb157-2"><a href="#cb157-2" tabindex="-1"></a>cols_with_missing <span class="op">=</span> [<span class="st">&quot;small_sold&quot;</span>, <span class="st">&quot;large_sold&quot;</span>, <span class="st">&quot;xl_sold&quot;</span>]</span>
+<span id="cb157-3"><a href="#cb157-3" tabindex="-1"></a></span>
+<span id="cb157-4"><a href="#cb157-4" tabindex="-1"></a><span class="co"># Create histograms showing the distributions cols_with_missing</span></span>
+<span id="cb157-5"><a href="#cb157-5" tabindex="-1"></a>avocados_2016[cols_with_missing].hist()</span>
+<span id="cb157-6"><a href="#cb157-6" tabindex="-1"></a></span>
+<span id="cb157-7"><a href="#cb157-7" tabindex="-1"></a><span class="co"># Show the plot</span></span>
+<span id="cb157-8"><a href="#cb157-8" tabindex="-1"></a>plt.show()</span>
+<span id="cb157-9"><a href="#cb157-9" tabindex="-1"></a><span class="co"># Fill in missing values with 0</span></span>
+<span id="cb157-10"><a href="#cb157-10" tabindex="-1"></a>avocados_filled <span class="op">=</span> avocados_2016.fillna(<span class="dv">0</span>)</span>
+<span id="cb157-11"><a href="#cb157-11" tabindex="-1"></a></span>
+<span id="cb157-12"><a href="#cb157-12" tabindex="-1"></a><span class="co"># Create histograms of the filled columns</span></span>
+<span id="cb157-13"><a href="#cb157-13" tabindex="-1"></a>avocados_filled[cols_with_missing].hist()</span>
+<span id="cb157-14"><a href="#cb157-14" tabindex="-1"></a></span>
+<span id="cb157-15"><a href="#cb157-15" tabindex="-1"></a><span class="co"># Show the plot</span></span>
+<span id="cb157-16"><a href="#cb157-16" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>Notice how the distribution has changed shape after replacing missing
+values with zeros.</p>
 </div>
 <div id="lecture-creating-dataframes" class="section level2" number="5.10">
 <h2><span class="header-section-number">5.10</span> Lecture: Creating
@@ -3319,10 +3380,44 @@ DataFrames</h2>
 <div id="list-of-dictionaries" class="section level2" number="5.11">
 <h2><span class="header-section-number">5.11</span> List of
 dictionaries</h2>
+<p>You recently got some new avocado data from 2019 that you’d like to
+put in a DataFrame using the list of dictionaries method. Remember that
+with this method, you go through the data row by row.</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb158-1"><a href="#cb158-1" tabindex="-1"></a><span class="co"># Create a list of dictionaries with new data</span></span>
+<span id="cb158-2"><a href="#cb158-2" tabindex="-1"></a>avocados_list <span class="op">=</span> [</span>
+<span id="cb158-3"><a href="#cb158-3" tabindex="-1"></a>    {<span class="st">&#39;date&#39;</span>: <span class="st">&quot;2019-11-03&quot;</span>, <span class="st">&#39;small_sold&#39;</span>: <span class="dv">10376832</span>, <span class="st">&#39;large_sold&#39;</span>: <span class="dv">7835071</span>},</span>
+<span id="cb158-4"><a href="#cb158-4" tabindex="-1"></a>    {<span class="st">&#39;date&#39;</span>: <span class="st">&quot;2019-11-10&quot;</span>, <span class="st">&#39;small_sold&#39;</span>: <span class="dv">10717154</span>, <span class="st">&#39;large_sold&#39;</span>: <span class="dv">8561348</span>},</span>
+<span id="cb158-5"><a href="#cb158-5" tabindex="-1"></a>]</span>
+<span id="cb158-6"><a href="#cb158-6" tabindex="-1"></a></span>
+<span id="cb158-7"><a href="#cb158-7" tabindex="-1"></a><span class="co"># Convert list into DataFrame</span></span>
+<span id="cb158-8"><a href="#cb158-8" tabindex="-1"></a>avocados_2019 <span class="op">=</span> pd.DataFrame(avocados_list)</span>
+<span id="cb158-9"><a href="#cb158-9" tabindex="-1"></a></span>
+<span id="cb158-10"><a href="#cb158-10" tabindex="-1"></a><span class="co"># Print the new DataFrame</span></span>
+<span id="cb158-11"><a href="#cb158-11" tabindex="-1"></a><span class="bu">print</span>(avocados_2019)</span></code></pre></div>
+<pre><code>##          date  small_sold  large_sold
+## 0  2019-11-03    10376832     7835071
+## 1  2019-11-10    10717154     8561348</code></pre>
 </div>
 <div id="dictionary-of-lists" class="section level2" number="5.12">
 <h2><span class="header-section-number">5.12</span> Dictionary of
 lists</h2>
+<p>Some more data just came in! This time, you’ll use the dictionary of
+lists method, parsing the data column by column.</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb160-1"><a href="#cb160-1" tabindex="-1"></a><span class="co"># Create a dictionary of lists with new data</span></span>
+<span id="cb160-2"><a href="#cb160-2" tabindex="-1"></a>avocados_dict <span class="op">=</span> {</span>
+<span id="cb160-3"><a href="#cb160-3" tabindex="-1"></a>  <span class="st">&quot;date&quot;</span>: [<span class="st">&quot;2019-11-17&quot;</span>, <span class="st">&quot;2019-12-01&quot;</span>],</span>
+<span id="cb160-4"><a href="#cb160-4" tabindex="-1"></a>  <span class="st">&quot;small_sold&quot;</span>: [<span class="dv">10859987</span>, <span class="dv">9291631</span> ],</span>
+<span id="cb160-5"><a href="#cb160-5" tabindex="-1"></a>  <span class="st">&quot;large_sold&quot;</span>: [<span class="dv">7674135</span>, <span class="dv">6238096</span>]</span>
+<span id="cb160-6"><a href="#cb160-6" tabindex="-1"></a>}</span>
+<span id="cb160-7"><a href="#cb160-7" tabindex="-1"></a></span>
+<span id="cb160-8"><a href="#cb160-8" tabindex="-1"></a><span class="co"># Convert dictionary into DataFrame</span></span>
+<span id="cb160-9"><a href="#cb160-9" tabindex="-1"></a>avocados_2019 <span class="op">=</span> pd.DataFrame(avocados_dict)</span>
+<span id="cb160-10"><a href="#cb160-10" tabindex="-1"></a></span>
+<span id="cb160-11"><a href="#cb160-11" tabindex="-1"></a><span class="co"># Print the new DataFrame</span></span>
+<span id="cb160-12"><a href="#cb160-12" tabindex="-1"></a><span class="bu">print</span>(avocados_2019)</span></code></pre></div>
+<pre><code>##          date  small_sold  large_sold
+## 0  2019-11-17    10859987     7674135
+## 1  2019-12-01     9291631     6238096</code></pre>
 </div>
 <div id="lecture-reading-and-writing-csvs" class="section level2" number="5.13">
 <h2><span class="header-section-number">5.13</span> Lecture: Reading and
@@ -3333,6 +3428,14 @@ writing CSVs</h2>
 <div id="csv-to-dataframe" class="section level2" number="5.14">
 <h2><span class="header-section-number">5.14</span> CSV to
 DataFrame</h2>
+<p>You work for an airline, and your manager has asked you to do a
+competitive analysis and see how often passengers flying on other
+airlines are involuntarily bumped from their flights. You got a CSV file
+(airline_bumping.csv) from the Department of Transportation containing
+data on passengers that were involuntarily denied boarding in 2016 and
+2017, but it doesn’t have the exact numbers you want. In order to figure
+this out, you’ll need to get the CSV into a pandas DataFrame and do some
+manipulation!</p>
 </div>
 <div id="dataframe-to-csv" class="section level2" number="5.15">
 <h2><span class="header-section-number">5.15</span> DataFrame to
