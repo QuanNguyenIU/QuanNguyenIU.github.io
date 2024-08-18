@@ -1639,7 +1639,7 @@ margin-left: 0 !important;
           <li class="divider"></li>
                                 <li><span><i class="glyphicon glyphicon-user"></i> Quan
 Nguyen</span></li>
-                                         <li><span><i class="glyphicon glyphicon-calendar"></i> July
+                                         <li><span><i class="glyphicon glyphicon-calendar"></i> August
 2024</span></li>
                   </ul>     
       </div>
@@ -1677,23 +1677,23 @@ font-size: 1.3em !important;
 Python</strong><a></a> prior to this course.</p>
 <div id="course-description" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Course Description</h1>
-<p>pandas is the world’s most popular Python library, used for
-everything from data manipulation to data analysis. In this course,
-you’ll learn how to manipulate DataFrames, as you extract, filter, and
-transform real-world datasets for analysis. Using pandas you’ll explore
-all the core data science concepts. Using real-world data, including
-Walmart sales figures and global temperature time series, you’ll learn
-how to import, clean, calculate statistics, and create
-visualizations—using pandas to add to the power of Python!</p>
+<p><strong>pandas</strong> is the world’s most popular Python library,
+used for everything from data manipulation to data analysis. In this
+course, you’ll learn how to manipulate DataFrames, as you extract,
+filter, and transform real-world datasets for analysis. Using pandas
+you’ll explore all the core data science concepts. Using real-world
+data, including Walmart sales figures and global temperature time
+series, you’ll learn how to import, clean, calculate statistics, and
+create visualizations—using pandas to add to the power of Python!</p>
 <p>Course materials can be found
 <a href="https://github.com/QuanNguyenIU/QuanNguyenIU.github.io/tree/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas"><strong>here</strong><a></a>.</p>
 </div>
 <div id="transforming-dataframes" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Transforming
 DataFrames</h1>
-<p>Let’s master the pandas basics. Learn how to inspect DataFrames and
-perform fundamental manipulations, including sorting rows, subsetting,
-and adding new columns.</p>
+<p>Let’s master the <strong>pandas</strong> basics. Learn how to inspect
+<strong>DataFrames</strong> and perform fundamental manipulations,
+including sorting rows, subsetting, and adding new columns.</p>
 <div id="lecture-introducing-dataframes" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Lecture: Introducing
 DataFrames</h2>
@@ -1706,16 +1706,22 @@ DataFrame</h2>
 <p>When you get a new DataFrame to work with, the first thing you need
 to do is explore it and see what it contains. There are several useful
 methods and attributes for this.</p>
-<p>.head() returns the first few rows (the “head” of the DataFrame).
-.info() shows information on each of the columns, such as the data type
-and number of missing values. .shape returns the number of rows and
-columns of the DataFrame. .describe() calculates a few summary
-statistics for each column.</p>
-<p>homelessness is a DataFrame containing estimates of homelessness in
-each U.S. state in 2018. The individual column is the number of homeless
-individuals not part of a family with children. The family_members
-column is the number of homeless individuals part of a family with
-children. The state_pop column is the state’s total population.</p>
+<ul>
+<li><strong>.head()</strong> returns the first few rows (the “head” of
+the DataFrame).</li>
+<li><strong>.info()</strong> shows information on each of the columns,
+such as the data type and number of missing values.</li>
+<li><strong>.shape</strong> returns the number of rows and columns of
+the DataFrame.</li>
+<li><strong>.describe()</strong> calculates a few summary statistics for
+each column.</li>
+</ul>
+<p><strong>homelessness</strong> is a DataFrame containing estimates of
+homelessness in each U.S. state in <span class="math inline">\(2018\)</span>. The <strong>individual</strong>
+column is the number of homeless individuals not part of a family with
+children. The <strong>family_members</strong> column is the number of
+homeless individuals part of a family with children. The
+<strong>state_pop</strong> column is the state’s total population.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas/homelessness.csv&#39;</span></span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>homelessness <span class="op">=</span> pd.read_csv(url)</span>
@@ -1761,19 +1767,26 @@ children. The state_pop column is the state’s total population.</p>
 ## 75%     37.500000    6781.500000     3196.000000  7.340946e+06
 ## max     50.000000  109008.000000    52070.000000  3.946159e+07</code></pre>
 <p>Insightful inspecting! You can see that the average number of
-homeless individuals in each state is about 7226. Let’s explore the
-DataFrame further.</p>
+homeless individuals in each state is about <span class="math inline">\(7226\)</span>. Let’s explore the DataFrame
+further.</p>
 </div>
 <div id="parts-of-a-dataframe" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Parts of a
 DataFrame</h2>
 <p>To better understand DataFrame objects, it’s useful to know that they
 consist of three components, stored as attributes:</p>
-<p>.values: A two-dimensional NumPy array of values. .columns: An index
-of columns: the column names. .index: An index for the rows: either row
-numbers or row names. You can usually think of indexes as a list of
-strings or numbers, though the pandas Index data type allows for more
-sophisticated options. (These will be covered later in the course.)</p>
+<ul>
+<li><strong>.values</strong>: A two-dimensional NumPy array of
+values.</li>
+<li><strong>.columns</strong>: An index of columns: the column
+names.</li>
+<li><strong>.index</strong>: An index for the rows: either row numbers
+or row names.</li>
+</ul>
+<p>You can usually think of indexes as a list of strings or numbers,
+though the <strong>pandas</strong> <em>Index</em> data type allows for
+more sophisticated options (these will be covered later in the
+course).</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Print the values of homelessness</span></span>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="bu">print</span>(homelessness.values)</span></code></pre></div>
 <pre><code>## [[0 &#39;East South Central&#39; &#39;Alabama&#39; 2570.0 864.0 4887681]
@@ -1846,15 +1859,32 @@ subsetting</h2>
 <h2><span class="header-section-number">2.5</span> Sorting rows</h2>
 <p>Finding interesting bits of data in a DataFrame is often easier if
 you change the order of the rows. You can sort the rows by passing a
-column name to .sort_values().</p>
+column name to <strong>.sort_values()</strong>.</p>
 <p>In cases where rows have the same value (this is common if you sort
 on a categorical variable), you may wish to break the ties by sorting on
 another column. You can sort on multiple columns in this way by passing
 a list of column names.</p>
-<p>Sort on … Syntax one column df.sort_values(“breed”) multiple columns
-df.sort_values([“breed”, “weight_kg”]) By combining .sort_values() with
-.head(), you can answer questions in the form, “What are the top cases
-where…?”.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Sort on …</th>
+<th>Syntax</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>one column</td>
+<td>df.sort_values(“breed”)</td>
+</tr>
+<tr class="even">
+<td>multiple columns</td>
+<td>df.sort_values([“breed”, “weight_kg”])</td>
+</tr>
+</tbody>
+</table>
+<p>By combining <strong>.sort_values()</strong> with
+<strong>.head()</strong>, you can answer questions in the form, “What
+are the top cases where…?”.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Sort homelessness by individuals</span></span>
 <span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>homelessness_ind <span class="op">=</span> homelessness.sort_values([<span class="st">&#39;individuals&#39;</span>])</span>
 <span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a></span>
