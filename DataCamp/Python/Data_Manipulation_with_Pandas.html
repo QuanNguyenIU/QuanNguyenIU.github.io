@@ -1929,11 +1929,13 @@ are the top cases where…?”.</p>
 <h2><span class="header-section-number">2.6</span> Subsetting
 columns</h2>
 <p>When working with data, you may not need all of the variables in your
-dataset. Square brackets ([]) can be used to select only the columns
-that matter to you in an order that makes sense to you. To select only
-“col_a” of the DataFrame df, use</p>
+dataset. Square brackets (<strong>[]</strong>) can be used to select
+only the columns that matter to you in an order that makes sense to you.
+To select only <strong>col_a</strong> of the DataFrame
+<strong>df</strong>, use</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>df[<span class="st">&quot;col_a&quot;</span>]</span></code></pre></div>
-<p>To select “col_a” and “col_b” of df, use</p>
+<p>To select <strong>col_a</strong> and <strong>col_b</strong> of
+<strong>df</strong>, use</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>df[[<span class="st">&quot;col_a&quot;</span>, <span class="st">&quot;col_b&quot;</span>]]</span></code></pre></div>
 <div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># Select the individuals column</span></span>
 <span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>individuals <span class="op">=</span> homelessness[[<span class="st">&#39;individuals&#39;</span>]]</span>
@@ -2059,8 +2061,7 @@ rows, subsetting columns, subsetting rows, and adding new columns. In a
 real-life data analysis, you can mix and match these four manipulations
 to answer a multitude of questions.</p>
 <p>In this exercise, you’ll answer the question, “Which state has the
-highest number of homeless individuals per 10,000 people in the
-state?”</p>
+highest number of homeless individuals per <span class="math inline">\(10{,}000\)</span> people in the state?”</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="co"># Create indiv_per_10k col as homeless individuals per 10k state pop</span></span>
 <span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a>homelessness[<span class="st">&quot;indiv_per_10k&quot;</span>] <span class="op">=</span> <span class="dv">10000</span> <span class="op">*</span> homelessness[<span class="st">&quot;individuals&quot;</span>] <span class="op">/</span> homelessness[<span class="st">&quot;state_pop&quot;</span>] </span>
 <span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a></span>
@@ -2084,10 +2085,10 @@ state?”</p>
 ## 47            Washington      21.829195
 ## 32              New York      20.392363</code></pre>
 <p>District of Columbia has the highest number of homeless individuals -
-almost 54 per ten thousand people. This is almost double the number of
-the next-highest state, Hawaii. If you combine new column addition, row
-subsetting, sorting, and column selection, you can answer lots of
-questions like this.</p>
+almost <span class="math inline">\(54\)</span> per <span class="math inline">\(10{,}000\)</span> people. This is almost double
+the number of the next-highest state, Hawaii. If you combine new column
+addition, row subsetting, sorting, and column selection, you can answer
+lots of questions like this.</p>
 </div>
 </div>
 <div id="aggregating-dataframes" class="section level1" number="3">
@@ -2104,10 +2105,11 @@ statistics</h2>
 <div id="mean-and-median" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Mean and median</h2>
 <p>Summary statistics are exactly what they sound like - they summarize
-many numbers in one statistic. For example, mean, median, minimum,
-maximum, and standard deviation are summary statistics. Calculating
-summary statistics allows you to get a better sense of your data, even
-if there’s a lot of it.</p>
+many numbers in one statistic. For example, <em>mean</em>,
+<em>median</em>, <em>minimum</em>, <em>maximum</em>, and <em>standard
+deviation</em> are summary statistics. Calculating summary statistics
+allows you to get a better sense of your data, even if there’s a lot of
+it.</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas/sales.csv&#39;</span></span>
 <span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>sales <span class="op">=</span> pd.read_csv(url)</span>
 <span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a></span>
@@ -2155,33 +2157,33 @@ that are making the mean so much higher than the median.</p>
 <h2><span class="header-section-number">3.3</span> Summarizing
 dates</h2>
 <p>Summary statistics can also be calculated on date columns that have
-values with the data type datetime64. Some summary statistics — like
-mean — don’t make a ton of sense on dates, but others are super helpful,
-for example, minimum and maximum, which allow you to see what time range
-your data covers.</p>
+values with the data type <strong>datetime64</strong>. Some summary
+statistics — like mean — don’t make a ton of sense on dates, but others
+are super helpful, for example, minimum and maximum, which allow you to
+see what time range your data covers.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="co"># Print the maximum of the date column</span></span>
 <span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a><span class="bu">print</span>(sales[<span class="st">&#39;date&#39;</span>].<span class="bu">max</span>())</span></code></pre></div>
 <pre><code>## 2012-10-26</code></pre>
 <div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a><span class="co"># Print the minimum of the date column</span></span>
 <span id="cb43-2"><a href="#cb43-2" tabindex="-1"></a><span class="bu">print</span>(sales[<span class="st">&#39;date&#39;</span>].<span class="bu">min</span>())</span></code></pre></div>
 <pre><code>## 2010-02-05</code></pre>
-<p>In this case, there are data from February of 2010 to October of
-2012.</p>
+<p>In this case, there are data from February of <span class="math inline">\(2010\)</span> to October of <span class="math inline">\(2012\)</span>.</p>
 </div>
 <div id="efficient-summaries" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Efficient
 summaries</h2>
-<p>While pandas and NumPy have tons of functions, sometimes, you may
-need a different function to summarize your data.</p>
-<p>The .agg() method allows you to apply your own custom functions to a
-DataFrame, as well as apply functions to more than one column of a
-DataFrame at once, making your aggregations super-efficient. For
-example,</p>
+<p>While <strong>pandas</strong> and <strong>NumPy</strong> have tons of
+functions, sometimes, you may need a different function to summarize
+your data.</p>
+<p>The <strong>.agg()</strong> method allows you to apply your own
+custom functions to a DataFrame, as well as apply functions to more than
+one column of a DataFrame at once, making your aggregations
+super-efficient. For example,</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a>df[<span class="st">&#39;column&#39;</span>].agg(function)</span></code></pre></div>
-<p>In the custom function for this exercise, “IQR” is short for
-inter-quartile range, which is the 75th percentile minus the 25th
-percentile. It’s an alternative to standard deviation that is helpful if
-your data contains outliers.</p>
+<p>In the custom function for this exercise, <em>IQR</em> is short for
+<em>inter-quartile range</em>, which is the <span class="math inline">\(75^{th}\)</span> percentile minus the <span class="math inline">\(25^{th}\)</span> percentile. It’s an alternative
+to standard deviation that is helpful if your data contains
+outliers.</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" tabindex="-1"></a><span class="co"># A custom IQR function</span></span>
 <span id="cb46-2"><a href="#cb46-2" tabindex="-1"></a><span class="kw">def</span> iqr(column):</span>
 <span id="cb46-3"><a href="#cb46-3" tabindex="-1"></a>    <span class="cf">return</span> column.quantile(<span class="fl">0.75</span>) <span class="op">-</span> column.quantile(<span class="fl">0.25</span>)</span>
@@ -2201,8 +2203,8 @@ your data contains outliers.</p>
 <pre><code>##         temperature_c  fuel_price_usd_per_l  unemployment
 ## iqr         16.583333              0.073176         0.565
 ## median      16.966667              0.743381         8.099</code></pre>
-<p>The .agg() method makes it easy to compute multiple statistics on
-multiple columns, all in just one line of code.</p>
+<p>The <strong>.agg()</strong> method makes it easy to compute multiple
+statistics on multiple columns, all in just one line of code.</p>
 </div>
 <div id="cumulative-statistics" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Cumulative
@@ -2212,8 +2214,8 @@ statistics over time. In this exercise, you’ll calculate the cumulative
 sum and cumulative max of a department’s weekly sales, which will allow
 you to identify what the total sales were so far as well as what the
 highest weekly sales were so far.</p>
-<p>A DataFrame called sales_1_1 has been created for you, which contains
-the sales data for department 1 of store 1.</p>
+<p>A DataFrame called <strong>sales_1_1</strong> has been created for
+you, which contains the sales data for department <span class="math inline">\(1\)</span> of store <span class="math inline">\(1\)</span>.</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas/sales_1_1.csv&#39;</span></span>
 <span id="cb52-2"><a href="#cb52-2" tabindex="-1"></a>sales_1_1 <span class="op">=</span> pd.read_csv(url)</span>
 <span id="cb52-3"><a href="#cb52-3" tabindex="-1"></a></span>
@@ -2361,14 +2363,15 @@ summary statistics</h2>
 <div id="what-percent-of-sales-occurred-at-each-store-type" class="section level2" number="3.10">
 <h2><span class="header-section-number">3.10</span> What percent of
 sales occurred at each store type?</h2>
-<p>While .groupby() is useful, you can calculate grouped summary
-statistics without it.</p>
-<p>Walmart distinguishes three types of stores: “supercenters,”
-“discount stores,” and “neighborhood markets,” encoded in this dataset
-as type “A,” “B,” and “C.” In this exercise, you’ll calculate the total
-sales made at each store type, without using .groupby(). You can then
-use these numbers to see what proportion of Walmart’s total sales were
-made at each type.</p>
+<p>While <strong>.groupby()</strong> is useful, you can calculate
+grouped summary statistics without it.</p>
+<p>Walmart distinguishes three types of stores: <em>supercenters</em>,
+<em>discount stores</em>, and <em>neighborhood markets</em>, encoded in
+this dataset as type <em>A</em>, <em>B</em>, and <em>C</em>. In this
+exercise, you’ll calculate the total sales made at each store type,
+without using <strong>.groupby()</strong>. You can then use these
+numbers to see what proportion of Walmart’s total sales were made at
+each type.</p>
 <div class="sourceCode" id="cb68"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" tabindex="-1"></a><span class="co"># Calc total weekly sales</span></span>
 <span id="cb68-2"><a href="#cb68-2" tabindex="-1"></a>sales_all <span class="op">=</span> sales[<span class="st">&quot;weekly_sales&quot;</span>].<span class="bu">sum</span>()</span>
 <span id="cb68-3"><a href="#cb68-3" tabindex="-1"></a></span>
@@ -2385,18 +2388,19 @@ made at each type.</p>
 <span id="cb68-14"><a href="#cb68-14" tabindex="-1"></a>sales_propn_by_type <span class="op">=</span> [sales_A, sales_B, sales_C] <span class="op">/</span> sales_all</span>
 <span id="cb68-15"><a href="#cb68-15" tabindex="-1"></a><span class="bu">print</span>(sales_propn_by_type)</span></code></pre></div>
 <pre><code>## [0.9097747 0.0902253 0.       ]</code></pre>
-<p>About 91% of sales occurred in stores of type A’, 9% in stores of
+<p>About <span class="math inline">\(91%\)</span> of sales occurred in
+stores of type A, <span class="math inline">\(9%\)</span> in stores of
 type B, and there are no sales records for stores of type C. Now see if
-you can do this calculation using .groupby().</p>
+you can do this calculation using <strong>.groupby()</strong>.</p>
 </div>
 <div id="calculations-with-.groupby" class="section level2" number="3.11">
 <h2><span class="header-section-number">3.11</span> Calculations with
 .groupby()</h2>
-<p>The .groupby() method makes life much easier. In this exercise,
-you’ll perform the same calculations as last time, except you’ll use the
-.groupby() method. You’ll also perform calculations on data grouped by
-two variables to see if sales differ by store type depending on if it’s
-a holiday week or not.</p>
+<p>The <strong>.groupby()</strong> method makes life much easier. In
+this exercise, you’ll perform the same calculations as last time, except
+you’ll use the <strong>.groupby()</strong> method. You’ll also perform
+calculations on data grouped by two variables to see if sales differ by
+store type depending on if it’s a holiday week or not.</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" tabindex="-1"></a><span class="co"># Group by type; calc total weekly sales</span></span>
 <span id="cb70-2"><a href="#cb70-2" tabindex="-1"></a>sales_by_type <span class="op">=</span> sales.groupby(<span class="st">&quot;type&quot;</span>)[<span class="st">&quot;weekly_sales&quot;</span>].<span class="bu">sum</span>()</span>
 <span id="cb70-3"><a href="#cb70-3" tabindex="-1"></a></span>
@@ -2422,11 +2426,12 @@ while writing much less code.</p>
 <div id="multiple-grouped-summaries" class="section level2" number="3.12">
 <h2><span class="header-section-number">3.12</span> Multiple grouped
 summaries</h2>
-<p>Earlier in this chapter, you saw that the .agg() method is useful to
-compute multiple statistics on multiple variables. It also works with
-grouped data. NumPy, which is imported as np, has many different summary
-statistics functions, including: np.min, np.max, np.mean, and
-np.median.</p>
+<p>Earlier in this chapter, you saw that the <strong>.agg()</strong>
+method is useful to compute multiple statistics on multiple variables.
+It also works with grouped data. <strong>NumPy</strong>, which is
+imported as <strong>np</strong>, has many different summary statistics
+functions, including: <strong>np.min</strong>, <strong>np.max</strong>,
+<strong>np.mean</strong>, and <strong>np.median</strong>.</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" tabindex="-1"></a><span class="co"># For each store type, aggregate weekly_sales: get min, max, mean, and median</span></span>
 <span id="cb74-2"><a href="#cb74-2" tabindex="-1"></a>sales_stats <span class="op">=</span> sales.groupby(<span class="st">&#39;type&#39;</span>)[<span class="st">&#39;weekly_sales&#39;</span>].agg([np.<span class="bu">min</span>, np.<span class="bu">max</span>, np.mean, np.median])</span>
 <span id="cb74-3"><a href="#cb74-3" tabindex="-1"></a></span>
@@ -2448,8 +2453,8 @@ np.median.</p>
 ## B           7.170  9.765  9.279323  ...             1.107674  0.805858  0.803348
 ## 
 ## [2 rows x 8 columns]</code></pre>
-<p>Notice that the minimum weekly_sales is negative because some stores
-had more returns than sales.</p>
+<p>Notice that the minimum <strong>weekly_sales</strong> is negative
+because some stores had more returns than sales.</p>
 </div>
 <div id="lecture-pivot-tables" class="section level2" number="3.13">
 <h2><span class="header-section-number">3.13</span> Lecture: Pivot
@@ -2463,11 +2468,11 @@ variable</h2>
 <p>Pivot tables are the standard way of aggregating data in
 spreadsheets.</p>
 <p>In pandas, pivot tables are essentially another way of performing
-grouped calculations. That is, the .pivot_table() method is an
-alternative to .groupby().</p>
-<p>In this exercise, you’ll perform calculations using .pivot_table() to
-replicate the calculations you performed in the last lesson using
-.groupby().</p>
+grouped calculations. That is, the <strong>.pivot_table()</strong>
+method is an alternative to <strong>.groupby()</strong>.</p>
+<p>In this exercise, you’ll perform calculations using
+<strong>.pivot_table()</strong> to replicate the calculations you
+performed in the last lesson using <strong>.groupby()</strong>.</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" tabindex="-1"></a><span class="co"># Pivot for mean weekly_sales for each store type</span></span>
 <span id="cb78-2"><a href="#cb78-2" tabindex="-1"></a>mean_sales_by_type <span class="op">=</span> sales.pivot_table(values <span class="op">=</span> <span class="st">&#39;weekly_sales&#39;</span>, index <span class="op">=</span> <span class="st">&#39;type&#39;</span>)</span>
 <span id="cb78-3"><a href="#cb78-3" tabindex="-1"></a></span>
@@ -2502,15 +2507,20 @@ group-by-then-summarize.</p>
 <div id="fill-in-missing-values-and-sum-values" class="section level2" number="3.15">
 <h2><span class="header-section-number">3.15</span> Fill in missing
 values and sum values</h2>
-<p>The .pivot_table() method has several useful arguments, including
-fill_value and margins.</p>
-<p>fill_value replaces missing values with a real value (known as
-imputation). What to replace missing values with is a topic big enough
-to have its own course (Dealing with Missing Data in Python), but the
-simplest thing to do is to substitute a dummy value. margins is a
-shortcut for when you pivoted by two variables, but also wanted to pivot
-by each of those variables separately: it gives the row and column
-totals of the pivot table contents.</p>
+<p>The <strong>.pivot_table()</strong> method has several useful
+arguments, including <strong>fill_value</strong> and
+<strong>margins</strong>.</p>
+<ul>
+<li><strong>fill_value</strong> replaces missing values with a real
+value (known as imputation). What to replace missing values with is a
+topic big enough to have its own course (Dealing with Missing Data in
+Python), but the simplest thing to do is to substitute a dummy
+value.</li>
+<li><strong>margins</strong> is a shortcut for when you pivoted by two
+variables, but also wanted to pivot by each of those variables
+separately: it gives the row and column totals of the pivot table
+contents.</li>
+</ul>
 <p>In this exercise, you’ll practice using these arguments to up your
 pivot table skills, which will help you crunch numbers more
 efficiently!</p>
@@ -2550,9 +2560,9 @@ efficiently!</p>
 ## [81 rows x 3 columns]</code></pre>
 <p>You are now armed with pivot table skills that can help you compute
 summaries at multiple grouped levels in one line of code. Note the
-subtlety in the value of margins here. The column ‘All’ returns an
-overall mean for each department, not (A+B)/2. (A+B)/2 would be a mean
-of means, rather than an overall mean per department!</p>
+subtlety in the value of margins here. The column <strong>All</strong>
+returns an overall mean for each department, not (A+B)/2. (A+B)/2 would
+be a mean of means, rather than an overall mean per department!</p>
 </div>
 </div>
 <div id="slicing-and-indexing-dataframes" class="section level1" number="4">
@@ -2569,11 +2579,11 @@ indexes</h2>
 <div id="setting-and-removing-indexes" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Setting and removing
 indexes</h2>
-<p>pandas allows you to designate columns as an index. This enables
-cleaner code when taking subsets (as well as providing more efficient
-lookup under some circumstances).</p>
-<p>In this chapter, you’ll be exploring temperatures, a DataFrame of
-average temperatures in cities around the world.</p>
+<p><strong>pandas</strong> allows you to designate columns as an index.
+This enables cleaner code when taking subsets (as well as providing more
+efficient lookup under some circumstances).</p>
+<p>In this chapter, you’ll be exploring <strong>temperatures</strong>, a
+DataFrame of average temperatures in cities around the world.</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas/temperatures.csv&#39;</span></span>
 <span id="cb88-2"><a href="#cb88-2" tabindex="-1"></a>temperatures <span class="op">=</span> pd.read_csv(url)</span>
 <span id="cb88-3"><a href="#cb88-3" tabindex="-1"></a></span>
@@ -2646,17 +2656,17 @@ average temperatures in cities around the world.</p>
 ## 
 ## [16500 rows x 4 columns]</code></pre>
 <p>Setting an index allows more concise code for subsetting for rows of
-a categorical variable via .loc[]</p>
+a categorical variable via <strong>.loc[]</strong>.</p>
 </div>
 <div id="subsetting-with-.loc" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Subsetting with
 .loc[]</h2>
-<p>The killer feature for indexes is .loc[]: a subsetting method that
-accepts index values. When you pass it a single argument, it will take a
-subset of rows.</p>
-<p>The code for subsetting using .loc[] can be easier to read than
-standard square bracket subsetting, which can make your code less
-burdensome to maintain.</p>
+<p>The killer feature for indexes is <strong>.loc[]</strong>: a
+subsetting method that accepts index values. When you pass it a single
+argument, it will take a subset of rows.</p>
+<p>The code for subsetting using <strong>.loc[]</strong> can be easier
+to read than standard square bracket subsetting, which can make your
+code less burdensome to maintain.</p>
 <div class="sourceCode" id="cb96"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb96-1"><a href="#cb96-1" tabindex="-1"></a><span class="co"># Make a list of cities to subset on</span></span>
 <span id="cb96-2"><a href="#cb96-2" tabindex="-1"></a>cities <span class="op">=</span> [<span class="st">&quot;Moscow&quot;</span>, <span class="st">&quot;Saint Petersburg&quot;</span>]</span>
 <span id="cb96-3"><a href="#cb96-3" tabindex="-1"></a></span>
@@ -2693,8 +2703,9 @@ burdensome to maintain.</p>
 ## Saint Petersburg       13364  2013-09-01  Russia         NaN
 ## 
 ## [330 rows x 4 columns]</code></pre>
-<p>.loc[] is used by all the best folk! Setting an index allows more
-concise code for subsetting rows via .loc[].</p>
+<p><strong>.loc[]</strong> is used by all the best folk! Setting an
+index allows more concise code for subsetting rows via
+<strong>.loc[]</strong>.</p>
 </div>
 <div id="setting-multi-level-indexes" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Setting multi-level
@@ -2742,8 +2753,9 @@ one category is nested inside another category.</p>
 <h2><span class="header-section-number">4.5</span> Sorting by index
 values</h2>
 <p>Previously, you changed the order of the rows in a DataFrame by
-calling .sort_values(). It’s also useful to be able to sort by elements
-in the index. For this, you need to use .sort_index().</p>
+calling <strong>.sort_values()</strong>. It’s also useful to be able to
+sort by elements in the index. For this, you need to use
+<strong>.sort_index()</strong>.</p>
 <div class="sourceCode" id="cb102"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1" tabindex="-1"></a><span class="co"># Sort temperatures_ind by index values</span></span>
 <span id="cb102-2"><a href="#cb102-2" tabindex="-1"></a><span class="bu">print</span>(temperatures_ind.sort_index())</span></code></pre></div>
 <pre><code>##                     Unnamed: 0        date  avg_temp_c
@@ -2796,7 +2808,8 @@ in the index. For this, you need to use .sort_index().</p>
 ## 
 ## [16500 rows x 3 columns]</code></pre>
 <p>Sorting index values is similar to sorting values in columns, except
-that you call .sort_index() instead of .sort_values()</p>
+that you call <strong>.sort_index()</strong> instead of
+<strong>.sort_values()</strong>.</p>
 </div>
 <div id="lecture-slicing-and-subsetting-with-loc-and-iloc" class="section level2" number="4.6">
 <h2><span class="header-section-number">4.6</span> Lecture: Slicing and
@@ -2808,14 +2821,18 @@ subsetting with loc and iloc</h2>
 <h2><span class="header-section-number">4.7</span> Slicing index
 values</h2>
 <p>Slicing lets you select consecutive elements of an object using
-first:last syntax. DataFrames can be sliced by index values or by
-row/column number; we’ll start with the first case. This involves
-slicing inside the .loc[] method.</p>
+<em>first:last</em> syntax. DataFrames can be sliced by index values or
+by row/column number; we’ll start with the first case. This involves
+slicing inside the <strong>.loc[]</strong> method.</p>
 <p>Compared to slicing lists, there are a few things to remember.</p>
-<p>You can only slice an index if the index is sorted (using
-.sort_index()). To slice at the outer level, first and last can be
-strings. To slice at inner levels, first and last should be tuples. If
-you pass a single slice to .loc[], it will slice the rows.</p>
+<ul>
+<li>You can only slice an index if the index is sorted (using
+<strong>.sort_index()</strong>).</li>
+<li>To slice at the outer level, first and last can be strings.</li>
+<li>To slice at inner levels, first and last should be tuples.</li>
+<li>If you pass a single slice to <strong>.loc[]</strong>, it will slice
+the rows.</li>
+</ul>
 <div class="sourceCode" id="cb108"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb108-1"><a href="#cb108-1" tabindex="-1"></a><span class="co"># Sort the index of temperatures_ind</span></span>
 <span id="cb108-2"><a href="#cb108-2" tabindex="-1"></a>temperatures_srt <span class="op">=</span> temperatures_ind.sort_index()</span>
 <span id="cb108-3"><a href="#cb108-3" tabindex="-1"></a></span>
@@ -2870,16 +2887,17 @@ you pass a single slice to .loc[], it will slice the rows.</p>
 ##          Moscow       10889  2013-09-01         NaN
 ## 
 ## [660 rows x 3 columns]</code></pre>
-<p>Combining slicing with .loc[] provides a concise syntax for
-subsetting.</p>
+<p>Combining slicing with <strong>.loc[]</strong> provides a concise
+syntax for subsetting.</p>
 </div>
 <div id="slicing-in-both-directions" class="section level2" number="4.8">
 <h2><span class="header-section-number">4.8</span> Slicing in both
 directions</h2>
 <p>You’ve seen slicing DataFrames by rows and by columns, but since
 DataFrames are two-dimensional objects, it is often natural to slice
-both dimensions at once. That is, by passing two arguments to .loc[],
-you can subset by rows and columns in one go.</p>
+both dimensions at once. That is, by passing two arguments to
+<strong>.loc[]</strong>, you can subset by rows and columns in one
+go.</p>
 <div class="sourceCode" id="cb114"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb114-1"><a href="#cb114-1" tabindex="-1"></a><span class="co"># Subset rows from India, Hyderabad to Iraq, Baghdad</span></span>
 <span id="cb114-2"><a href="#cb114-2" tabindex="-1"></a><span class="bu">print</span>(temperatures_srt.loc[(<span class="st">&#39;India&#39;</span>, <span class="st">&#39;Hyderabad&#39;</span>):(<span class="st">&#39;Iraq&#39;</span>, <span class="st">&#39;Baghdad&#39;</span>)])</span></code></pre></div>
 <pre><code>##                    Unnamed: 0        date  avg_temp_c
@@ -2931,21 +2949,23 @@ you can subset by rows and columns in one go.</p>
 ##         Baghdad    2013-09-01         NaN
 ## 
 ## [2145 rows x 2 columns]</code></pre>
-<p>Slicing with .loc[] lets you take subsets in both directions at
-once.</p>
+<p>Slicing with <strong>.loc[]</strong> lets you take subsets in both
+directions at once.</p>
 </div>
 <div id="slicing-time-series" class="section level2" number="4.9">
 <h2><span class="header-section-number">4.9</span> Slicing time
 series</h2>
 <p>Slicing is particularly useful for time series since it’s a common
 thing to want to filter for data within a date range. Add the date
-column to the index, then use .loc[] to perform the subsetting. The
-important thing to remember is to keep your dates in ISO 8601 format,
-that is, “yyyy-mm-dd” for year-month-day, “yyyy-mm” for year-month, and
-“yyyy” for year.</p>
-<p>Recall from Chapter 1 that you can combine multiple Boolean
-conditions using logical operators, such as &amp;. To do so in one line
-of code, you’ll need to add parentheses () around each condition.</p>
+column to the index, then use <strong>.loc[]</strong> to perform the
+subsetting. The important thing to remember is to keep your dates in
+<em>ISO 8601</em> format, that is, <em>yyyy-mm-dd</em> for
+year-month-day, <em>yyyy-mm</em> for year-month, and <em>yyyy</em> for
+year.</p>
+<p>Recall from Chapter <span class="math inline">\(1\)</span> that you
+can combine multiple Boolean conditions using logical operators, such as
+<strong>&amp;</strong>. To do so in one line of code, you’ll need to add
+parentheses <strong>()</strong> around each condition.</p>
 <div class="sourceCode" id="cb120"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb120-1"><a href="#cb120-1" tabindex="-1"></a><span class="co"># Use Boolean conditions to subset temperatures for rows in 2010 and 2011</span></span>
 <span id="cb120-2"><a href="#cb120-2" tabindex="-1"></a>temperatures_bool <span class="op">=</span> temperatures[(temperatures[<span class="st">&#39;date&#39;</span>] <span class="op">&gt;=</span> <span class="st">&#39;2010-01-01&#39;</span>) <span class="op">&amp;</span> (temperatures[<span class="st">&#39;date&#39;</span>] <span class="op">&lt;=</span> <span class="st">&#39;2011-12-31&#39;</span>)]</span>
 <span id="cb120-3"><a href="#cb120-3" tabindex="-1"></a><span class="bu">print</span>(temperatures_bool)</span></code></pre></div>
@@ -3000,8 +3020,8 @@ of code, you’ll need to add parentheses () around each condition.</p>
 ## 2011-01-01       11847       New York  United States      -4.463
 ## 
 ## [600 rows x 4 columns]</code></pre>
-<p>Using .loc[] in conjunction with a date index provides an easy way to
-subset for rows before or after some date.</p>
+<p>Using <strong>.loc[]</strong> in conjunction with a date index
+provides an easy way to subset for rows before or after some date.</p>
 </div>
 <div id="subsetting-by-rowcolumn-number" class="section level2" number="4.10">
 <h2><span class="header-section-number">4.10</span> Subsetting by
@@ -3009,8 +3029,9 @@ row/column number</h2>
 <p>The most common ways to subset rows are the ways we’ve previously
 discussed: using a Boolean condition or by index labels. However, it is
 also occasionally useful to pass row numbers.</p>
-<p>This is done using .iloc[], and like .loc[], it can take two
-arguments to let you subset by rows and columns.</p>
+<p>This is done using <strong>.iloc[]</strong>, and like
+<strong>.loc[]</strong>, it can take two arguments to let you subset by
+rows and columns.</p>
 <div class="sourceCode" id="cb126"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb126-1"><a href="#cb126-1" tabindex="-1"></a><span class="co"># Get 23rd row, 2nd column (index 22, 1)</span></span>
 <span id="cb126-2"><a href="#cb126-2" tabindex="-1"></a><span class="bu">print</span>(temperatures.iloc[<span class="dv">22</span>, <span class="dv">1</span>])</span></code></pre></div>
 <pre><code>## 2001-11-01</code></pre>
@@ -3061,9 +3082,10 @@ time—looking at every month results in a big table, which can be tricky
 to reason about. Instead, let’s look at how temperatures change by
 year.</p>
 <p>You can access the components of a date (year, month and day) using
-code of the form dataframe[“column”].dt.component. For example, the
-month component is dataframe[“column”].dt.month, and the year component
-is dataframe[“column”].dt.year.</p>
+code of the form <strong>dataframe[“column”].dt.component</strong>. For
+example, the month component is
+<strong>dataframe[“column”].dt.month</strong>, and the year component is
+<strong>dataframe[“column”].dt.year</strong>.</p>
 <p>Once you have the year column, you can create a pivot table with the
 data aggregated by city and year, which you’ll explore in the coming
 exercises.</p>
@@ -3098,7 +3120,8 @@ exercises.</p>
 tables</h2>
 <p>A pivot table is just a DataFrame with sorted indexes, so the
 techniques you have learned already can be used to subset them. In
-particular, the .loc[] + slicing combination is often helpful.</p>
+particular, the <strong>.loc[]</strong> <span class="math inline">\(+\)</span> slicing combination is often
+helpful.</p>
 <div class="sourceCode" id="cb136"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb136-1"><a href="#cb136-1" tabindex="-1"></a><span class="co"># Subset for Egypt to India</span></span>
 <span id="cb136-2"><a href="#cb136-2" tabindex="-1"></a><span class="bu">print</span>(temp_by_country_city_vs_year.loc[<span class="st">&#39;Egypt&#39;</span>:<span class="st">&#39;India&#39;</span>])</span></code></pre></div>
 <pre><code>## year                       2000       2001  ...       2012       2013
@@ -3165,9 +3188,10 @@ pivot table</h2>
 first step to finding something insightful. Often you’ll need to perform
 further calculations on them. A common thing to do is to find the rows
 or columns where the highest or lowest value occurs.</p>
-<p>Recall from Chapter 1 that you can easily subset a Series or
-DataFrame to find rows of interest using a logical condition inside of
-square brackets. For example: series[series &gt; value].</p>
+<p>Recall from Chapter <span class="math inline">\(1\)</span> that you
+can easily subset a Series or DataFrame to find rows of interest using a
+logical condition inside of square brackets. For example:
+<em>series[series &gt; value]</em>.</p>
 <div class="sourceCode" id="cb142"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb142-1"><a href="#cb142-1" tabindex="-1"></a><span class="co"># Get the worldwide mean temp by year</span></span>
 <span id="cb142-2"><a href="#cb142-2" tabindex="-1"></a>mean_temp_by_year <span class="op">=</span> temp_by_country_city_vs_year.mean()</span>
 <span id="cb142-3"><a href="#cb142-3" tabindex="-1"></a></span>
@@ -3192,7 +3216,8 @@ its ice sculpture festival.</p>
 <h1><span class="header-section-number">5</span> Creating and
 Visualizing DataFrames</h1>
 <p>Learn to visualize the contents of your DataFrames, handle missing
-data values, and import data from and export data to CSV files.</p>
+data values, and import data from and export data to
+<strong>CSV</strong> files.</p>
 <div id="lecture-visualizing-your-data" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> Lecture: Visualizing
 your data</h2>
@@ -3205,8 +3230,8 @@ most popular?</h2>
 <p>Avocados are increasingly popular and delicious in guacamole and on
 toast. The Hass Avocado Board keeps track of avocado supply and demand
 across the USA, including the sales of three different sizes of avocado.
-In this exercise, you’ll use a bar plot to figure out which size is the
-most popular.</p>
+In this exercise, you’ll use a <em>bar plot</em> to figure out which
+size is the most popular.</p>
 <p>Bar plots are great for revealing relationships between categorical
 (size) and numeric (number sold) variables, but you’ll often have to
 manipulate your data first in order to get the numbers you need for
@@ -3240,12 +3265,12 @@ avocados were a close second.</p>
 <div id="changes-in-sales-over-time" class="section level2" number="5.3">
 <h2><span class="header-section-number">5.3</span> Changes in sales over
 time</h2>
-<p>Line plots are designed to visualize the relationship between two
-numeric variables, where each data values is connected to the next one.
-They are especially useful for visualizing the change in a number over
-time since each time point is naturally connected to the next time
-point. In this exercise, you’ll visualize the change in avocado sales
-over three years.</p>
+<p><em>Line plots</em> are designed to visualize the relationship
+between two numeric variables, where each data values is connected to
+the next one. They are especially useful for visualizing the change in a
+number over time since each time point is naturally connected to the
+next time point. In this exercise, you’ll visualize the change in
+avocado sales over three years.</p>
 <div class="sourceCode" id="cb149"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb149-1"><a href="#cb149-1" tabindex="-1"></a><span class="co"># Get the total number of avocados sold on each date</span></span>
 <span id="cb149-2"><a href="#cb149-2" tabindex="-1"></a>nb_sold_by_date <span class="op">=</span> avocados.groupby(<span class="st">&#39;date&#39;</span>)[[<span class="st">&#39;nb_sold&#39;</span>]].<span class="bu">sum</span>()</span>
 <span id="cb149-3"><a href="#cb149-3" tabindex="-1"></a></span>
@@ -3262,9 +3287,9 @@ year.</p>
 <div id="avocado-supply-and-demand" class="section level2" number="5.4">
 <h2><span class="header-section-number">5.4</span> Avocado supply and
 demand</h2>
-<p>Scatter plots are ideal for visualizing relationships between
-numerical variables. In this exercise, you’ll compare the number of
-avocados sold to average price and see if they’re at all related. If
+<p><em>Scatter plots</em> are ideal for visualizing relationships
+between numerical variables. In this exercise, you’ll compare the number
+of avocados sold to average price and see if they’re at all related. If
 they’re related, you may be able to use one number to predict the
 other.</p>
 <div class="sourceCode" id="cb150"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb150-1"><a href="#cb150-1" tabindex="-1"></a><span class="co"># Scatter plot of avg_price vs. nb_sold with title</span></span>
@@ -3339,8 +3364,9 @@ before you can use them. If you don’t know where your missing values
 are, or if they exist, you could make mistakes in your analysis. In this
 exercise, you’ll determine if there are missing values in the dataset,
 and if so, how many.</p>
-<p>avocados_2016, a subset of avocados that contains only sales from
-2016, is available.</p>
+<p><strong>avocados_2016</strong>, a subset of avocados that contains
+only sales from <span class="math inline">\(2016\)</span>, is
+available.</p>
 <div class="sourceCode" id="cb154"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb154-1"><a href="#cb154-1" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas/avocados_2016.csv&#39;</span></span>
 <span id="cb154-2"><a href="#cb154-2" tabindex="-1"></a>avocados_2016 <span class="op">=</span> pd.read_csv(url)</span>
 <span id="cb154-3"><a href="#cb154-3" tabindex="-1"></a></span>
@@ -3455,10 +3481,11 @@ values are not missing at random.</p>
 values</h2>
 <p>Another way of handling missing values is to replace them all with
 the same value. For numerical variables, one option is to replace values
-with 0— you’ll do this here. However, when you replace missing values,
-you make assumptions about what a missing value means. In this case, you
-will assume that a missing number sold means that no sales for that
-avocado type were made that week.</p>
+with <span class="math inline">\(0\)</span> - you’ll do this here.
+However, when you replace missing values, you make assumptions about
+what a missing value means. In this case, you will assume that a missing
+number sold means that no sales for that avocado type were made that
+week.</p>
 <p>In this exercise, you’ll see how replacing missing values can affect
 the distribution of a variable using histograms. You can plot histograms
 for multiple variables at a time as follows:</p>
@@ -3497,9 +3524,9 @@ DataFrames</h2>
 <div id="list-of-dictionaries" class="section level2" number="5.11">
 <h2><span class="header-section-number">5.11</span> List of
 dictionaries</h2>
-<p>You recently got some new avocado data from 2019 that you’d like to
-put in a DataFrame using the list of dictionaries method. Remember that
-with this method, you go through the data row by row.</p>
+<p>You recently got some new avocado data from <span class="math inline">\(2019\)</span> that you’d like to put in a
+DataFrame using the list of dictionaries method. Remember that with this
+method, you go through the data row by row.</p>
 <div class="sourceCode" id="cb168"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb168-1"><a href="#cb168-1" tabindex="-1"></a><span class="co"># Create a list of dictionaries with new data</span></span>
 <span id="cb168-2"><a href="#cb168-2" tabindex="-1"></a>avocados_list <span class="op">=</span> [</span>
 <span id="cb168-3"><a href="#cb168-3" tabindex="-1"></a>    {<span class="st">&#39;date&#39;</span>: <span class="st">&quot;2019-11-03&quot;</span>, <span class="st">&#39;small_sold&#39;</span>: <span class="dv">10376832</span>, <span class="st">&#39;large_sold&#39;</span>: <span class="dv">7835071</span>},</span>
@@ -3549,10 +3576,9 @@ DataFrame</h2>
 competitive analysis and see how often passengers flying on other
 airlines are involuntarily bumped from their flights. You got a CSV file
 (airline_bumping.csv) from the Department of Transportation containing
-data on passengers that were involuntarily denied boarding in 2016 and
-2017, but it doesn’t have the exact numbers you want. In order to figure
-this out, you’ll need to get the CSV into a pandas DataFrame and do some
-manipulation!</p>
+data on passengers that were involuntarily denied boarding in <span class="math inline">\(2016\)</span> and <span class="math inline">\(2017\)</span>, but it doesn’t have the exact
+numbers you want. In order to figure this out, you’ll need to get the
+CSV into a pandas DataFrame and do some manipulation!</p>
 <div class="sourceCode" id="cb172"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb172-1"><a href="#cb172-1" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas/airline_bumping.csv&#39;</span></span>
 <span id="cb172-2"><a href="#cb172-2" tabindex="-1"></a>airline_bumping <span class="op">=</span> pd.read_csv(url)</span>
 <span id="cb172-3"><a href="#cb172-3" tabindex="-1"></a></span>
