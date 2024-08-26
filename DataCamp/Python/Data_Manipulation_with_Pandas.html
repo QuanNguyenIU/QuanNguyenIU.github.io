@@ -1721,7 +1721,9 @@ homelessness in each U.S. state in <span class="math inline">\(2018\)</span>. Th
 column is the number of homeless individuals not part of a family with
 children. The <strong>family_members</strong> column is the number of
 homeless individuals part of a family with children. The
-<strong>state_pop</strong> column is the state’s total population.</p>
+<strong>state_pop</strong> column is the state’s total population. The
+data can be found
+<a href="https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas/homelessness.csv"><strong>here</strong><a></a>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas/homelessness.csv&#39;</span></span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>homelessness <span class="op">=</span> pd.read_csv(url)</span>
@@ -2215,7 +2217,8 @@ sum and cumulative max of a department’s weekly sales, which will allow
 you to identify what the total sales were so far as well as what the
 highest weekly sales were so far.</p>
 <p>A DataFrame called <strong>sales_1_1</strong> has been created for
-you, which contains the sales data for department <span class="math inline">\(1\)</span> of store <span class="math inline">\(1\)</span>.</p>
+you, which contains the sales data for department <span class="math inline">\(1\)</span> of store <span class="math inline">\(1\)</span>. The data can be found
+<a href="https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas/sales_1_1.csv"><strong>here</strong><a></a>.</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas/sales_1_1.csv&#39;</span></span>
 <span id="cb52-2"><a href="#cb52-2" tabindex="-1"></a>sales_1_1 <span class="op">=</span> pd.read_csv(url)</span>
 <span id="cb52-3"><a href="#cb52-3" tabindex="-1"></a></span>
@@ -2583,7 +2586,9 @@ indexes</h2>
 This enables cleaner code when taking subsets (as well as providing more
 efficient lookup under some circumstances).</p>
 <p>In this chapter, you’ll be exploring <strong>temperatures</strong>, a
-DataFrame of average temperatures in cities around the world.</p>
+DataFrame of average temperatures in cities around the world. The data
+can be found
+<a href="https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas/temperatures.csv"><strong>here</strong><a></a>.</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas/temperatures.csv&#39;</span></span>
 <span id="cb88-2"><a href="#cb88-2" tabindex="-1"></a>temperatures <span class="op">=</span> pd.read_csv(url)</span>
 <span id="cb88-3"><a href="#cb88-3" tabindex="-1"></a></span>
@@ -3230,6 +3235,8 @@ most popular?</h2>
 <p>Avocados are increasingly popular and delicious in guacamole and on
 toast. The Hass Avocado Board keeps track of avocado supply and demand
 across the USA, including the sales of three different sizes of avocado.
+The data can be found
+<a href="https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas/avocados.csv"><strong>here</strong><a></a>.
 In this exercise, you’ll use a <em>bar plot</em> to figure out which
 size is the most popular.</p>
 <p>Bar plots are great for revealing relationships between categorical
@@ -3365,8 +3372,9 @@ are, or if they exist, you could make mistakes in your analysis. In this
 exercise, you’ll determine if there are missing values in the dataset,
 and if so, how many.</p>
 <p><strong>avocados_2016</strong>, a subset of avocados that contains
-only sales from <span class="math inline">\(2016\)</span>, is
-available.</p>
+only sales from <span class="math inline">\(2016\)</span>, is available.
+The data can be found
+<a href="https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas/avocados_2016.csv"><strong>here</strong><a></a>.</p>
 <div class="sourceCode" id="cb154"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb154-1"><a href="#cb154-1" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas/avocados_2016.csv&#39;</span></span>
 <span id="cb154-2"><a href="#cb154-2" tabindex="-1"></a>avocados_2016 <span class="op">=</span> pd.read_csv(url)</span>
 <span id="cb154-3"><a href="#cb154-3" tabindex="-1"></a></span>
@@ -3578,7 +3586,9 @@ airlines are involuntarily bumped from their flights. You got a CSV file
 (airline_bumping.csv) from the Department of Transportation containing
 data on passengers that were involuntarily denied boarding in <span class="math inline">\(2016\)</span> and <span class="math inline">\(2017\)</span>, but it doesn’t have the exact
 numbers you want. In order to figure this out, you’ll need to get the
-CSV into a pandas DataFrame and do some manipulation!</p>
+CSV into a pandas DataFrame and do some manipulation! The data can be
+found
+<a href="https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas/airline_bumping.csv"><strong>here</strong><a></a>.</p>
 <div class="sourceCode" id="cb172"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb172-1"><a href="#cb172-1" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Data%20Manipulation%20with%20Pandas/airline_bumping.csv&#39;</span></span>
 <span id="cb172-2"><a href="#cb172-2" tabindex="-1"></a>airline_bumping <span class="op">=</span> pd.read_csv(url)</span>
 <span id="cb172-3"><a href="#cb172-3" tabindex="-1"></a></span>
