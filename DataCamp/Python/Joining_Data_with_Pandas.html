@@ -1729,6 +1729,71 @@ that the most common fuel type for taxis in Chicago are hybrids.</p>
 <div id="inner-joins-and-number-of-rows-returned" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Inner joins and
 number of rows returned</h2>
+<p>All of the merges you have studied to this point are called inner
+joins. It is necessary to understand that inner joins only return the
+rows with matching values in both tables. You will explore this further
+by reviewing the merge between the
+<a href="https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Joining%20Data%20with%20Pandas/wards.csv"><strong>wards</strong><a></a>
+and
+<a href="https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Joining%20Data%20with%20Pandas/census.csv"><strong>census</strong><a></a>
+tables, then comparing it to merges of copies of these tables that are
+slightly altered, named
+<a href="https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Joining%20Data%20with%20Pandas/wards_altered.csv"><strong>wards_altered</strong><a></a>,
+and
+<a href="https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Joining%20Data%20with%20Pandas/census_altered.csv"><strong>census_altered</strong><a></a>.
+The first row of the wards column has been changed in the altered
+tables. You will examine how this affects the merge between them. The
+tables have been loaded for you.</p>
+<p>For this exercise, it is important to know that the wards and census
+tables start with 50 rows.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Joining%20Data%20with%20Pandas/wards.csv&#39;</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>wards <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Joining%20Data%20with%20Pandas/census.csv&#39;</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>census <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co"># Merge the wards and census tables on the ward column</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>wards_census <span class="op">=</span> wards.merge(census,on<span class="op">=</span><span class="st">&#39;ward&#39;</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co"># Print the shape of wards_census</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;wards_census table shape:&#39;</span>, wards_census.shape)</span></code></pre></div>
+<pre><code>## wards_census table shape: (50, 9)</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Joining%20Data%20with%20Pandas/wards_altered.csv&#39;</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>wards_altered <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co"># Print the first few rows of the wards_altered table to view the change </span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="bu">print</span>(wards_altered[[<span class="st">&#39;ward&#39;</span>]].head())</span></code></pre></div>
+<pre><code>##    ward
+## 0    61
+## 1     2
+## 2     3
+## 3     4
+## 4     5</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Merge the wards_altered and census tables on the ward column</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>wards_altered_census <span class="op">=</span> wards_altered.merge(census, on<span class="op">=</span><span class="st">&#39;ward&#39;</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co"># Print the shape of wards_altered_census</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;wards_altered_census table shape:&#39;</span>, wards_altered_census.shape)</span></code></pre></div>
+<pre><code>## wards_altered_census table shape: (49, 9)</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Joining%20Data%20with%20Pandas/census_altered.csv&#39;</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>census_altered <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="co"># Print the first few rows of the census_altered table to view the change </span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="bu">print</span>(census_altered[[<span class="st">&#39;ward&#39;</span>]].head())</span></code></pre></div>
+<pre><code>##    ward
+## 0   NaN
+## 1   2.0
+## 2   3.0
+## 3   4.0
+## 4   5.0</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Merge the wards and census_altered tables on the ward column</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>wards_census_altered <span class="op">=</span> wards.merge(census_altered, on<span class="op">=</span><span class="st">&#39;ward&#39;</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="co"># Print the shape of wards_census_altered</span></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;wards_census_altered table shape:&#39;</span>, wards_census_altered.shape)</span></code></pre></div>
+<pre><code>## wards_census_altered table shape: (49, 9)</code></pre>
+<p>In step 1, the .merge() returned a table with the same number of rows
+as the original wards table. However, in steps 2 and 3, using the
+altered tables with the altered first row of the ward column, the number
+of returned rows was fewer. There was not a matching value in the ward
+column of the other table. Remember that .merge() only returns rows
+where the values match in both tables.</p>
 </div>
 <div id="lecture-one-to-many-relationships" class="section level2" number="2.4">
 <h2><span class="header-section-number">2.4</span> Lecture: One-to-many
