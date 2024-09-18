@@ -1804,6 +1804,40 @@ relationships</h2>
 <div id="one-to-many-merge" class="section level2" number="2.5">
 <h2><span class="header-section-number">2.5</span> One-to-many
 merge</h2>
+<p>A business may have one or multiple owners. In this exercise, you
+will continue to gain experience with one-to-many merges by merging a
+table of business owners, called biz_owners, to the licenses table.
+Recall from the video lesson, with a one-to-many relationship, a row in
+the left table may be repeated if it is related to multiple rows in the
+right table. In this lesson, you will explore this further by finding
+out what is the most common business owner title (i.e., secretary, CEO,
+or vice president).</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Joining%20Data%20with%20Pandas/licenses.csv&#39;</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>licenses <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Joining%20Data%20with%20Pandas/biz_owners.csv&#39;</span></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>biz_owners <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="co"># Merge the licenses and biz_owners table on account</span></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>licenses_owners <span class="op">=</span> licenses.merge(biz_owners, on<span class="op">=</span><span class="st">&#39;account&#39;</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="co"># Group the results by title then count the number of accounts</span></span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a>counted_df <span class="op">=</span> licenses_owners.groupby(<span class="st">&#39;title&#39;</span>).agg({<span class="st">&#39;account&#39;</span>:<span class="st">&#39;count&#39;</span>})</span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a><span class="co"># Sort the counted_df in desending order</span></span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a>sorted_df <span class="op">=</span> counted_df.sort_values(by<span class="op">=</span><span class="st">&#39;account&#39;</span>,ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a><span class="co"># Use .head() method to print the first few rows of sorted_df</span></span>
+<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a><span class="bu">print</span>(sorted_df.head())</span></code></pre></div>
+<pre><code>##                  account
+## title                   
+## PRESIDENT           6259
+## SECRETARY           5205
+## SOLE PROPRIETOR     1658
+## OTHER               1200
+## VICE PRESIDENT       970</code></pre>
+<p>Wonderful! After merging the tables together, you counted the number
+of repeated rows with the combination of .groupby() and .agg()
+statements. You see that president, followed by secretary, are the most
+common business owner titles.</p>
 </div>
 <div id="lecture-merging-multiple-dataframes" class="section level2" number="2.6">
 <h2><span class="header-section-number">2.6</span> Lecture: Merging
