@@ -1889,6 +1889,77 @@ July.</p>
 <div id="three-table-merge" class="section level2" number="2.8">
 <h2><span class="header-section-number">2.8</span> Three table
 merge</h2>
+<p>To solidify the concept of a three DataFrame merge, practice another
+exercise. A reasonable extension of our review of Chicago business data
+would include looking at demographics information about the
+neighborhoods where the businesses are. A table with the median income
+by zip code has been provided to you. You will merge the licenses and
+wards tables with this new income-by-zip-code table called zip_demo.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Joining%20Data%20with%20Pandas/zip_demo.csv&#39;</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>zip_demo <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a><span class="co"># Merge licenses and zip_demo, on zip; and merge the wards on ward</span></span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>licenses_zip_ward <span class="op">=</span> licenses.merge(zip_demo,on<span class="op">=</span><span class="st">&#39;zip&#39;</span>) <span class="op">\</span></span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>                        .merge(wards,on<span class="op">=</span><span class="st">&#39;ward&#39;</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a><span class="co"># Print the results by alderman and show median income</span></span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a><span class="bu">print</span>(licenses_zip_ward.groupby(<span class="st">&#39;alderman&#39;</span>).agg({<span class="st">&#39;income&#39;</span>:<span class="st">&#39;median&#39;</span>}))</span></code></pre></div>
+<pre><code>##                                  income
+## alderman                               
+## &quot;Daniel &quot;&quot;Danny&quot;&quot; Solis&quot;        41226.0
+## &quot;Milagros &quot;&quot;Milly&quot;&quot; Santiago&quot;   41307.0
+## &quot;Proco &quot;&quot;Joe&quot;&quot; Moreno&quot;          87143.0
+## Ameya Pawar                     66246.0
+## Anthony A. Beale                38206.0
+## Anthony V. Napolitano           82226.0
+## Ariel E. Reyboras               41307.0
+## Brendan Reilly                 110215.0
+## Brian Hopkins                   87143.0
+## Carlos Ramirez-Rosa             66246.0
+## Carrie M. Austin                38206.0
+## Chris Taliaferro                55566.0
+## David H. Moore                  33304.0
+## Deborah Mell                    66246.0
+## Debra L. Silverstein            50554.0
+## Derrick G. Curtis               65770.0
+## Edward M. Burke                 42335.0
+## Emma M. Mitts                   36283.0
+## George Cardenas                 33959.0
+## Gilbert Villegas                41307.0
+## Gregory I. Mitchell             24941.0
+## Harry Osterman                  45442.0
+## Howard B. Brookins, Jr.         33304.0
+## James Cappleman                 79565.0
+## Jason C. Ervin                  41226.0
+## Joe Moore                       39163.0
+## John S. Arena                   70122.0
+## Leslie A. Hairston              28024.0
+## Margaret Laurino                70122.0
+## Marty Quinn                     67045.0
+## Matthew J. O\&#39;Shea              59488.0
+## Michael R. Zalewski             42335.0
+## Michael Scott, Jr.              31445.0
+## Michelle A. Harris              32558.0
+## Michelle Smith                 100116.0
+## Nicholas Sposato                62223.0
+## Pat Dowell                      46340.0
+## Patrick Daley Thompson          41226.0
+## Patrick J. O\&#39;Connor            50554.0
+## Raymond A. Lopez                33959.0
+## Ricardo Munoz                   31445.0
+## Roberto Maldonado               68223.0
+## Roderick T. Sawyer              32558.0
+## Scott Waguespack                68223.0
+## Susan Sadlowski Garza           38417.0
+## Tom Tunney                      88708.0
+## Toni L. Foulkes                 27573.0
+## Walter Burnett, Jr.             87143.0
+## William D. Burns               107811.0
+## Willie B. Cochran               28024.0</code></pre>
+<p>Nice work! You successfully merged three tables together. With the
+merged data, you can complete your income analysis. You see that only a
+few aldermen represent businesses in areas where the median income is
+greater than $62,000, which is the median income for the state of
+Illinois.</p>
 </div>
 <div id="one-to-many-merge-with-multiple-tables" class="section level2" number="2.9">
 <h2><span class="header-section-number">2.9</span> One-to-many merge
