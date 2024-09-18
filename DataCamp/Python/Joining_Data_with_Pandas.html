@@ -1964,6 +1964,43 @@ Illinois.</p>
 <div id="one-to-many-merge-with-multiple-tables" class="section level2" number="2.9">
 <h2><span class="header-section-number">2.9</span> One-to-many merge
 with multiple tables</h2>
+<p>In this exercise, assume that you are looking to start a business in
+the city of Chicago. Your perfect idea is to start a company that uses
+goats to mow the lawn for other businesses. However, you have to choose
+a location in the city to put your goat farm. You need a location with a
+great deal of space and relatively few businesses and people around to
+avoid complaints about the smell. You will need to merge three tables to
+help you choose your location. The land_use table has info on the
+percentage of vacant land by city ward. The census table has population
+by ward, and the licenses table lists businesses by ward.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Joining%20Data%20with%20Pandas/land_use.csv&#39;</span></span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>land_use <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a><span class="co"># Merge land_use and census and merge result with licenses including suffixes</span></span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>land_cen_lic <span class="op">=</span> land_use.merge(census, on<span class="op">=</span><span class="st">&#39;ward&#39;</span>) <span class="op">\</span></span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a>                    .merge(licenses, on<span class="op">=</span><span class="st">&#39;ward&#39;</span>, suffixes<span class="op">=</span>(<span class="st">&#39;_cen&#39;</span>,<span class="st">&#39;_lic&#39;</span>))</span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a><span class="co"># Group by ward, pop_2010, and vacant, then count the # of accounts</span></span>
+<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a>pop_vac_lic <span class="op">=</span> land_cen_lic.groupby([<span class="st">&#39;ward&#39;</span>,<span class="st">&#39;pop_2010&#39;</span>,<span class="st">&#39;vacant&#39;</span>], </span>
+<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a>                                   as_index<span class="op">=</span><span class="va">False</span>).agg({<span class="st">&#39;account&#39;</span>:<span class="st">&#39;count&#39;</span>})</span>
+<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a><span class="co"># Sort pop_vac_lic and print the results</span></span>
+<span id="cb23-13"><a href="#cb23-13" tabindex="-1"></a>sorted_pop_vac_lic <span class="op">=</span> pop_vac_lic.sort_values([<span class="st">&#39;vacant&#39;</span>,<span class="st">&#39;account&#39;</span>,<span class="st">&#39;pop_2010&#39;</span>], </span>
+<span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a>                                             ascending<span class="op">=</span>[<span class="va">False</span>,<span class="va">True</span>,<span class="va">True</span>])</span>
+<span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a></span>
+<span id="cb23-16"><a href="#cb23-16" tabindex="-1"></a><span class="co"># Print the top few rows of sorted_pop_vac_lic</span></span>
+<span id="cb23-17"><a href="#cb23-17" tabindex="-1"></a><span class="bu">print</span>(sorted_pop_vac_lic.head())</span></code></pre></div>
+<pre><code>##     ward  pop_2010  vacant  account
+## 6      7     51581      19       80
+## 19    20     52372      15      123
+## 9     10     51535      14      130
+## 23    24     54909      13       98
+## 15    16     51954      13      156</code></pre>
+<p>Great job putting your new skills into action. You merged multiple
+tables with varying relationships and added suffixes to make your column
+names clearer. Using your skills, you were able to pull together
+information from different tables to see that the 7th ward would be a
+good place to build your goat farm!</p>
 </div>
 </div>
 <div id="merging-tables-with-different-join-types" class="section level1" number="3">
