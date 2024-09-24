@@ -2019,6 +2019,32 @@ join</h2>
 <div id="counting-missing-rows-with-left-join" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Counting missing rows
 with left join</h2>
+<p>The Movie Database is supported by volunteers going out into the
+world, collecting data, and entering it into the database. This includes
+financial data, such as movie budget and revenue. If you wanted to know
+which movies are still missing data, you could use a left join to
+identify them. Practice using a left join by merging the movies table
+and the financials table.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Joining%20Data%20with%20Pandas/movies.csv&#39;</span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>movies <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Joining%20Data%20with%20Pandas/financials.csv&#39;</span></span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a>financials <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a><span class="co"># Merge the movies table with the financials table with a left join</span></span>
+<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a>movies_financials <span class="op">=</span> movies.merge(financials, on<span class="op">=</span><span class="st">&#39;id&#39;</span>, how<span class="op">=</span><span class="st">&#39;left&#39;</span>)</span>
+<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a><span class="co"># Count the number of rows in the budget column that are missing</span></span>
+<span id="cb25-10"><a href="#cb25-10" tabindex="-1"></a>number_of_missing_fin <span class="op">=</span> movies_financials[<span class="st">&#39;budget&#39;</span>].isnull().<span class="bu">sum</span>()</span>
+<span id="cb25-11"><a href="#cb25-11" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" tabindex="-1"></a><span class="co"># Print the number of movies missing financials</span></span>
+<span id="cb25-13"><a href="#cb25-13" tabindex="-1"></a><span class="bu">print</span>(number_of_missing_fin)</span></code></pre></div>
+<pre><code>## 1574</code></pre>
+<p>Great job! You used a left join to find out which rows in the
+financials table were missing data. When performing a left join, the
+.merge() method returns a row full of null values for columns in the
+right table if the key column does not have a matching value in both
+tables. We see that there are at least 1,500 rows missing data. Wow!
+That sounds like a lot of work.</p>
 </div>
 <div id="enriching-a-dataset" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Enriching a
