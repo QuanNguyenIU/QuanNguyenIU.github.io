@@ -2049,6 +2049,42 @@ That sounds like a lot of work.</p>
 <div id="enriching-a-dataset" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Enriching a
 dataset</h2>
+<p>Setting how=‘left’ with the .merge()method is a useful technique for
+enriching or enhancing a dataset with additional information from a
+different table. In this exercise, you will start off with a sample of
+movie data from the movie series Toy Story. Your goal is to enrich this
+data by adding the marketing tag line for each movie. You will compare
+the results of a left join versus an inner join.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Joining%20Data%20with%20Pandas/toy_story.csv&#39;</span></span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>toy_story <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Joining%20Data%20with%20Pandas/taglines.csv&#39;</span></span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a>taglines <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a><span class="co"># Merge the toy_story and taglines tables with a left join</span></span>
+<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a>toystory_tag <span class="op">=</span> toy_story.merge(taglines,on<span class="op">=</span><span class="st">&#39;id&#39;</span>,how<span class="op">=</span><span class="st">&#39;left&#39;</span>)</span>
+<span id="cb27-8"><a href="#cb27-8" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" tabindex="-1"></a><span class="co"># Print the rows and shape of toystory_tag</span></span>
+<span id="cb27-10"><a href="#cb27-10" tabindex="-1"></a><span class="bu">print</span>(toystory_tag)</span></code></pre></div>
+<pre><code>##       id        title  popularity release_date                   tagline
+## 0  10193  Toy Story 3   59.995418   2010-06-16  No toy gets left behind.
+## 1    863  Toy Story 2   73.575118   1999-10-30        The toys are back!
+## 2    862    Toy Story   73.640445   1995-10-30                       NaN</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="bu">print</span>(toystory_tag.shape)</span></code></pre></div>
+<pre><code>## (3, 5)</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="co"># Merge the toy_story and taglines tables with a inner join</span></span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a>toystory_tag <span class="op">=</span> toy_story.merge(taglines,on<span class="op">=</span><span class="st">&#39;id&#39;</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a><span class="co"># Print the rows and shape of toystory_tag</span></span>
+<span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a><span class="bu">print</span>(toystory_tag)</span></code></pre></div>
+<pre><code>##       id        title  popularity release_date                   tagline
+## 0  10193  Toy Story 3   59.995418   2010-06-16  No toy gets left behind.
+## 1    863  Toy Story 2   73.575118   1999-10-30        The toys are back!</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="bu">print</span>(toystory_tag.shape)</span></code></pre></div>
+<pre><code>## (2, 5)</code></pre>
+<p>If your goal is to enhance or enrich a dataset, then you do not want
+to lose any of your original data. A left join will do that by returning
+all of the rows of your left table, while using an inner join may result
+in lost data if it does not exist in both tables.</p>
 </div>
 <div id="lecture-other-joins" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Lecture: Other
