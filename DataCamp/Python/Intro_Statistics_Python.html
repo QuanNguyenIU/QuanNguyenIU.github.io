@@ -1791,6 +1791,26 @@ beef consumption patterns differ dramatically across countries.</p>
 <div id="quartiles-quantiles-and-quintiles" class="section level2" number="2.7">
 <h2><span class="header-section-number">2.7</span> Quartiles, quantiles,
 and quintiles</h2>
+<p>Quantiles are a great way of summarizing numerical data since they
+can be used to measure center and spread, as well as to get a sense of
+where a data point stands in relation to the rest of the data set. For
+example, you might want to give a discount to the 10% most active users
+on a website.</p>
+<p>In this exercise, you’ll calculate quartiles, quintiles, and deciles,
+which split up a dataset into 4, 5, and 10 pieces, respectively.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Calculate the quartiles of co2_emission</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="bu">print</span>(np.quantile(food_consumption.co2_emission, q <span class="op">=</span> [<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>]))</span></code></pre></div>
+<pre><code>## [   0.        5.21     16.53     62.5975 1712.    ]</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># Calculate the quintiles of co2_emission</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="bu">print</span>(np.quantile(food_consumption.co2_emission, q <span class="op">=</span> [<span class="dv">0</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="dv">1</span>]))</span></code></pre></div>
+<pre><code>## [   0.       3.54    11.026   25.59    99.978 1712.   ]</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># Calculate the deciles of co2_emission</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="bu">print</span>(np.quantile(food_consumption.co2_emission, q <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">11</span>)))</span></code></pre></div>
+<pre><code>## [0.00000e+00 6.68000e-01 3.54000e+00 7.04000e+00 1.10260e+01 1.65300e+01
+##  2.55900e+01 4.42710e+01 9.99780e+01 2.03629e+02 1.71200e+03]</code></pre>
+<p>While calculating more quantiles gives you a more detailed look at
+the data, it also produces more numbers, making the summary more
+difficult to quickly understand.</p>
 </div>
 <div id="finding-outliers-using-iqr" class="section level2" number="2.8">
 <h2><span class="header-section-number">2.8</span> Finding outliers
