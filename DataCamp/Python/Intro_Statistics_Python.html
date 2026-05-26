@@ -1862,6 +1862,38 @@ chances?</h2>
 <div id="calculating-probabilities" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Calculating
 probabilities</h2>
+<p>You’re in charge of the sales team, and it’s time for performance
+reviews, starting with Amir. As part of the review, you want to randomly
+select a few of the deals that he’s worked on over the past year so that
+you can look at them more deeply. Before you start selecting deals,
+you’ll first figure out what the chances are of selecting certain
+deals.</p>
+<p>Recall that the probability of an event can be calculated by <span class="math display">\[P(event)=\frac{\#\ ways\ event\ can\
+happen}{total\ \#\ of\ possible\ outcomes}\]</span></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>url <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/QuanNguyenIU/QuanNguyenIU.github.io/main/DataCamp/Python/Intro.%20to%20Statistics</span><span class="sc">%20i</span><span class="st">n%20Python/amir_deals.csv&#39;</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>amir_deals <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="co"># Count the deals for each product</span></span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a>counts <span class="op">=</span> amir_deals[<span class="st">&#39;product&#39;</span>].value_counts()</span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a><span class="co"># Calculate probability of picking a deal with each product</span></span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a>probs <span class="op">=</span> counts <span class="op">/</span> <span class="bu">sum</span>(<span class="bu">list</span>(counts))</span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a><span class="bu">print</span>(probs)</span></code></pre></div>
+<pre><code>## product
+## Product B    0.348315
+## Product D    0.224719
+## Product A    0.129213
+## Product C    0.084270
+## Product F    0.061798
+## Product H    0.044944
+## Product I    0.039326
+## Product E    0.028090
+## Product N    0.016854
+## Product G    0.011236
+## Product J    0.011236
+## Name: count, dtype: float64</code></pre>
+<p>Now that you know what the chances are, it’s time to start
+sampling.</p>
 </div>
 <div id="sampling-deals" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Sampling deals</h2>
